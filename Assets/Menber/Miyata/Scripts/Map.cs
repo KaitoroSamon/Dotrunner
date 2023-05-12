@@ -59,31 +59,31 @@ public class Map : MonoBehaviour
                     switch (dungeonMap[i,j])
                     {
                         case "0":
-                            Instantiate(NothingSquare, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
  
                         case "1":
-                            Instantiate(Player1Square, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
  
                         case "2":
-                            Instantiate(Player2Square, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
                         
                         case "3":
-                            Instantiate(Item1Square, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(Item1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
 
                         case "4":
-                            Instantiate(Item2Square, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(Item2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
 
                         case "5":
-                            Instantiate(Item3Square, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(Item3Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
 
                         case "6":
-                            Instantiate(GoalSquare, new Vector3(-4.5f + j, 4.5f - i, 0), Quaternion.identity);
+                            Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
                             break;
                     }
                 }
