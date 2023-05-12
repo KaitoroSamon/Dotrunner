@@ -12,6 +12,9 @@ public class SoundManager_BGM : MonoBehaviour
 
     public AudioClip[] Audio_Clip_BGM;
 
+    public float [] Audio_Clip_BGM_Vol;
+
+
     public AudioSource Audio_Source_BGM;
 
     //float volume;
@@ -22,7 +25,7 @@ public class SoundManager_BGM : MonoBehaviour
     }
     public void Play(int clip)
     {
-        Audio_Source_BGM.volume = 1;
+        Audio_Source_BGM.volume = Audio_Clip_BGM_Vol[clip];
         Audio_Source_BGM.clip = Audio_Clip_BGM[clip];
         Audio_Source_BGM.Play();
 
