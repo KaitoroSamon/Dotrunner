@@ -54,28 +54,23 @@ public class PlayerManager : MonoBehaviour
             Dy = Input.GetAxis(Vertical);
             nowDirection = new Vector2(Dx,Dy);
 
-            //[0,0]じゃなければ([0,0]は自分と同じマス)
-            if (nowDirection != new Vector2(0,0))
+            //カーソルを移動
+
+
+            //選択
+            if (Input.GetButtonDown(select))
             {
-                //カーソルを移動
+                //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
+                nowPos += nowDirection;
+                //マネージャーで塗ったマスが何かを判別する仕組みが必要
 
-
-                //選択
-                if (Input.GetButtonDown(select))
-                {
-                    //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
-                    nowPos += nowDirection;
-                    //マネージャーで塗ったマスが何かを判別する仕組みが必要
-
-                    //一回塗ったので行動を一減らす
-                    moveCounter--;
-                }
-
+                //一回塗ったので行動を一減らす
+                moveCounter--;
             }
 
             //行動回数が0になるか
             //ターン終了時ボタンを押したら終了
-            if(moveCounter <= 0)
+            if (moveCounter <= 0)
             {
                 myTrun = false;
                 //マネージャーにも終了したと返す
