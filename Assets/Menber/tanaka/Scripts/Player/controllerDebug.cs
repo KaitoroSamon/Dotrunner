@@ -15,36 +15,46 @@ public class controllerDebug : MonoBehaviour
         if (Input.GetButtonDown("DS4square"))
         {
             //Å†
-            Debug.Log("Å†");
+            Debug.Log("<color=red>Å†</color>");
         }
         if (Input.GetButtonDown("DS4cross"))
         {
             //Å~
-            Debug.Log("Å~");
+            Debug.Log("<color=red>Å~</color>");
         }
         if (Input.GetButtonDown("DS4circle"))
         {
             //ÅZ
-            Debug.Log("ÅZ");
+            Debug.Log("<color=red>ÅZ</color>");
         }
         if (Input.GetButtonDown("DS4triangle"))
         {
             //Å¢
-            Debug.Log("Å¢");
+            Debug.Log("<color=red>Å¢</color>");
         }
 
-        //ç∂ÉXÉeÉBÉbÉN
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        if (x != 0)
-        {
-            Debug.Log(x);
-        }
-        if (y != 0)
-        {
-            Debug.Log(y);
-        }
+        //2
 
+        if (Input.GetButtonDown("DS4square2"))
+        {
+            //Å†
+            Debug.Log("<color=green>Å†</color>");
+        }
+        if (Input.GetButtonDown("DS4cross2"))
+        {
+            //Å~
+            Debug.Log("<color=green>Å~</color>");
+        }
+        if (Input.GetButtonDown("DS4circle2"))
+        {
+            //ÅZ
+            Debug.Log("<color=green>ÅZ</color>");
+        }
+        if (Input.GetButtonDown("DS4triangle2"))
+        {
+            //Å¢
+            Debug.Log("<color=green>Å¢</color>");
+        }
 
         //è\éöÉLÅ[ 
         //â°Å®DpadX(âEÇ™Åu+ÅvÅAç∂Ç™Åu-Åv)
@@ -53,12 +63,24 @@ public class controllerDebug : MonoBehaviour
         float Dy = Input.GetAxis("DpadY");
         if (Dx != 0)
         {
-            Debug.Log("DpadX: " + Dx);
+            Debug.Log("DpadX : " + Dx);
         }
         if (Dy != 0)
         {
             Debug.Log("DpadY :" + Dy);
         }
 
+
+
+        float Dx2 = Input.GetAxis("DpadX2");
+        float Dy2 = Input.GetAxis("DpadY2");
+        if (Dx2 != 0)
+        {
+            Debug.Log("DpadX2 : " + Dx2);
+        }
+        if (Dy2 != 0)
+        {
+            Debug.Log("DpadY2 :" + Dy2);
+        }
     }
 }
