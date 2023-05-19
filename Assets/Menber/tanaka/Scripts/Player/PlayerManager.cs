@@ -46,18 +46,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     Image cursor;
 
-    private void Awake()
-    {
-        animator.transform.Find("CursorController");
-        animator = GetComponent<Animator>();
-    }
-
     void Start()
     {
         //初期座標
         this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
         cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
         //スキン設定
+
+        animator.transform.Find("CursorController");
+        animator = GetComponent<Animator>();
     }
 
     //プレイヤーの相対移動度(一括移動は後で)
@@ -88,7 +85,7 @@ public class PlayerManager : MonoBehaviour
                 //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
                 if (map.paintRedMap(nowDirection))
                 {
-                    //マネージャーで塗ったマスが何かを判別する仕組みが必要
+                    //塗ったマスに移動する
 
                     //一回塗ったので行動を一減らす
                     moveCounter--;
