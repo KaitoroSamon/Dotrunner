@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-     [SerializeField] TextAsset mapText; //マップの情報を取得
+     [SerializeField] 
+    public TextAsset mapText; //マップの情報を取得
 
     int selectPlayer; //どちらが攻撃しているかを保存しておくフィールド
 
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
          if (Input.GetKeyDown(KeyCode.Space))
         {
             if (selectPlayer == 0)

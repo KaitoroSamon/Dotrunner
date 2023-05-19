@@ -5,7 +5,7 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     [SerializeField]
-    private TextAsset textFile; //マップの情報取得
+    public TextAsset textFile; //マップの情報取得
  
     private string[] textData;
     private string[,] dungeonMap;
