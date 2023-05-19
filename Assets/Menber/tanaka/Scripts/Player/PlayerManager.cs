@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
 3-ゲームパッドの十字キー入力で選択できるようにする
@@ -19,6 +20,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    Animator animator;
+    Map map;
+    GameManager gameManager;
 
     //自分のターンかどうか？(マネージャーから受け取り)
     private bool myTrun = false;
@@ -39,8 +43,20 @@ public class PlayerManager : MonoBehaviour
     float Dx = default;
     float Dy = default;
 
+    [SerializeField]
+    Image cursor;
+
+    private void Awake()
+    {
+        animator.transform.Find("CursorController");
+        animator = GetComponent<Animator>();
+    }
+
     void Start()
     {
+        //初期座標
+        this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
+        cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
         //スキン設定
     }
 
@@ -50,27 +66,37 @@ public class PlayerManager : MonoBehaviour
         //自ターンのみ動かす
         if (myTrun)
         {
+            animator.SetBool("Selection",true);
+
             Debug.Log("<color=green> TrunChange! </color>");
             Dx = Input.GetAxis("DpadX");
             Dy = Input.GetAxis("DpadY");
             nowDirection = new Vector2(Dx,Dy);
 
             //カーソルを移動
-
-
-            //選択
             Dx = Input.GetAxis("DpadX");
             Dy = Input.GetAxis("DpadY");
-            //どちらかを動かしたら
             if (Dx != 0 && Dy != 0)
             {
+                cursor.transform.position = new Vector3(-7.5f + Dx,-0.5f + Dy,0);
                 nowDirection += new Vector2(Dx, Dy);
-                //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
-                nowPos += nowDirection;
-                //マネージャーで塗ったマスが何かを判別する仕組みが必要
+            }
 
-                //一回塗ったので行動を一減らす
-                moveCounter--;
+            //塗り
+            if (Input.GetButtonDown("DS4circle"))
+            {
+                //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
+                if (map.paintRedMap(nowDirection))
+                {
+                    //マネージャーで塗ったマスが何かを判別する仕組みが必要
+
+                    //一回塗ったので行動を一減らす
+                    moveCounter--;
+                }
+                else
+                {
+                    Debug.Log("<color=red>隣接したマスがありません。</color>");
+                }
             }
 
             //行動回数が0になるか
@@ -79,34 +105,41 @@ public class PlayerManager : MonoBehaviour
             {
                 myTrun = false;
                 //マネージャーにも終了したと返す
-
+                gameManager.trunChange();
             }
             if (Input.GetButtonDown("DS4cross"))
             {
                 //再度確認
 
                 //マネージャーにも終了したと返す
-
+                gameManager.trunChange();
                 //行動回数を０にする(バグ対策)
                 moveCounter = 0;
                 myTrun = false;
             }
 
+            //ターン終了時カーソルを透明感
         }
 
 
     }
 
     /// <summary>
-    /// プレイヤー情報送り先(ゲームマネージャーより)
+    /// プレイヤー情報送り先(ゲームマップより)
     /// </summary>
     /// <param name="playerPos"></param>
-    public void PlayerUpdate(bool nowTurn, Vector2 playerPos, int playerMove,int Repaint)
+    public void PlayerUpdate(Vector2 playerPos)
+    {
+        nowPos = playerPos;
+    }
+    /// <summary>
+    /// プレイヤーの情報送り先(ゲームマネージャーより)
+    /// </summary>
+    /// <param name="nowTurn"></param>
+    public void PlayertrunUpdate(bool nowTurn, int playerMove, int Repaint)
     {
         myTrun = nowTurn;
-        nowPos = playerPos;
         moveCounter = playerMove;
         rePaint = Repaint;
-
     }
 }
