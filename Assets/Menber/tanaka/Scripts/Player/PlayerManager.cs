@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
+3-ゲームパッドの十字キー入力で選択できるようにする
+3.5-選択中のマスの方向にエフェクトを入れわかりやすいようにする
+4-Bキー入力後マスの色を変更する
 5-最後に色を変更した方向にプレイヤーを移動させる
 5.1-アニメーションの追加（ゆっくり移動させる）
 5.2-アイテムがあるマスを選択したらアイテムの取得、発動を行う
 6-もう一人のプレイヤーの動作を受け付ける
 7-特定のマスに乗ったら終了させる[相手の城にたどり着く際は塗ポイントぴったり使わないとゴールできない]
 8-プレイヤーのHPを管理する[相手と同じマスに乗ると攻撃(攻撃した側が次の自分のターン行動不可)]
+9-マスのない場所には移動できないようにする
+10-ターン終了ボタンをXキーに入れる
 11-キャラ選択画面で受け取ったIDに合わせてプレイヤースキンを変更する
 */
 
 public class PlayerManager : MonoBehaviour
 {
-    string Horizontal = "DpadX";
-    string Vertical = "DpadY";
-    string select = "DS4circle";
-    string end = "DS4circle";
 
     //自分のターンかどうか？(マネージャーから受け取り)
     private bool myTrun = false;
@@ -40,7 +41,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-
+        //スキン設定
     }
 
     //プレイヤーの相対移動度(一括移動は後で)
@@ -50,16 +51,20 @@ public class PlayerManager : MonoBehaviour
         if (myTrun)
         {
             Debug.Log("<color=green> TrunChange! </color>");
-            Dx = Input.GetAxis(Horizontal);
-            Dy = Input.GetAxis(Vertical);
+            Dx = Input.GetAxis("DpadX");
+            Dy = Input.GetAxis("DpadY");
             nowDirection = new Vector2(Dx,Dy);
 
             //カーソルを移動
 
 
             //選択
-            if (Input.GetButtonDown(select))
+            Dx = Input.GetAxis("DpadX");
+            Dy = Input.GetAxis("DpadY");
+            //どちらかを動かしたら
+            if (Dx != 0 && Dy != 0)
             {
+                nowDirection += new Vector2(Dx, Dy);
                 //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
                 nowPos += nowDirection;
                 //マネージャーで塗ったマスが何かを判別する仕組みが必要
@@ -76,7 +81,7 @@ public class PlayerManager : MonoBehaviour
                 //マネージャーにも終了したと返す
 
             }
-            if (Input.GetButtonDown(end))
+            if (Input.GetButtonDown("DS4cross"))
             {
                 //再度確認
 

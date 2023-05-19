@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class controllerDebug : MonoBehaviour
 {
+
+    /* 入力キーコード
+     * プレイヤー1
+     * DS4square(□)
+     * DS4cross(×)
+     * DS4circle(〇)
+     * DS4Triangle(△)
+     * DpadX - 十字キー横(右+　左-)
+     * DpadY - 十字キー縦(上+　下-)
+     * 
+     * DS4square2(□)
+     * DS4cross2(×)
+     * DS4circle2(〇)
+     * DS4Triangle2(△)
+     * DpadX2 - 十字キー横(右+　左-)
+     * DpadY2 - 十字キー縦(上+　下-)
+     */
     void Start()
     {
         Debug.Log("デバッグモード");
