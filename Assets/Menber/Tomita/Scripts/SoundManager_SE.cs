@@ -8,8 +8,6 @@ public class SoundManager_SE : MonoBehaviour
 
     static SoundManager_SE _instance;
 
-
-
     public AudioClip[] Audio_Clip_SE;
 
     public AudioSource Audio_Source_SE;
@@ -22,11 +20,13 @@ public class SoundManager_SE : MonoBehaviour
     }
     public void Play(int clip)
     {
-        Audio_Source_SE.volume = 1;
-        Audio_Source_SE.clip = Audio_Clip_SE[clip];
-        Audio_Source_SE.Play();
-
+       
+            Audio_Source_SE.volume = 1;
+            Audio_Source_SE.clip = Audio_Clip_SE[clip];
+            Audio_Source_SE.Play();
+    
     }
+
 
     public void Stop()
     {
