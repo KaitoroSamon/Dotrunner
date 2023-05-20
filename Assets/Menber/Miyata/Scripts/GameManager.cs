@@ -17,13 +17,17 @@ public class GameManager : MonoBehaviour
     private int  maxMoveCounter = 3;
     //バケツ所持数
     private int rePaint = 0;
-    PlayerManager playerManager;
+    public static PlayerManager playerManager;
+    [SerializeField]
+    GameObject player1;
 
     // Start is called before the first frame update
     void Start()
     {
         playerObj1 = GameObject.Find("Square");
         playerObj2 = GameObject.Find("Square (1)");
+
+        playerManager = player1.GetComponent<PlayerManager>();
     }
 
     // Update is called once per frame
@@ -35,14 +39,17 @@ public class GameManager : MonoBehaviour
             if (player1Trun)
             {
                 // プレイヤー１の攻撃
-                playerObj1.GetComponent<Player1>().Attack();//プレイヤー1の行動を呼び出す
+                //playerObj1.GetComponent<Player1>().Attack();//プレイヤー1の行動を呼び出す
+
+                Debug.Log("<color=cyan> TrunChange! </color>");
 
                 playerManager.PlayertrunUpdate(player1Trun, maxMoveCounter, rePaint);
             }
             else
             {
                 // プレイヤー２の攻撃
-                playerObj2.GetComponent<Player2>().Attack();
+                Debug.Log("<color=orange> TrunChange! </color>");
+                //playerObj2.GetComponent<Player2>().Attack();
             }
         }
     }

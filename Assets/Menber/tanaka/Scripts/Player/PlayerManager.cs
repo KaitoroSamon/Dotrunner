@@ -21,8 +21,12 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     Animator animator;
-    Map map;
-    GameManager gameManager;
+    public static Map map;
+    public static GameManager gameManager;
+    [SerializeField]
+    GameObject mapScrits;
+    [SerializeField]
+    GameObject gameManagerScripts;
 
     //自分のターンかどうか？(マネージャーから受け取り)
     private bool myTrun = false;
@@ -42,19 +46,26 @@ public class PlayerManager : MonoBehaviour
     //コントローラーからのキー受け取り用
     float Dx = default;
     float Dy = default;
+    bool nowMove = false;
 
     [SerializeField]
-    Image cursor;
+    GameObject cursor;
+
+    private void Awake()
+    {
+        map = mapScrits.GetComponent<Map>();
+        gameManager = gameManagerScripts.GetComponent<GameManager>();
+
+        //初期座標
+        //this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
+        //cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
+    }
 
     void Start()
     {
-        //初期座標
-        this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
-        cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
-        //スキン設定
+        animator = cursor.GetComponent<Animator>();
 
-        animator.transform.Find("CursorController");
-        animator = GetComponent<Animator>();
+        //スキン設定
     }
 
     //プレイヤーの相対移動度(一括移動は後で)
@@ -65,18 +76,17 @@ public class PlayerManager : MonoBehaviour
         {
             animator.SetBool("Selection",true);
 
-            Debug.Log("<color=green> TrunChange! </color>");
-            Dx = Input.GetAxis("DpadX");
-            Dy = Input.GetAxis("DpadY");
-            nowDirection = new Vector2(Dx,Dy);
-
-            //カーソルを移動
-            Dx = Input.GetAxis("DpadX");
-            Dy = Input.GetAxis("DpadY");
-            if (Dx != 0 && Dy != 0)
+            if (!nowMove)
             {
-                cursor.transform.position = new Vector3(-7.5f + Dx,-0.5f + Dy,0);
-                nowDirection += new Vector2(Dx, Dy);
+                Dx = (int)Input.GetAxis("DpadX");
+                Dy = (int)Input.GetAxis("DpadY");
+
+                //カーソルを移動
+                if (Dx != 0 || Dy != 0)
+                {
+                    nowMove = true;
+                    StartCoroutine("cursorMove");
+                }
             }
 
             //塗り
@@ -92,7 +102,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("<color=red>隣接したマスがありません。</color>");
+                    //Debug.Log("<color=red>隣接したマスがありません。</color>");
                 }
             }
 
@@ -100,6 +110,7 @@ public class PlayerManager : MonoBehaviour
             //ターン終了時ボタンを押したら終了
             if (moveCounter <= 0)
             {
+                animator.SetBool("Selection", false);
                 myTrun = false;
                 //マネージャーにも終了したと返す
                 gameManager.trunChange();
@@ -108,6 +119,7 @@ public class PlayerManager : MonoBehaviour
             {
                 //再度確認
 
+                animator.SetBool("Selection", false);
                 //マネージャーにも終了したと返す
                 gameManager.trunChange();
                 //行動回数を０にする(バグ対策)
@@ -117,7 +129,15 @@ public class PlayerManager : MonoBehaviour
 
             //ターン終了時カーソルを透明感
         }
+    }
 
+    private IEnumerator cursorMove()
+    {
+        cursor.transform.position = new Vector3(cursor.transform.position.x + Dx, cursor.transform.position.y + Dy, cursor.transform.position.z);
+        nowDirection = new Vector2(nowDirection.x+(int)Dx, nowDirection.y+(int)Dy);
+
+        yield return new WaitForSeconds(0.25f);
+        nowMove = false;
 
     }
 
@@ -128,6 +148,8 @@ public class PlayerManager : MonoBehaviour
     public void PlayerUpdate(Vector2 playerPos)
     {
         nowPos = playerPos;
+        this.gameObject.transform.position = nowPos;
+        nowDirection = nowPos;
     }
     /// <summary>
     /// プレイヤーの情報送り先(ゲームマネージャーより)

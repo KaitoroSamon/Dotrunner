@@ -32,9 +32,19 @@ public class Map : MonoBehaviour
     //塗った元のマスのデータ保持
     private int formerData = default;
     GameManager gameManager;
+    PlayerManager playerManager;
+    [SerializeField]
+    GameObject gameManagerScripts;
+    [SerializeField]
+    GameObject playerManagerScripts;
+    int count = 0;
 
-    private void Start()
+    private void Awake()
     {
+        gameManager = gameManagerScripts.GetComponent<GameManager>();
+        playerManager = playerManagerScripts.GetComponent<PlayerManager>();
+
+
         string textLines = textFile.text; // テキストの全体データの代入
         print(textLines);
  
@@ -89,6 +99,15 @@ public class Map : MonoBehaviour
 
                         case "6"://ゴール
                             Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            if(count == 0)
+                            {
+                                playerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
+                                count++;
+                            }
+                            else{
+
+                            }
+                            
                             break;
                     }
                 }
@@ -99,18 +118,21 @@ public class Map : MonoBehaviour
     //田中加筆
     public bool paintRedMap(Vector2 pos)
     {
+        pos = positionConverter(pos);
+        Debug.Log("["+pos.x+ "]" + "["+pos.y+"]");
         bool paint = false;
-        Debug.Log("塗り");
-        for(int i = 0; i < LineNumber; i++)
+        for(int i = 0; i < ColumnNumber; i++)
         {
-            for (int j = 0; j < ColumnNumber; j++)
+            for (int j = 0; j < LineNumber; j++)
             {
                 if (i == pos.x && j == pos.y)
                 {
+                    Debug.Log("あった！");
                     //隣接したマスに何もなければ何もしない
                     if (dungeonMap[i+1,j] == "1" || dungeonMap[i, j+1] == "1" || dungeonMap[i - 1, j] == "1" || dungeonMap[i, j - 1] == "1" ||
                         dungeonMap[i + 1, j] == "6" || dungeonMap[i, j + 1] == "6" || dungeonMap[i - 1, j] == "6" || dungeonMap[i, j - 1] == "6")
                     {
+                        Debug.Log("塗った!");
                         formerData = int.Parse(dungeonMap[i, j]);
                         //対応した色に塗る
                         dungeonMap[i, j] = "1";
@@ -138,5 +160,19 @@ public class Map : MonoBehaviour
         }
 
         return paint;
+    }
+
+    public Vector2 positionConverter(Vector2 pos)
+    {
+        //  x/y   x   y
+        //  0/0 -7.5 3.5
+        //  0/8 -7.5 -4.5
+        //  15/0 7.5 3.5
+        //  15/8 7.5 -4.5
+
+        //(0,0)を起点にする
+        pos = new Vector2(pos.x + 7.5f,pos.y-3.5f);
+        return pos;
+        
     }
 }
