@@ -6,13 +6,13 @@ public class Map : MonoBehaviour
 {
     [SerializeField]
     public TextAsset textFile; //マップの情報取得
- 
+
     private string[] textData;
     private string[,] dungeonMap;
- 
+
     private int LineNumber; // 行数に相当
     private int ColumnNumber; // 列数に相当
- 
+
     [SerializeField]
     private GameObject NothingSquare;
     [SerializeField]
@@ -31,13 +31,22 @@ public class Map : MonoBehaviour
     //田中さん加筆
     //塗った元のマスのデータ保持
     private int formerData = default;
+
     GameManager gameManager;
     PlayerManager playerManager;
     [SerializeField]
     GameObject gameManagerScripts;
     [SerializeField]
     GameObject playerManagerScripts;
-    int count = 0;
+
+    public bool paint = false;
+    private bool neighbor = false;
+
+    //選択したマスの上下左右の座標保持
+    private Vector2 top = default;
+    private Vector2 bottom = default;
+    private Vector2 left = default;
+    private Vector2 right = default;
 
     private void Awake()
     {
@@ -47,67 +56,84 @@ public class Map : MonoBehaviour
 
         string textLines = textFile.text; // テキストの全体データの代入
         print(textLines);
- 
+
         // 改行でデータを分割して配列に代入
         textData = textLines.Split('\n');
- 
+
         // 行数と列数の取得
         ColumnNumber = textData[0].Split(',').Length;
         LineNumber = textData.Length;
- 
-        print("tate" + LineNumber);
-        print("yoko" + ColumnNumber);
- 
+
+        //print("tate" + LineNumber);
+        //print("yoko" + ColumnNumber);
+
         // ２次元配列の定義
         dungeonMap = new string[LineNumber, ColumnNumber];
- 
-        for(int i = 0; i < LineNumber; i++)
+
+        for (int i = 0; i < LineNumber; i++)
         {
             string[] tempWords = textData[i].Split(',');
- 
-            for(int j = 0; j < ColumnNumber; j++)
+
+            for (int j = 0; j < ColumnNumber; j++)
             {
                 dungeonMap[i, j] = tempWords[j];
- 
-                if(dungeonMap[i,j] != null)
+            }
+        }
+        mapRemake();
+    }
+
+    public void mapRemake()
+    {
+        Debug.Log("マップ生成");
+        //最初に以前のマップ画像を消す
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(this.transform.GetChild(i).gameObject);
+        }
+        this.transform.DetachChildren();
+
+        for (int i = 0; i < LineNumber; i++)
+        {
+            for (int j = 0; j < ColumnNumber; j++)
+            {
+                if (dungeonMap[i, j] != null)
                 {
-                    switch (dungeonMap[i,j])
+                    switch (dungeonMap[i, j])
                     {
                         case "0"://何もなし
-                            Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             break;
- 
+
                         case "1"://プレイヤー1の色
-                            Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             break;
- 
+
                         case "2"://プレイヤー2の色
-                            Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             break;
-                        
+
                         case "3"://ポーション
-                            Instantiate(Item1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            Instantiate(Item1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             break;
 
                         case "4"://バケツ
-                            Instantiate(Item2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            Instantiate(Item2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             break;
 
                         case "5"://爆弾
-                            Instantiate(Item3Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
+                            Instantiate(Item3Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             break;
 
-                        case "6"://ゴール
-                            Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity);
-                            if(count == 0)
-                            {
-                                playerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
-                                count++;
-                            }
-                            else{
+                        case "6"://赤ゴール
+                            Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            //一人目のプレイヤー配置
+                            playerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
 
-                            }
-                            
+                            break;
+                        case "7"://青ゴール
+                            Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            //二人目のプレイヤー配置
+
                             break;
                     }
                 }
@@ -115,31 +141,100 @@ public class Map : MonoBehaviour
         }
     }
 
+
     //田中加筆
-    public bool paintRedMap(Vector2 pos)
+    public IEnumerator paintRedMap(Vector2 pos)
     {
-        pos = positionConverter(pos);
-        Debug.Log("["+pos.x+ "]" + "["+pos.y+"]");
-        bool paint = false;
-        for(int i = 0; i < ColumnNumber; i++)
+        var converterPos = positionConverter(pos);
+        //Debug.Log("["+pos.x+ "]" + "["+pos.y+"]");
+
+        //paintがtureになるまで続ける
+        while (!paint)
         {
-            for (int j = 0; j < LineNumber; j++)
+            for (int y = 0; y < LineNumber; y++)
             {
-                if (i == pos.x && j == pos.y)
+
+                for (int x = 0; x < ColumnNumber; x++)
                 {
-                    Debug.Log("あった！");
-                    //隣接したマスに何もなければ何もしない
-                    if (dungeonMap[i+1,j] == "1" || dungeonMap[i, j+1] == "1" || dungeonMap[i - 1, j] == "1" || dungeonMap[i, j - 1] == "1" ||
-                        dungeonMap[i + 1, j] == "6" || dungeonMap[i, j + 1] == "6" || dungeonMap[i - 1, j] == "6" || dungeonMap[i, j - 1] == "6")
+
+                    if (y == converterPos.y && x == converterPos.x)
                     {
-                        Debug.Log("塗った!");
-                        formerData = int.Parse(dungeonMap[i, j]);
-                        //対応した色に塗る
-                        dungeonMap[i, j] = "1";
-                        paint = true;
+                        Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
+                        //Debug.Log("[" + tate + "]" + "[" + yoko + "]");
+                        Debug.Log("マスデータ" + dungeonMap[y, x]);
+
+                        top = new Vector2(converterPos.x, converterPos.y + 1);
+                        bottom = new Vector2(converterPos.x, converterPos.y - 1);
+                        right = new Vector2(converterPos.x + 1, converterPos.y);
+                        left = new Vector2(converterPos.x - 1, converterPos.y);
+
+                        //塗ろうとしているマスが塗れないなら終了
+                        if (dungeonMap[y, x] == "1" || dungeonMap[y, x] == "6")
+                        {
+                            break;
+                        }
+
+                        //上のマスが配列外でない
+                        if (dungeonMap[(int)top.y, (int)top.x] != null)
+                        {
+                            Debug.Log("top");
+                            if (dungeonMap[(int)top.y, (int)top.x] == "1" ||
+                                dungeonMap[(int)top.y, (int)top.x] == "6"){
+                                neighbor = true;
+                            }
+                        }
+                        //右のマスが配列外でない
+                        else if (dungeonMap[(int)right.y, (int)right.x] != null)
+                        {
+                            Debug.Log("right");
+                            if (dungeonMap[(int)right.y, (int)right.x] == "1" ||
+                                dungeonMap[(int)right.y, (int)right.x] == "6"){
+                                neighbor = true;
+                            }
+                        }
+                        //左のマスが配列外でない
+                        else if (dungeonMap[(int)bottom.y, (int)bottom.x] != null)
+                        {
+                            Debug.Log("bottom");
+                            if (dungeonMap[(int)bottom.y, (int)bottom.x] == "1" ||
+                                dungeonMap[(int)bottom.y, (int)bottom.x] == "6"){
+                                neighbor = true;
+                            }
+                        }
+                        //下のマスが配列外でない
+                        else if (dungeonMap[(int)left.y, (int)left.x] != null)
+                        {
+                            Debug.Log("left");
+                            if (dungeonMap[(int)left.y, (int)left.x] == "1" ||
+                                dungeonMap[(int)left.y, (int)left.x] == "6"){
+                                neighbor = true;
+                            }
+                        }
+                        if (neighbor)
+                        {
+
+                            /*
+                            //配列外ならスキップ
+                            //隣接したマスに何もなければ何もしない
+                            else if (dungeonMap[tate, yoko + 1] == "1" || dungeonMap[tate + 1, yoko] == "1" ||
+                                    dungeonMap[tate - 1, yoko] == "1" || dungeonMap[tate, yoko - 1] == "1" ||
+                                    dungeonMap[tate, yoko + 1] == "6" || dungeonMap[tate + 1, yoko] == "6" ||
+                                    dungeonMap[tate - 1, yoko] == "6" || dungeonMap[tate, yoko - 1] == "6") { 
+                            */
+
+                            //塗る前のデータ保持
+                            formerData = int.Parse(dungeonMap[y, x]);
+                            //対応した色に塗る
+                            dungeonMap[y, x] = "1";
+
+                            neighbor = false;
+                            paint = true;
+                        }
                     }
                 }
             }
+            //回し終わってもfalseだったらbreak
+            if (!paint) break;
         }
 
         //アイテムと重なった処置
@@ -154,12 +249,12 @@ public class Map : MonoBehaviour
             case 5:
                 //爆弾の処理
                 break;
-            case 6:
+            case 7:
 
-            default : break;
+            default: break;
         }
 
-        return paint;
+        yield return null;
     }
 
     public Vector2 positionConverter(Vector2 pos)
@@ -171,8 +266,8 @@ public class Map : MonoBehaviour
         //  15/8 7.5 -4.5
 
         //(0,0)を起点にする
-        pos = new Vector2(pos.x + 7.5f,pos.y-3.5f);
+        pos = new Vector2(pos.x + 7.5f, pos.y + 4.5f);
         return pos;
-        
+
     }
 }

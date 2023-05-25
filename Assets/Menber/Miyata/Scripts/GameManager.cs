@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public static PlayerManager playerManager;
     [SerializeField]
     GameObject player1;
+    public bool oneTime = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +34,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
-         if (Input.GetKeyDown(KeyCode.Space))
+
+        if (player1Trun)
         {
-            if (player1Trun)
+            if(oneTime == false)
             {
+                oneTime = true;
                 // プレイヤー１の攻撃
                 //playerObj1.GetComponent<Player1>().Attack();//プレイヤー1の行動を呼び出す
 
@@ -45,12 +47,20 @@ public class GameManager : MonoBehaviour
 
                 playerManager.PlayertrunUpdate(player1Trun, maxMoveCounter, rePaint);
             }
-            else
+        }
+        else
+        {
+            if (oneTime == false)
             {
+                oneTime = true;
                 // プレイヤー２の攻撃
                 Debug.Log("<color=orange> TrunChange! </color>");
                 //playerObj2.GetComponent<Player2>().Attack();
             }
+        }
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.F1)){
+            trunChange();
         }
     }
 
@@ -65,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
             player1Trun = true;
         }
+        oneTime = false;
     }
 
     //ポーションをとった処理

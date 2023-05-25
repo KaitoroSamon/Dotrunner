@@ -581,14 +581,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textFile: {fileID: 4900000, guid: c128b9990aad617468406955b7144f27, type: 3}
   NothingSquare: {fileID: 2970747645344951186, guid: 29cabca58c3a05d458d968d90441d195, type: 3}
-  Player1Square: {fileID: 2970747645344951186, guid: 54b090143cd08d141a5c7e74f2ec75fb, type: 3}
-  Player2Square: {fileID: 2970747645344951186, guid: 8cd33ff69910104438c04dbe391786d6, type: 3}
+  Player1Square: {fileID: 2970747645344951186, guid: 8cd33ff69910104438c04dbe391786d6, type: 3}
+  Player2Square: {fileID: 2970747645344951186, guid: 54b090143cd08d141a5c7e74f2ec75fb, type: 3}
   Item1Square: {fileID: 0}
   Item2Square: {fileID: 0}
   Item3Square: {fileID: 0}
   GoalSquare: {fileID: 115535686308552695, guid: 773ed210bb55db848aed3f30a35c04a8, type: 3}
   gameManagerScripts: {fileID: 475180434}
   playerManagerScripts: {fileID: 386786074}
+  paint: 0
 --- !u!1 &218947459
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapText: {fileID: 4900000, guid: c128b9990aad617468406955b7144f27, type: 3}
   player1: {fileID: 386786074}
+  oneTime: 0
 --- !u!4 &475180436
 Transform:
   m_ObjectHideFlags: 0
@@ -1878,7 +1880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881632954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

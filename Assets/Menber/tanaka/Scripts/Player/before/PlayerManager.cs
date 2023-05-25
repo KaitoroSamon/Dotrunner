@@ -50,12 +50,16 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     GameObject cursor;
+    Image cursorImage;
+
+    GameObject playerModel;
 
     private void Awake()
     {
         map = mapScrits.GetComponent<Map>();
         gameManager = gameManagerScripts.GetComponent<GameManager>();
-
+        cursorImage = cursor.GetComponent<Image>();
+        playerModel = transform.Find("PlayerModel").gameObject;
         //初期座標
         //this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
         //cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
@@ -74,6 +78,7 @@ public class PlayerManager : MonoBehaviour
         //自ターンのみ動かす
         if (myTrun)
         {
+            cursorImage.color = new Color32(255, 0, 217, 138);
             animator.SetBool("Selection",true);
 
             if (!nowMove)
@@ -85,38 +90,52 @@ public class PlayerManager : MonoBehaviour
                 if (Dx != 0 || Dy != 0)
                 {
                     nowMove = true;
-                    StartCoroutine("cursorMove");
+                    StartCoroutine(cursorMove());
                 }
             }
 
             //塗り
-            if (Input.GetButtonDown("DS4circle"))
+            if (!nowMove && Input.GetButtonDown("DS4circle"))
             {
+                nowMove = true;
+                StartCoroutine(map.paintRedMap(nowDirection));
                 //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
-                if (map.paintRedMap(nowDirection))
+                if (map.paint)
                 {
-                    //塗ったマスに移動する
+                    //マップ書き換え
+                    map.mapRemake();
+
+                    //プレイヤーモデルを動かす
+                    StartCoroutine(playerAnimation());
 
                     //一回塗ったので行動を一減らす
                     moveCounter--;
+                    map.paint = false;
                 }
                 else
                 {
-                    //Debug.Log("<color=red>隣接したマスがありません。</color>");
+                    Debug.Log("<color=red>隣接したマスがありません。</color>");
+                    nowMove = false;
                 }
             }
 
             //行動回数が0になるか
             //ターン終了時ボタンを押したら終了
-            if (moveCounter <= 0)
+            if (!nowMove && moveCounter <= 0)
             {
+                nowMove = true;
                 animator.SetBool("Selection", false);
                 myTrun = false;
                 //マネージャーにも終了したと返す
                 gameManager.trunChange();
+                //ターン終了時カーソルを透明感
+                cursorImage.color = new Color32(255, 0, 217, 0);
+                cursor.transform.position = this.transform.position;
+                nowMove = false;
             }
-            if (Input.GetButtonDown("DS4cross"))
+            if (!nowMove && Input.GetButtonDown("DS4cross"))
             {
+                nowMove = true;
                 //再度確認
 
                 animator.SetBool("Selection", false);
@@ -125,20 +144,41 @@ public class PlayerManager : MonoBehaviour
                 //行動回数を０にする(バグ対策)
                 moveCounter = 0;
                 myTrun = false;
+                //ターン終了時カーソルを透明にする
+                cursorImage.color = new Color32(255, 0, 217, 0);
+                cursor.transform.position = this.transform.position;
+                nowMove = false;
             }
-
-            //ターン終了時カーソルを透明感
         }
     }
 
+    /// <summary>
+    /// カーソルを動かす処理
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator cursorMove()
     {
         cursor.transform.position = new Vector3(cursor.transform.position.x + Dx, cursor.transform.position.y + Dy, cursor.transform.position.z);
-        nowDirection = new Vector2(nowDirection.x+(int)Dx, nowDirection.y+(int)Dy);
+        nowDirection = new Vector2(nowDirection.x+(int)Dx, nowDirection.y-(int)Dy);
 
         yield return new WaitForSeconds(0.25f);
         nowMove = false;
+    }
 
+    /// <summary>
+    /// プレイヤーモデルの移動アニメーション処理
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator playerAnimation()
+    {
+        //塗ったマスに移動する
+        playerModel.transform.position = new Vector3(cursor.transform.position.x + Dx,
+            cursor.transform.position.y + Dy,
+            playerModel.transform.position.z);
+
+        cursor.transform.position = this.transform.position;
+        yield return new WaitForSeconds(0.5f);
+        nowMove = false;
     }
 
     /// <summary>
