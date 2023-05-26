@@ -29,7 +29,7 @@ public class RedPlayerManager : MonoBehaviour
     private int rePaint = default;
 
     //選択中の方向
-    public Vector2 nowDirection = default;
+    private Vector2 nowDirection = default;
 
     //コントローラーからのキー受け取り用
     float Dx = default;
@@ -150,6 +150,16 @@ public class RedPlayerManager : MonoBehaviour
     {
         cursor.transform.position = new Vector3(cursor.transform.position.x + Dx, cursor.transform.position.y + Dy, cursor.transform.position.z);
         nowDirection = new Vector2(nowDirection.x + (int)Dx, nowDirection.y - (int)Dy);
+
+        //x[-15～0]の範囲にy[-4～4]の範囲に制限する
+        var Xpos = Mathf.Clamp((int)cursor.transform.localPosition.x, (int)0, (int)15);
+        var Ypos = Mathf.Clamp((int)cursor.transform.localPosition.y, (int)-4, (int)4);
+        Debug.Log(Xpos + " : " + Ypos);
+        cursor.transform.localPosition = new Vector3(Xpos, Ypos, cursor.transform.position.z);
+        //x -7.5～7.5 y -3.5～4.5
+        var Xdir = Mathf.Clamp(nowDirection.x, -7.5f, 7.5f);
+        var Ydir = Mathf.Clamp(nowDirection.y, -4.5f, 3.5f);
+        nowDirection = new Vector2(Xdir, Ydir);
 
         yield return new WaitForSeconds(0.25f);
         nowMove = false;

@@ -356,7 +356,7 @@ public class Map : MonoBehaviour
                 formerData = 0;
                 break;
             case 7:
-                SceneManager.LoadScene("Result Scene");
+                SceneManager.LoadScene("redWin");
                 break;
             default: break;
         }
@@ -541,7 +541,7 @@ public class Map : MonoBehaviour
                 formerData = 0;
                 break;
             case 6:
-                SceneManager.LoadScene("ResultSceneA");
+                SceneManager.LoadScene("blueWin");
                 break;
             default: break;
         }

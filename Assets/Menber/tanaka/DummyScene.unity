@@ -4926,6 +4926,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 152370874649408427, guid: ad27bf9114682c846aed433aa06ac3ec, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d840649f25ab951478840758dfb9e860, type: 3}
     - target: {fileID: 152370875194586635, guid: ad27bf9114682c846aed433aa06ac3ec, type: 3}
       propertyPath: mapScrits
       value: 
@@ -4999,6 +5003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6449557663621979065, guid: fc68c3ade7816d84cafc2bea2e509c73, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d840649f25ab951478840758dfb9e860, type: 3}
     - target: {fileID: 6449557663893357073, guid: fc68c3ade7816d84cafc2bea2e509c73, type: 3}
       propertyPath: m_Name
       value: BluePlayer
