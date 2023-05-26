@@ -26,7 +26,7 @@ public class RedPlayerManager : MonoBehaviour
     private int rePaint = default;
 
     //選択中の方向
-    private Vector2 nowDirection = default;
+    public Vector2 nowDirection = default;
 
     //コントローラーからのキー受け取り用
     float Dx = default;
@@ -115,7 +115,6 @@ public class RedPlayerManager : MonoBehaviour
                 gameManager.trunChange();
                 //ターン終了時カーソルを透明
                 cursorImage.color = new Color32(255, 0, 30, 0);
-                cursor.transform.position = this.transform.position;
                 nowMove = false;
             }
             if (!nowMove && Input.GetButtonDown("DS4cross"))
@@ -131,7 +130,6 @@ public class RedPlayerManager : MonoBehaviour
                 myTrun = false;
                 //ターン終了時カーソルを透明にする
                 cursorImage.color = new Color32(255, 0, 30, 0);
-                cursor.transform.position = this.transform.position;
                 nowMove = false;
             }
         }
@@ -161,7 +159,6 @@ public class RedPlayerManager : MonoBehaviour
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
 
-        cursor.transform.position = this.transform.position;
         yield return null;
         nowMove = false;
     }

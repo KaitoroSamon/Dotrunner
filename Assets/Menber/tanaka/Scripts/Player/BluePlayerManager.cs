@@ -113,7 +113,6 @@ public class BluePlayerManager : MonoBehaviour
                 gameManager.trunChange();
                 //ターン終了時カーソルを透明感
                 cursorImage.color = new Color32(30, 0, 255, 0);
-                cursor.transform.position = this.transform.position;
                 nowMove = false;
             }
             if (!nowMove && Input.GetButtonDown("DS4cross2"))
@@ -129,7 +128,6 @@ public class BluePlayerManager : MonoBehaviour
                 myTrun = false;
                 //ターン終了時カーソルを透明にする
                 cursorImage.color = new Color32(30, 0, 255, 0);
-                cursor.transform.position = playerModel.transform.position;
                 nowMove = false;
             }
         }
@@ -159,7 +157,6 @@ public class BluePlayerManager : MonoBehaviour
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
 
-        cursor.transform.position = playerModel.transform.position;
         yield return null;
         nowMove = false;
     }

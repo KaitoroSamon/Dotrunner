@@ -53,6 +53,9 @@ public class Map : MonoBehaviour
     private Vector2 left = default;
     private Vector2 right = default;
 
+    private bool setRedPlayer = false;
+    private bool setBluePlayer = false;
+
     private void Awake()
     {
         gameManager = gameManagerScripts.GetComponent<GameManager>();
@@ -134,13 +137,20 @@ public class Map : MonoBehaviour
                         case "6"://赤ゴール
                             Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             //一人目のプレイヤー配置
-                            RedPlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
-
+                            if (!setRedPlayer)
+                            {
+                                RedPlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
+                                setRedPlayer = true;
+                            }
                             break;
                         case "7"://青ゴール
                             Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             //二人目のプレイヤー配置
-                            BluePlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
+                            if (!setBluePlayer)
+                            {
+                                BluePlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
+                                setBluePlayer = true;
+                            }
                             break;
                     }
                 }
@@ -158,7 +168,6 @@ public class Map : MonoBehaviour
     public IEnumerator paintRedMap(Vector2 pos)
     {
         var converterPos = positionConverter(pos);
-        //Debug.Log("["+pos.x+ "]" + "["+pos.y+"]");
 
         //paintがtureになるまで続ける
         while (!paint)
@@ -291,7 +300,6 @@ public class Map : MonoBehaviour
     public IEnumerator paintBlueMap(Vector2 pos)
     {
         var converterPos = positionConverter(pos);
-        //Debug.Log("["+pos.x+ "]" + "["+pos.y+"]");
 
         //paintがtureになるまで続ける
         while (!paint)
@@ -419,13 +427,6 @@ public class Map : MonoBehaviour
 
     public Vector2 positionConverter(Vector2 pos)
     {
-        //  x/y   x   y
-        //  0/0 -7.5 3.5
-        //  0/8 -7.5 -4.5
-        //  15/0 7.5 3.5
-        //  15/8 7.5 -4.5
-
-        //(0,0)を起点にする
         pos = new Vector2(pos.x + 7.5f, pos.y + 4.5f);
         return pos;
 
