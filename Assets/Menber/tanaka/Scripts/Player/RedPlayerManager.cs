@@ -23,7 +23,7 @@ public class RedPlayerManager : MonoBehaviour
     private Vector2 nowPos = default;
 
     //ˆÚ“®‚Å‚«‚é‰ñ”
-    private int moveCounter = default;
+    public int moveCounter = default;
 
     //“h‚è‘Ö‚¦‚¹‚é‰ñ”
     private int rePaint = default;

@@ -62,6 +62,11 @@ public class GameManager : MonoBehaviour
         blueRePaint = 0;
         portopn_p1 = 0;
         portopn_p2 = 0;
+
+        PPDisplay.ppDisplay.PointDisplay1(redMaxMoveCounter);
+        PPDisplay.ppDisplay.PointDisplay2(blueMaxMoveCounter);
+        PPDisplay.ppDisplay.BucketDisplay1(redRePaint);
+        PPDisplay.ppDisplay.BucketDisplay2(blueRePaint);
     }
 
     // Update is called once per frame
@@ -110,6 +115,9 @@ public class GameManager : MonoBehaviour
             move_up = redMaxMoveCounter + portopn_p1;
             redMaxMoveCounter = move_up;
 
+            //菊地加筆
+            PPDisplay.ppDisplay.PointDisplay1(redMaxMoveCounter);//P1側の塗ポイントを更新して表示
+
 
             player1Trun = false;
         }
@@ -119,6 +127,9 @@ public class GameManager : MonoBehaviour
             blueMaxMoveCounter = 3;
             move_up = blueMaxMoveCounter + portopn_p2;
             blueMaxMoveCounter = move_up;
+
+            //菊地加筆
+            PPDisplay.ppDisplay.PointDisplay2(blueMaxMoveCounter);//P2側の塗ポイントを更新して表示
 
             player1Trun = true;
         }
@@ -164,6 +175,8 @@ public class GameManager : MonoBehaviour
                 {
                     redRePaint++;
                 }
+                //菊地加筆
+                PPDisplay.ppDisplay.BucketDisplay1(redRePaint);//P1のバケツポイントを更新して表示
             }
         }
         //P2側の処理
@@ -181,7 +194,10 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     blueRePaint++;
+                    
                 }
+                //菊地加筆
+                PPDisplay.ppDisplay.BucketDisplay2(blueRePaint);//P2のバケツポイントを更新して表示
             }
         }
     }
