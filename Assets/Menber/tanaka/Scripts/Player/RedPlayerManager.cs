@@ -63,7 +63,7 @@ public class RedPlayerManager : MonoBehaviour
         //自ターンのみ動かす
         if (myTrun)
         {
-            cursorImage.color = new Color32(255, 0, 217, 138);
+            cursorImage.color = new Color32(255, 0, 30, 138);
             animator.SetBool("Selection", true);
 
             if (!nowMove)
@@ -113,8 +113,8 @@ public class RedPlayerManager : MonoBehaviour
                 myTrun = false;
                 //マネージャーにも終了したと返す
                 gameManager.trunChange();
-                //ターン終了時カーソルを透明感
-                cursorImage.color = new Color32(255, 0, 217, 0);
+                //ターン終了時カーソルを透明
+                cursorImage.color = new Color32(255, 0, 30, 0);
                 cursor.transform.position = this.transform.position;
                 nowMove = false;
             }
@@ -130,7 +130,7 @@ public class RedPlayerManager : MonoBehaviour
                 moveCounter = 0;
                 myTrun = false;
                 //ターン終了時カーソルを透明にする
-                cursorImage.color = new Color32(255, 0, 217, 0);
+                cursorImage.color = new Color32(255, 0, 30, 0);
                 cursor.transform.position = this.transform.position;
                 nowMove = false;
             }

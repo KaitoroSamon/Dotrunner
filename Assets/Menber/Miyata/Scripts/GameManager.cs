@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-     [SerializeField] 
+    [SerializeField]
     public TextAsset mapText; //マップの情報を取得
 
     bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     //田中加筆
     //最大塗り回数
-    private int  redMaxMoveCounter = 3;
+    private int redMaxMoveCounter = 3;
     //バケツ所持数
     public int redRePaint = 0;
     public static RedPlayerManager redPlayerManager;
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
         if (player1Trun)
         {
-            if(oneTime == false)
+            if (oneTime == false)
             {
                 oneTime = true;
                 // プレイヤー１の攻撃
@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
             }
         }
         //デバッグ用
-        if (Input.GetKeyDown(KeyCode.F1)){
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
             trunChange();
         }
     }

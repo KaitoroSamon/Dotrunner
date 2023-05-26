@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,9 +87,11 @@ public class Map : MonoBehaviour
         mapRemake();
     }
 
+    /// <summary>
+    /// マップの表示
+    /// </summary>
     public void mapRemake()
     {
-        Debug.Log("マップ生成");
         //最初に以前のマップ画像を消す
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -168,12 +171,13 @@ public class Map : MonoBehaviour
 
                     if (y == converterPos.y && x == converterPos.x)
                     {
+
                         Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
                         //Debug.Log("[" + tate + "]" + "[" + yoko + "]");
                         Debug.Log("マスデータ" + dungeonMap[y, x]);
 
-                        top = new Vector2(converterPos.x, converterPos.y + 1);
-                        bottom = new Vector2(converterPos.x, converterPos.y - 1);
+                        top = new Vector2(converterPos.x, converterPos.y - 1);
+                        bottom = new Vector2(converterPos.x, converterPos.y + 1);
                         right = new Vector2(converterPos.x + 1, converterPos.y);
                         left = new Vector2(converterPos.x - 1, converterPos.y);
 
@@ -182,46 +186,50 @@ public class Map : MonoBehaviour
                         {
                             break;
                         }
-
-                        //上のマスが配列外でない
-                        if (dungeonMap[(int)top.y, (int)top.x] != null)
+                        //バケツ所持していない状態で相手のマスを塗ろうとしたら飛ばす
+                        if (dungeonMap[y, x] == "2" && gameManager.redRePaint <= 0)
                         {
-                            Debug.Log("top");
+                            break;
+                        }
+                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
+                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
+                        {
                             if (dungeonMap[(int)top.y, (int)top.x] == "1" ||
-                                dungeonMap[(int)top.y, (int)top.x] == "6"){
+                                dungeonMap[(int)top.y, (int)top.x] == "6")
+                            {
+                                Debug.Log("上");
                                 neighbor = true;
                             }
                         }
-                        //右のマスが配列外でない
-                        if (dungeonMap[(int)right.y, (int)right.x] != null)
+                        //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
+                        if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
-                            Debug.Log("right");
                             if (dungeonMap[(int)right.y, (int)right.x] == "1" ||
-                                dungeonMap[(int)right.y, (int)right.x] == "6"){
+                                dungeonMap[(int)right.y, (int)right.x] == "6")
+                            {
+                                Debug.Log("右");
                                 neighbor = true;
                             }
                         }
-                        //左のマスが配列外でない
-                        if (dungeonMap[(int)bottom.y, (int)bottom.x] != null)
+                        //下のマスが配列外でないdungeonMap[(int)bottom.y, (int)bottom.x] != null
+                        if (!neighbor && IsArrayRange((int)bottom.y, (int)bottom.x))
                         {
-                            Debug.Log("bottom");
                             if (dungeonMap[(int)bottom.y, (int)bottom.x] == "1" ||
-                                dungeonMap[(int)bottom.y, (int)bottom.x] == "6"){
+                                dungeonMap[(int)bottom.y, (int)bottom.x] == "6")
+                            {
+                                Debug.Log("下");
                                 neighbor = true;
                             }
                         }
-                        //下のマスが配列外でない
-                        if (dungeonMap[(int)left.y, (int)left.x] != null)
+                        //左のマスが配列外でないdungeonMap[(int)left.y, (int)left.x] != null
+                        if (!neighbor && IsArrayRange((int)left.y, (int)left.x))
                         {
-                            Debug.Log("left");
                             if (dungeonMap[(int)left.y, (int)left.x] == "1" ||
-                                dungeonMap[(int)left.y, (int)left.x] == "6"){
+                                dungeonMap[(int)left.y, (int)left.x] == "6")
+                            {
+                                Debug.Log("左");
                                 neighbor = true;
                             }
-                        }
-                        if (dungeonMap[y, x] == "2" && gameManager.redRePaint < 0)
-                        {
-                            neighbor = false;
                         }
                         if (neighbor)
                         {
@@ -275,6 +283,11 @@ public class Map : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// BluePlayer処理
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
     public IEnumerator paintBlueMap(Vector2 pos)
     {
         var converterPos = positionConverter(pos);
@@ -291,12 +304,13 @@ public class Map : MonoBehaviour
 
                     if (y == converterPos.y && x == converterPos.x)
                     {
+
                         Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
                         //Debug.Log("[" + tate + "]" + "[" + yoko + "]");
                         Debug.Log("マスデータ" + dungeonMap[y, x]);
 
-                        top = new Vector2(converterPos.x, converterPos.y + 1);
-                        bottom = new Vector2(converterPos.x, converterPos.y - 1);
+                        top = new Vector2(converterPos.x, converterPos.y - 1);
+                        bottom = new Vector2(converterPos.x, converterPos.y + 1);
                         right = new Vector2(converterPos.x + 1, converterPos.y);
                         left = new Vector2(converterPos.x - 1, converterPos.y);
 
@@ -305,50 +319,50 @@ public class Map : MonoBehaviour
                         {
                             break;
                         }
-
-                        //上のマスが配列外でない
-                        if (dungeonMap[(int)top.y, (int)top.x] != null)
+                        //バケツ所持していない状態で相手のマスを塗ろうとしたら飛ばす
+                        if (dungeonMap[y, x] == "1" && gameManager.redRePaint <= 0)
                         {
-                            Debug.Log("top");
+                            break;
+                        }
+                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
+                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
+                        {
                             if (dungeonMap[(int)top.y, (int)top.x] == "2" ||
                                 dungeonMap[(int)top.y, (int)top.x] == "7")
                             {
+                                Debug.Log("上");
                                 neighbor = true;
                             }
                         }
-                        //右のマスが配列外でない
-                        if (dungeonMap[(int)right.y, (int)right.x] != null)
+                        //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
+                        if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
-                            Debug.Log("right");
                             if (dungeonMap[(int)right.y, (int)right.x] == "2" ||
                                 dungeonMap[(int)right.y, (int)right.x] == "7")
                             {
+                                Debug.Log("右");
                                 neighbor = true;
                             }
                         }
-                        //左のマスが配列外でない
-                        if (dungeonMap[(int)bottom.y, (int)bottom.x] != null)
+                        //下のマスが配列外でないdungeonMap[(int)bottom.y, (int)bottom.x] != null
+                        if (!neighbor && IsArrayRange((int)bottom.y, (int)bottom.x))
                         {
-                            Debug.Log("bottom");
                             if (dungeonMap[(int)bottom.y, (int)bottom.x] == "2" ||
                                 dungeonMap[(int)bottom.y, (int)bottom.x] == "7")
                             {
+                                Debug.Log("下");
                                 neighbor = true;
                             }
                         }
-                        //下のマスが配列外でない
-                        if (dungeonMap[(int)left.y, (int)left.x] != null)
+                        //左のマスが配列外でないdungeonMap[(int)left.y, (int)left.x] != null
+                        if (!neighbor && IsArrayRange((int)left.y, (int)left.x))
                         {
-                            Debug.Log("left");
                             if (dungeonMap[(int)left.y, (int)left.x] == "2" ||
                                 dungeonMap[(int)left.y, (int)left.x] == "7")
                             {
+                                Debug.Log("左");
                                 neighbor = true;
                             }
-                        }
-                        if (dungeonMap[y, x] == "1" && gameManager.redRePaint < 0)
-                        {
-                            neighbor = false;
                         }
                         if (neighbor)
                         {
@@ -364,7 +378,7 @@ public class Map : MonoBehaviour
                             //相手のマスだったら
                             if (dungeonMap[y, x] == "1" && gameManager.redRePaint > 0)
                             {
-                                gameManager.blueRePaint--;
+                                gameManager.redRePaint--;
                             }
                             //塗る前のデータ保持
                             formerData = int.Parse(dungeonMap[y, x]);
@@ -394,13 +408,14 @@ public class Map : MonoBehaviour
                 //爆弾の処理
                 break;
             case 6:
-                SceneManager.LoadScene("Result Scene A");
+                SceneManager.LoadScene("ResultSceneA");
                 break;
             default: break;
         }
 
         yield return null;
     }
+
 
     public Vector2 positionConverter(Vector2 pos)
     {
@@ -414,5 +429,14 @@ public class Map : MonoBehaviour
         pos = new Vector2(pos.x + 7.5f, pos.y + 4.5f);
         return pos;
 
+    }
+
+    private bool IsArrayRange(int x, int y)
+    {
+        return true
+            && x >= 0
+            && y >= 0
+            && x < dungeonMap.GetLength(0)
+            && y < dungeonMap.GetLength(1);
     }
 }

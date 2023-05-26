@@ -45,9 +45,7 @@ public class BluePlayerManager : MonoBehaviour
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         cursorImage = cursor.GetComponent<Image>();
         playerModel = transform.Find("PlayerModel").gameObject;
-        //初期座標
-        //this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
-        //cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
+        //初期座標はマップから受け取り
     }
 
     void Start()
@@ -63,7 +61,7 @@ public class BluePlayerManager : MonoBehaviour
         //自ターンのみ動かす
         if (myTrun)
         {
-            cursorImage.color = new Color32(255, 0, 217, 138);
+            cursorImage.color = new Color32(30, 0, 255, 138);
             animator.SetBool("Selection", true);
 
             if (!nowMove)
@@ -114,7 +112,7 @@ public class BluePlayerManager : MonoBehaviour
                 //マネージャーにも終了したと返す
                 gameManager.trunChange();
                 //ターン終了時カーソルを透明感
-                cursorImage.color = new Color32(255, 0, 217, 0);
+                cursorImage.color = new Color32(30, 0, 255, 0);
                 cursor.transform.position = this.transform.position;
                 nowMove = false;
             }
@@ -130,8 +128,8 @@ public class BluePlayerManager : MonoBehaviour
                 moveCounter = 0;
                 myTrun = false;
                 //ターン終了時カーソルを透明にする
-                cursorImage.color = new Color32(255, 0, 217, 0);
-                cursor.transform.position = this.transform.position;
+                cursorImage.color = new Color32(30, 0, 255, 0);
+                cursor.transform.position = playerModel.transform.position;
                 nowMove = false;
             }
         }
@@ -161,7 +159,7 @@ public class BluePlayerManager : MonoBehaviour
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
 
-        cursor.transform.position = this.transform.position;
+        cursor.transform.position = playerModel.transform.position;
         yield return null;
         nowMove = false;
     }
