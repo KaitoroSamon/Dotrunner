@@ -10,10 +10,13 @@ public class PPDisplay : MonoBehaviour
     public static RedPlayerManager redPlayerManager;
     public static BluePlayerManager bluePlayerManager;
 
+
     [SerializeField]
     private GameObject player1;
     [SerializeField]
     private GameObject player2;
+    [SerializeField]
+    private GameObject gManager;
 
     [SerializeField]
     [Header("PaintPointText")]
@@ -21,12 +24,12 @@ public class PPDisplay : MonoBehaviour
     [SerializeField]
     [Header("BucketPointText")]
     private Text[] bucketPoint;//バケツの個数表示をするテキストをアタッチしてください
-    //[SerializeField]
-    //[Header("Player1HP")]
-    //private GameObject[] p1HealthPoint;//HPの個数表示をする画像をアタッチしてください
-    //[SerializeField]
-    //[Header("Player2HP")]
-    //private GameObject[] p2HealthPoint;//HPの個数表示をする画像をアタッチしてください
+    [SerializeField]
+    [Header("Player1HP")]
+    private GameObject[] p1HealthPoint;//HPの個数表示をする画像をアタッチしてください
+    [SerializeField]
+    [Header("Player2HP")]
+    private GameObject[] p2HealthPoint;//HPの個数表示をする画像をアタッチしてください
 
     private Text changeText;
 
@@ -76,6 +79,12 @@ public class PPDisplay : MonoBehaviour
         {
             paintPoint[playerBlue].text = "" + bluePlayerManager.moveCounter;
         }
+
+        //HP処理
+       
+        
+
+
     }
     public void PointDisplay1(int Point1)//この関数には左側に表示する塗ポイントの値を送ってください。
     {
@@ -99,13 +108,13 @@ public class PPDisplay : MonoBehaviour
         Debug.Log("dousa");
         bucketPoint[playerBlue].text = "" + BucketPoint2;
     }
-    //public void p1HPDisplay(int BucketPoint1)//この関数には左側に表示するバケツポイントの値を送ってください。
-    //{
-    //    //ハートを消す処理
-    //}
+    public void p1HPDisplay(int BucketPoint1)//この関数には左側に表示するバケツポイントの値を送ってください。
+    {
+        //ハートを消す処理
+    }
 
-    //public void p2HPDisplay(int BucketPoint2)//この関数には右側に表示するバケツポイントの値を送ってください。
-    //{
-    //    //ハートを消す処理
-    //}
+    public void p2HPDisplay(int BucketPoint2)//この関数には右側に表示するバケツポイントの値を送ってください。
+    {
+        //ハートを消す処理
+    }
 }

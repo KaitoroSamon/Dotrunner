@@ -385,13 +385,15 @@ MonoBehaviour:
   mapText: {fileID: 4900000, guid: c128b9990aad617468406955b7144f27, type: 3}
   redRePaint: 0
   player1: {fileID: 669362967}
-  oneTime: 0
+  redHp: 3
   blueRePaint: 0
   player2: {fileID: 368085420}
+  blueHp: 3
   Portopn_limit: 9
   portopn_p1: 0
   portopn_p2: 0
   RePaint_limit: 10
+  oneTime: 0
 --- !u!4 &708110908
 Transform:
   m_ObjectHideFlags: 0
@@ -583,11 +585,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 368085420}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: gManager
+      value: 
+      objectReference: {fileID: 708110906}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: HealthPoint.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: bucketPoint.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: p1HealthPoint.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: p2HealthPoint.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
@@ -622,6 +636,22 @@ PrefabInstance:
       propertyPath: bucketPoint.Array.data[1]
       value: 
       objectReference: {fileID: 1251279245}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: p1HealthPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 6818004174942025817}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: p1HealthPoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 3122475075976241905}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: p2HealthPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 6021696602274932835}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: p2HealthPoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 81885286208991156}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
 --- !u!1 &6021696602274932835 stripped
