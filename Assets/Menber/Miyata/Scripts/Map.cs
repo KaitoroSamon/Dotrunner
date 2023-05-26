@@ -293,9 +293,11 @@ public class Map : MonoBehaviour
         {
             case 3:
                 gameManager.addMoveCounter();
+                formerData = 0;
                 break;
             case 4:
                 gameManager.addRePaint();
+                formerData = 0;
                 break;
             case 5:
                 //横山加筆
@@ -351,6 +353,7 @@ public class Map : MonoBehaviour
                         }
                     }
                 }
+                formerData = 0;
                 break;
             case 7:
                 SceneManager.LoadScene("Result Scene");
@@ -477,9 +480,11 @@ public class Map : MonoBehaviour
         {
             case 3:
                 gameManager.addMoveCounter();
+                formerData = 0;
                 break;
             case 4:
                 gameManager.addRePaint();
+                formerData = 0;
                 break;
             case 5:
                 //横山加筆
@@ -533,6 +538,7 @@ public class Map : MonoBehaviour
                         }
                     }
                 }
+                formerData = 0;
                 break;
             case 6:
                 SceneManager.LoadScene("ResultSceneA");

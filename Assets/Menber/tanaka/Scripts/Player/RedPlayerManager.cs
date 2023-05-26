@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RedPlayerManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class RedPlayerManager : MonoBehaviour
     GameObject mapScrits;
     [SerializeField]
     GameObject gameManagerScripts;
+    [SerializeField]
+    GameObject opponentPlayerPos;
 
     //自分のターンかどうか？(マネージャーから受け取り)
     private bool myTrun = false;
@@ -132,6 +135,10 @@ public class RedPlayerManager : MonoBehaviour
                 cursorImage.color = new Color32(255, 0, 30, 0);
                 nowMove = false;
             }
+            if(gameManager.redHp <= 0)
+            {
+                SceneManager.LoadScene("Result Scene");
+            }
         }
     }
 
@@ -158,6 +165,11 @@ public class RedPlayerManager : MonoBehaviour
         playerModel.transform.position = new Vector3(cursor.transform.position.x + Dx,
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
+
+        if(playerModel.transform.position == opponentPlayerPos.transform.position)
+        {
+            gameManager.blueHp--;
+        }
 
         yield return null;
         nowMove = false;

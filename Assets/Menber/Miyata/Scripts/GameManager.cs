@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     public static RedPlayerManager redPlayerManager;
     [SerializeField]
     GameObject player1;
-    public bool oneTime = false;
+    //プレイヤー1のHP
+    public int redHp = 3;
+    
 
     //最大塗り回数
     private int blueMaxMoveCounter = 3;
@@ -29,6 +31,8 @@ public class GameManager : MonoBehaviour
     public static BluePlayerManager bluePlayerManager;
     [SerializeField]
     GameObject player2;
+    //プレイヤー2のHP
+    public int blueHp = 3;
 
     //横山加筆
     //ポーションの最大所持数
@@ -40,6 +44,8 @@ public class GameManager : MonoBehaviour
     private int move_up;
     //バケツの最大所持数
     public int RePaint_limit = 10;
+
+    public bool oneTime = false;
 
     // Start is called before the first frame update
     void Start()
