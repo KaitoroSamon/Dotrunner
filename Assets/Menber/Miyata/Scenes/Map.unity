@@ -156,9 +156,9 @@ MonoBehaviour:
   NothingSquare: {fileID: 2970747645344951186, guid: 29cabca58c3a05d458d968d90441d195, type: 3}
   Player1Square: {fileID: 0}
   Player2Square: {fileID: 0}
-  Item1Square: {fileID: 0}
-  Item2Square: {fileID: 0}
-  Item3Square: {fileID: 0}
+  Item1Square: {fileID: 8177368741335348506, guid: 69700f3b9a68d7b4690b8d8c3bf916b1, type: 3}
+  Item2Square: {fileID: 8177368741335348506, guid: dcd938de256e8bc4fa5c9bce633bcd56, type: 3}
+  Item3Square: {fileID: 8177368741335348506, guid: d000b1ba6f3effc43aa5086666b78406, type: 3}
   GoalSquare: {fileID: 115535686308552695, guid: 773ed210bb55db848aed3f30a35c04a8, type: 3}
 --- !u!4 &56627887
 Transform:
@@ -281,6 +281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapText: {fileID: 0}
+  Portopn_limit: 9
+  RePaint_limit: 0
 --- !u!4 &471348894
 Transform:
   m_ObjectHideFlags: 0
