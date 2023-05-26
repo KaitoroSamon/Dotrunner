@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Map : MonoBehaviour
 {
@@ -33,11 +34,14 @@ public class Map : MonoBehaviour
     private int formerData = default;
 
     GameManager gameManager;
-    PlayerManager playerManager;
+    RedPlayerManager RedPlayerManager;
+    BluePlayerManager BluePlayerManager;
     [SerializeField]
     GameObject gameManagerScripts;
     [SerializeField]
-    GameObject playerManagerScripts;
+    GameObject RedPlayerManagerScripts;
+    [SerializeField]
+    GameObject BluePlayerManagerScripts;
 
     public bool paint = false;
     private bool neighbor = false;
@@ -51,8 +55,8 @@ public class Map : MonoBehaviour
     private void Awake()
     {
         gameManager = gameManagerScripts.GetComponent<GameManager>();
-        playerManager = playerManagerScripts.GetComponent<PlayerManager>();
-
+        RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
+        BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
 
         string textLines = textFile.text; // テキストの全体データの代入
         print(textLines);
@@ -127,13 +131,13 @@ public class Map : MonoBehaviour
                         case "6"://赤ゴール
                             Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             //一人目のプレイヤー配置
-                            playerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
+                            RedPlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
 
                             break;
                         case "7"://青ゴール
                             Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             //二人目のプレイヤー配置
-
+                            BluePlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
                             break;
                     }
                 }
@@ -143,6 +147,11 @@ public class Map : MonoBehaviour
 
 
     //田中加筆
+    /// <summary>
+    /// RedPlayer処理
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
     public IEnumerator paintRedMap(Vector2 pos)
     {
         var converterPos = positionConverter(pos);
@@ -184,7 +193,7 @@ public class Map : MonoBehaviour
                             }
                         }
                         //右のマスが配列外でない
-                        else if (dungeonMap[(int)right.y, (int)right.x] != null)
+                        if (dungeonMap[(int)right.y, (int)right.x] != null)
                         {
                             Debug.Log("right");
                             if (dungeonMap[(int)right.y, (int)right.x] == "1" ||
@@ -193,7 +202,7 @@ public class Map : MonoBehaviour
                             }
                         }
                         //左のマスが配列外でない
-                        else if (dungeonMap[(int)bottom.y, (int)bottom.x] != null)
+                        if (dungeonMap[(int)bottom.y, (int)bottom.x] != null)
                         {
                             Debug.Log("bottom");
                             if (dungeonMap[(int)bottom.y, (int)bottom.x] == "1" ||
@@ -202,13 +211,17 @@ public class Map : MonoBehaviour
                             }
                         }
                         //下のマスが配列外でない
-                        else if (dungeonMap[(int)left.y, (int)left.x] != null)
+                        if (dungeonMap[(int)left.y, (int)left.x] != null)
                         {
                             Debug.Log("left");
                             if (dungeonMap[(int)left.y, (int)left.x] == "1" ||
                                 dungeonMap[(int)left.y, (int)left.x] == "6"){
                                 neighbor = true;
                             }
+                        }
+                        if (dungeonMap[y, x] == "2" && gameManager.redRePaint < 0)
+                        {
+                            neighbor = false;
                         }
                         if (neighbor)
                         {
@@ -221,7 +234,11 @@ public class Map : MonoBehaviour
                                     dungeonMap[tate, yoko + 1] == "6" || dungeonMap[tate + 1, yoko] == "6" ||
                                     dungeonMap[tate - 1, yoko] == "6" || dungeonMap[tate, yoko - 1] == "6") { 
                             */
-
+                            //相手のマスだったら
+                            if (dungeonMap[y, x] == "2" && gameManager.redRePaint > 0)
+                            {
+                                gameManager.redRePaint--;
+                            }
                             //塗る前のデータ保持
                             formerData = int.Parse(dungeonMap[y, x]);
                             //対応した色に塗る
@@ -250,7 +267,135 @@ public class Map : MonoBehaviour
                 //爆弾の処理
                 break;
             case 7:
+                SceneManager.LoadScene("Result Scene");
+                break;
+            default: break;
+        }
 
+        yield return null;
+    }
+
+    public IEnumerator paintBlueMap(Vector2 pos)
+    {
+        var converterPos = positionConverter(pos);
+        //Debug.Log("["+pos.x+ "]" + "["+pos.y+"]");
+
+        //paintがtureになるまで続ける
+        while (!paint)
+        {
+            for (int y = 0; y < LineNumber; y++)
+            {
+
+                for (int x = 0; x < ColumnNumber; x++)
+                {
+
+                    if (y == converterPos.y && x == converterPos.x)
+                    {
+                        Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
+                        //Debug.Log("[" + tate + "]" + "[" + yoko + "]");
+                        Debug.Log("マスデータ" + dungeonMap[y, x]);
+
+                        top = new Vector2(converterPos.x, converterPos.y + 1);
+                        bottom = new Vector2(converterPos.x, converterPos.y - 1);
+                        right = new Vector2(converterPos.x + 1, converterPos.y);
+                        left = new Vector2(converterPos.x - 1, converterPos.y);
+
+                        //塗ろうとしているマスが塗れないなら終了
+                        if (dungeonMap[y, x] == "2" || dungeonMap[y, x] == "7")
+                        {
+                            break;
+                        }
+
+                        //上のマスが配列外でない
+                        if (dungeonMap[(int)top.y, (int)top.x] != null)
+                        {
+                            Debug.Log("top");
+                            if (dungeonMap[(int)top.y, (int)top.x] == "2" ||
+                                dungeonMap[(int)top.y, (int)top.x] == "7")
+                            {
+                                neighbor = true;
+                            }
+                        }
+                        //右のマスが配列外でない
+                        if (dungeonMap[(int)right.y, (int)right.x] != null)
+                        {
+                            Debug.Log("right");
+                            if (dungeonMap[(int)right.y, (int)right.x] == "2" ||
+                                dungeonMap[(int)right.y, (int)right.x] == "7")
+                            {
+                                neighbor = true;
+                            }
+                        }
+                        //左のマスが配列外でない
+                        if (dungeonMap[(int)bottom.y, (int)bottom.x] != null)
+                        {
+                            Debug.Log("bottom");
+                            if (dungeonMap[(int)bottom.y, (int)bottom.x] == "2" ||
+                                dungeonMap[(int)bottom.y, (int)bottom.x] == "7")
+                            {
+                                neighbor = true;
+                            }
+                        }
+                        //下のマスが配列外でない
+                        if (dungeonMap[(int)left.y, (int)left.x] != null)
+                        {
+                            Debug.Log("left");
+                            if (dungeonMap[(int)left.y, (int)left.x] == "2" ||
+                                dungeonMap[(int)left.y, (int)left.x] == "7")
+                            {
+                                neighbor = true;
+                            }
+                        }
+                        if (dungeonMap[y, x] == "1" && gameManager.redRePaint < 0)
+                        {
+                            neighbor = false;
+                        }
+                        if (neighbor)
+                        {
+
+                            /*
+                            //配列外ならスキップ
+                            //隣接したマスに何もなければ何もしない
+                            else if (dungeonMap[tate, yoko + 1] == "1" || dungeonMap[tate + 1, yoko] == "1" ||
+                                    dungeonMap[tate - 1, yoko] == "1" || dungeonMap[tate, yoko - 1] == "1" ||
+                                    dungeonMap[tate, yoko + 1] == "6" || dungeonMap[tate + 1, yoko] == "6" ||
+                                    dungeonMap[tate - 1, yoko] == "6" || dungeonMap[tate, yoko - 1] == "6") { 
+                            */
+                            //相手のマスだったら
+                            if (dungeonMap[y, x] == "1" && gameManager.redRePaint > 0)
+                            {
+                                gameManager.blueRePaint--;
+                            }
+                            //塗る前のデータ保持
+                            formerData = int.Parse(dungeonMap[y, x]);
+                            //対応した色に塗る
+                            dungeonMap[y, x] = "2";
+
+                            neighbor = false;
+                            paint = true;
+                        }
+                    }
+                }
+            }
+            //回し終わってもfalseだったらbreak
+            if (!paint) break;
+        }
+
+        //アイテムと重なった処置
+        switch (formerData)
+        {
+            case 3:
+                gameManager.addMoveCounter();
+                break;
+            case 4:
+                gameManager.addRePaint();
+                break;
+            case 5:
+                //爆弾の処理
+                break;
+            case 6:
+                SceneManager.LoadScene("Result Scene A");
+                break;
             default: break;
         }
 

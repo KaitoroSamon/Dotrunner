@@ -177,7 +177,7 @@ public class PlayerManager : MonoBehaviour
             playerModel.transform.position.z);
 
         cursor.transform.position = this.transform.position;
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
         nowMove = false;
     }
 

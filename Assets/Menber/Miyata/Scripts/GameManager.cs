@@ -14,13 +14,21 @@ public class GameManager : MonoBehaviour
 
     //田中加筆
     //最大塗り回数
-    private int  maxMoveCounter = 3;
+    private int  redMaxMoveCounter = 3;
     //バケツ所持数
-    private int rePaint = 0;
-    public static PlayerManager playerManager;
+    public int redRePaint = 0;
+    public static RedPlayerManager redPlayerManager;
     [SerializeField]
     GameObject player1;
     public bool oneTime = false;
+
+    //最大塗り回数
+    private int blueMaxMoveCounter = 3;
+    //バケツ所持数
+    public int blueRePaint = 0;
+    public static BluePlayerManager bluePlayerManager;
+    [SerializeField]
+    GameObject player2;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +36,8 @@ public class GameManager : MonoBehaviour
         playerObj1 = GameObject.Find("Square");
         playerObj2 = GameObject.Find("Square (1)");
 
-        playerManager = player1.GetComponent<PlayerManager>();
+        redPlayerManager = player1.GetComponent<RedPlayerManager>();
+        bluePlayerManager = player2.GetComponent<BluePlayerManager>();
     }
 
     // Update is called once per frame
@@ -43,9 +52,9 @@ public class GameManager : MonoBehaviour
                 // プレイヤー１の攻撃
                 //playerObj1.GetComponent<Player1>().Attack();//プレイヤー1の行動を呼び出す
 
-                Debug.Log("<color=cyan> TrunChange! </color>");
+                Debug.Log("<color=orange> TrunChange! </color>");
 
-                playerManager.PlayertrunUpdate(player1Trun, maxMoveCounter, rePaint);
+                redPlayerManager.PlayertrunUpdate(player1Trun, redMaxMoveCounter, redRePaint);
             }
         }
         else
@@ -54,8 +63,10 @@ public class GameManager : MonoBehaviour
             {
                 oneTime = true;
                 // プレイヤー２の攻撃
-                Debug.Log("<color=orange> TrunChange! </color>");
+                Debug.Log("<color=cyan> TrunChange! </color>");
                 //playerObj2.GetComponent<Player2>().Attack();
+
+                bluePlayerManager.PlayertrunUpdate(!player1Trun, blueMaxMoveCounter, blueRePaint);
             }
         }
         //デバッグ用
