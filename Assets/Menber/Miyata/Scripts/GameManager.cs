@@ -165,8 +165,6 @@ public class GameManager : MonoBehaviour
         {
             if (RePaint_limit >= blueRePaint)
             {
-                Debug.Log("バケツ");
-
                 //バケツの所持数が９じゃなかったら
                 if (blueRePaint != 9)
                 {
