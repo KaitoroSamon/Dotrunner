@@ -1,4 +1,4 @@
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,6 +56,8 @@ public class Map : MonoBehaviour
     private bool setRedPlayer = false;
     private bool setBluePlayer = false;
 
+    
+
     private void Awake()
     {
         gameManager = gameManagerScripts.GetComponent<GameManager>();
@@ -88,6 +90,21 @@ public class Map : MonoBehaviour
             }
         }
         mapRemake();
+
+        //横山加筆
+        //アイテム生成の処理
+        for (int i = 1; i <= 10; i++)
+        {
+            CreateItem(0, 8, 0, 16, "3");
+        }
+        for (int i = 1; i <= 10; i++)
+        {
+            CreateItem(0, 8, 0, 16, "4");
+        }
+        for (int i = 1; i <= 5; i++)
+        {
+            CreateItem(3, 6, 0, 16, "5");
+        }
     }
 
     /// <summary>
@@ -281,7 +298,59 @@ public class Map : MonoBehaviour
                 gameManager.addRePaint();
                 break;
             case 5:
+                //横山加筆
+                //爆弾を使った後、おかしくなる時がある。
+                //爆発した際にアイテムが中に存在する場合は、一旦消滅させる用にする
                 //爆弾の処理
+                for (int y = 0; y < LineNumber; y++)
+                {
+                    for (int x = 0; x < ColumnNumber; x++)
+                    {
+                        if (y == converterPos.y && x == converterPos.x)
+                        {
+                            //上
+                            if (dungeonMap[y - 1, x] != "6" && dungeonMap[y - 1, x] != "7")
+                            {
+                                dungeonMap[y - 1, x] = "1";
+                            }
+                            //下
+                            if (dungeonMap[y + 1, x] != "6" && dungeonMap[y + 1, x] != "7")
+                            {
+                                dungeonMap[y + 1, x] = "1";
+                            }
+                            //左
+                            if (dungeonMap[y, x - 1] != "6" && dungeonMap[y, x - 1] != "7" && x != 0)
+                            {
+                                dungeonMap[y, x - 1] = "1";
+                            }
+                            //左斜め上
+                            if (dungeonMap[y - 1, x - 1] != "6" && dungeonMap[y - 1, x - 1] != "7" && x != 0)
+                            {
+                                dungeonMap[y - 1, x - 1] = "1";
+                            }
+                            //左斜め下
+                            if (dungeonMap[y + 1, x - 1] != "6" && dungeonMap[y + 1, x - 1] != "7" && x != 0)
+                            {
+                                dungeonMap[y + 1, x - 1] = "1";
+                            }
+                            //右
+                            if (dungeonMap[y, x + 1] != "6" && dungeonMap[y, x + 1] != "7" && x != 15)
+                            {
+                                dungeonMap[y, x + 1] = "1";
+                            }
+                            //右斜め上
+                            if (dungeonMap[y - 1, x + 1] != "6" && dungeonMap[y - 1, x + 1] != "7" && x != 15)
+                            {
+                                dungeonMap[y - 1, x + 1] = "1";
+                            }
+                            //右斜め下
+                            if (dungeonMap[y + 1, x + 1] != "6" && dungeonMap[y + 1, x + 1] != "7" && x != 15)
+                            {
+                                dungeonMap[y + 1, x + 1] = "1";
+                            }
+                        }
+                    }
+                }
                 break;
             case 7:
                 SceneManager.LoadScene("Result Scene");
@@ -413,7 +482,57 @@ public class Map : MonoBehaviour
                 gameManager.addRePaint();
                 break;
             case 5:
+                //横山加筆
                 //爆弾の処理
+                for (int i = 0; i < LineNumber; i++)
+                {
+                    for (int j = 0; j < ColumnNumber; j++)
+                    {
+                        if (i == converterPos.y && j == converterPos.x)
+                        {
+                            //上
+                            if (dungeonMap[i - 1, j] != "6")
+                            {
+                                dungeonMap[i - 1, j] = "2";
+                            }
+                            //下
+                            if (dungeonMap[i + 1, j] != "6")
+                            {
+                                dungeonMap[i + 1, j] = "2";
+                            }
+                            //左
+                            if (dungeonMap[i, j - 1] != "6" && j != 0)
+                            {
+                                dungeonMap[i, j - 1] = "2";
+                            }
+                            //左斜め上
+                            if (dungeonMap[i - 1, j - 1] != "6" && j != 0)
+                            {
+                                dungeonMap[i - 1, j - 1] = "2";
+                            }
+                            //左斜め下
+                            if (dungeonMap[i + 1, j - 1] != "6" && j != 0)
+                            {
+                                dungeonMap[i + 1, j - 1] = "2";
+                            }
+                            //右
+                            if (dungeonMap[i, j + 1] != "6" && j != 15)
+                            {
+                                dungeonMap[i, j + 1] = "2";
+                            }
+                            //右斜め上
+                            if (dungeonMap[i - 1, j + 1] != "6" && j != 15)
+                            {
+                                dungeonMap[i - 1, j + 1] = "2";
+                            }
+                            //右斜め下
+                            if (dungeonMap[i + 1, j + 1] != "6" && j != 15)
+                            {
+                                dungeonMap[i + 1, j + 1] = "2";
+                            }
+                        }
+                    }
+                }
                 break;
             case 6:
                 SceneManager.LoadScene("ResultSceneA");
@@ -439,5 +558,40 @@ public class Map : MonoBehaviour
             && y >= 0
             && x < dungeonMap.GetLength(0)
             && y < dungeonMap.GetLength(1);
+    }
+
+    //横山加筆
+    //アイテムをランダムで生成するためのメソッド
+    void CreateItem(int tate_min, int tate_max, int yoko_min, int yoko_max, string Item)
+    {
+        while (true)
+        {
+            int Tate = Random.Range(tate_min, tate_max);
+            int Yoko = Random.Range(yoko_min, yoko_max);
+
+            //何もマップに置いて無かったら
+            if (dungeonMap[Tate, Yoko] == "0")
+            {
+                dungeonMap[Tate, Yoko] = Item;
+
+                switch (dungeonMap[Tate, Yoko])
+                {
+                    case "3"://ポーション
+                        Instantiate(Item1Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
+                        break;
+
+                    case "4"://バケツ
+                        Instantiate(Item2Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
+                        break;
+
+                    case "5"://爆弾
+                        Instantiate(Item3Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
+                        break;
+                }
+
+                //処理を抜ける
+                break;
+            }
+        }
     }
 }

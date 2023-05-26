@@ -30,6 +30,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject player2;
 
+    //横山加筆
+    //ポーションの最大所持数
+    public int Portopn_limit = 9;
+    //ポーションの所持数
+    public int portopn_p1 = 0;
+    public int portopn_p2 = 0;
+    //行動回数アップ変数
+    private int move_up;
+    //バケツの最大所持数
+    public int RePaint_limit = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +49,13 @@ public class GameManager : MonoBehaviour
 
         redPlayerManager = player1.GetComponent<RedPlayerManager>();
         bluePlayerManager = player2.GetComponent<BluePlayerManager>();
+
+        //横山加筆
+        //初期化
+        redRePaint = 0;
+        blueRePaint = 0;
+        portopn_p1 = 0;
+        portopn_p2 = 0;
     }
 
     // Update is called once per frame
@@ -81,10 +99,21 @@ public class GameManager : MonoBehaviour
     {
         if (player1Trun)
         {
+            //横山加筆
+            redMaxMoveCounter = 3;
+            move_up = redMaxMoveCounter + portopn_p1;
+            redMaxMoveCounter = move_up;
+
+
             player1Trun = false;
         }
         else
         {
+            //横山加筆
+            blueMaxMoveCounter = 3;
+            move_up = blueMaxMoveCounter + portopn_p2;
+            blueMaxMoveCounter = move_up;
+
             player1Trun = true;
         }
         oneTime = false;
@@ -93,12 +122,62 @@ public class GameManager : MonoBehaviour
     //ポーションをとった処理
     public void addMoveCounter()
     {
-
+        //横山加筆
+        //P1側の処理
+        if (player1Trun)
+        {
+            if (Portopn_limit > portopn_p1)
+            {
+                portopn_p1++;
+            }
+        }
+        //P2側の処理
+        else
+        {
+            if (Portopn_limit > portopn_p2)
+            {
+                portopn_p2++;
+            }
+        }
     }
     //バケツをとった処理
     public void addRePaint()
     {
+        //横山加筆
+        //P1側の処理
+        if (player1Trun)
+        {
+            if (RePaint_limit >= redRePaint)
+            {
+                //バケツの所持数が９じゃなかったら
+                if (redRePaint != 9)
+                {
+                    redRePaint += 2;
+                }
+                else
+                {
+                    redRePaint++;
+                }
+            }
+        }
+        //P2側の処理
+        else
+        {
+            if (RePaint_limit >= blueRePaint)
+            {
+                Debug.Log("バケツ");
 
+                //バケツの所持数が９じゃなかったら
+                if (blueRePaint != 9)
+                {
+                    blueRePaint += 2;
+                }
+                else
+                {
+                    blueRePaint++;
+                }
+            }
+        }
     }
     public void arrivalDestination()
     {
