@@ -103,7 +103,7 @@ public class Map : MonoBehaviour
         }
         for (int i = 1; i <= 5; i++)
         {
-            CreateItem(3, 6, 0, 16, "5");
+            CreateItem(3, 6, 2, 14, "5");
         }
     }
 
@@ -272,6 +272,7 @@ public class Map : MonoBehaviour
                             if (dungeonMap[y, x] == "2" && gameManager.redRePaint > 0)
                             {
                                 gameManager.redRePaint--;
+                                dungeonMap[y, x] = "1";
                             }
                             //塗る前のデータ保持
                             formerData = int.Parse(dungeonMap[y, x]);
@@ -311,45 +312,21 @@ public class Map : MonoBehaviour
                         if (y == converterPos.y && x == converterPos.x)
                         {
                             //上
-                            if (dungeonMap[y - 1, x] != "6" && dungeonMap[y - 1, x] != "7")
-                            {
-                                dungeonMap[y - 1, x] = "1";
-                            }
+                            dungeonMap[y - 1, x] = "1";
                             //下
-                            if (dungeonMap[y + 1, x] != "6" && dungeonMap[y + 1, x] != "7")
-                            {
-                                dungeonMap[y + 1, x] = "1";
-                            }
+                            dungeonMap[y + 1, x] = "1";
                             //左
-                            if (dungeonMap[y, x - 1] != "6" && dungeonMap[y, x - 1] != "7" && x != 0)
-                            {
-                                dungeonMap[y, x - 1] = "1";
-                            }
+                            dungeonMap[y, x - 1] = "1";
                             //左斜め上
-                            if (dungeonMap[y - 1, x - 1] != "6" && dungeonMap[y - 1, x - 1] != "7" && x != 0)
-                            {
-                                dungeonMap[y - 1, x - 1] = "1";
-                            }
+                            dungeonMap[y - 1, x - 1] = "1";
                             //左斜め下
-                            if (dungeonMap[y + 1, x - 1] != "6" && dungeonMap[y + 1, x - 1] != "7" && x != 0)
-                            {
-                                dungeonMap[y + 1, x - 1] = "1";
-                            }
+                            dungeonMap[y + 1, x - 1] = "1";
                             //右
-                            if (dungeonMap[y, x + 1] != "6" && dungeonMap[y, x + 1] != "7" && x != 15)
-                            {
-                                dungeonMap[y, x + 1] = "1";
-                            }
+                            dungeonMap[y, x + 1] = "1";
                             //右斜め上
-                            if (dungeonMap[y - 1, x + 1] != "6" && dungeonMap[y - 1, x + 1] != "7" && x != 15)
-                            {
-                                dungeonMap[y - 1, x + 1] = "1";
-                            }
+                            dungeonMap[y - 1, x + 1] = "1";
                             //右斜め下
-                            if (dungeonMap[y + 1, x + 1] != "6" && dungeonMap[y + 1, x + 1] != "7" && x != 15)
-                            {
-                                dungeonMap[y + 1, x + 1] = "1";
-                            }
+                            dungeonMap[y + 1, x + 1] = "1";
                         }
                     }
                 }
@@ -459,6 +436,7 @@ public class Map : MonoBehaviour
                             if (dungeonMap[y, x] == "1" && gameManager.redRePaint > 0)
                             {
                                 gameManager.redRePaint--;
+                                dungeonMap[y, x] = "2";
                             }
                             //塗る前のデータ保持
                             formerData = int.Parse(dungeonMap[y, x]);
@@ -496,45 +474,21 @@ public class Map : MonoBehaviour
                         if (i == converterPos.y && j == converterPos.x)
                         {
                             //上
-                            if (dungeonMap[i - 1, j] != "6")
-                            {
-                                dungeonMap[i - 1, j] = "2";
-                            }
+                            dungeonMap[i - 1, j] = "2";
                             //下
-                            if (dungeonMap[i + 1, j] != "6")
-                            {
-                                dungeonMap[i + 1, j] = "2";
-                            }
+                            dungeonMap[i + 1, j] = "2";
                             //左
-                            if (dungeonMap[i, j - 1] != "6" && j != 0)
-                            {
-                                dungeonMap[i, j - 1] = "2";
-                            }
+                            dungeonMap[i, j - 1] = "2";
                             //左斜め上
-                            if (dungeonMap[i - 1, j - 1] != "6" && j != 0)
-                            {
-                                dungeonMap[i - 1, j - 1] = "2";
-                            }
+                            dungeonMap[i - 1, j - 1] = "2";
                             //左斜め下
-                            if (dungeonMap[i + 1, j - 1] != "6" && j != 0)
-                            {
-                                dungeonMap[i + 1, j - 1] = "2";
-                            }
+                            dungeonMap[i + 1, j - 1] = "2";
                             //右
-                            if (dungeonMap[i, j + 1] != "6" && j != 15)
-                            {
-                                dungeonMap[i, j + 1] = "2";
-                            }
+                            dungeonMap[i, j + 1] = "2";
                             //右斜め上
-                            if (dungeonMap[i - 1, j + 1] != "6" && j != 15)
-                            {
-                                dungeonMap[i - 1, j + 1] = "2";
-                            }
+                            dungeonMap[i - 1, j + 1] = "2";
                             //右斜め下
-                            if (dungeonMap[i + 1, j + 1] != "6" && j != 15)
-                            {
-                                dungeonMap[i + 1, j + 1] = "2";
-                            }
+                            dungeonMap[i + 1, j + 1] = "2";
                         }
                     }
                 }
