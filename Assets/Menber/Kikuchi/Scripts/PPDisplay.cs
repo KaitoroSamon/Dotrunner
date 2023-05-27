@@ -21,20 +21,18 @@ public class PPDisplay : MonoBehaviour
 
     [SerializeField]
     [Header("PaintPointText")]
-    private Text[] paintPoint;//�h��|�C���g�̕\��������e�L�X�g���A�^�b�`���Ă�������
+    private Text[] paintPoint;
     [SerializeField]
     [Header("BucketPointText")]
-    private Text[] bucketPoint;//�o�P�c�̌��\��������e�L�X�g���A�^�b�`���Ă�������
+    private Text[] bucketPoint;
     [SerializeField]
     [Header("Player1HP")]
-    private GameObject[] p1HealthPoint;//HP�̌��\��������摜���A�^�b�`���Ă�������
+    private GameObject[] p1HealthPoint;
     [SerializeField]
     [Header("Player2HP")]
-    private GameObject[] p2HealthPoint;//HP�̌��\��������摜���A�^�b�`���Ă�������
+    private GameObject[] p2HealthPoint;
 
     private Text changeText;
-
-    private GameObject[] Test;
 
     private int paintPoint1;
     private int paintPoint2;
@@ -47,7 +45,6 @@ public class PPDisplay : MonoBehaviour
 
     private int p1decNumber = 0;
     private int p2decNumber = 0;
-    private int maxHP = 2;
     private void Awake()
     {
         if (ppDisplay == null)
@@ -66,8 +63,8 @@ public class PPDisplay : MonoBehaviour
     private void Start()
     {
         //ppDisplay.BucketDisplay1(10);
-        gManager.redHp = p1NowHP;
-        gManager.blueHp = p2NowHP;
+        p1NowHP = gManager.redHp;
+        p2NowHP = gManager.blueHp;
 
         if(paintPoint[0].name == "PaintPointText2")
         {
@@ -83,20 +80,11 @@ public class PPDisplay : MonoBehaviour
             bucketPoint[1] = changeText;
         }
 
-        if(p1HealthPoint[0].name == "P1Hp2")
-        {
-
-        }
-
-        if (p2HealthPoint[0].name == "P2Hp2")
-        {
-
-        }
-
     }
 
     private void Update()
     {
+        Debug.Log(gManager.redHp);
         if (redPlayerManager.moveCounter <= 0)
         {
             paintPoint[playerRed].text = "" + paintPoint1;
@@ -115,20 +103,22 @@ public class PPDisplay : MonoBehaviour
             paintPoint[playerBlue].text = "" + bluePlayerManager.moveCounter;
         }
 
-        //HP����
-        if((gManager.redHp < p1NowHP) && p1decNumber < maxHP)
+        //HP
+        if(gManager.redHp < p1NowHP)
         {
             p1NowHP = gManager.redHp;
             p1HealthPoint[p1decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
             p1decNumber++;
+            Debug.Log("aaaaaaaaaaaaaaaaaaa");
         }
 
-        if ((gManager.blueHp < p2NowHP) && p2decNumber < maxHP)
+        if (gManager.blueHp < p2NowHP)
         {
             p2NowHP = gManager.blueHp;
             p2HealthPoint[p2decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
             p2decNumber++;
         }
+        
 
     }
     public void PointDisplay1(int Point1)//���̊֐��ɂ͍����ɕ\������h�|�C���g�̒l�𑗂��Ă��������B

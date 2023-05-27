@@ -440,6 +440,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 182105772}
     - target: {fileID: 6449557663893357100, guid: fc68c3ade7816d84cafc2bea2e509c73, type: 3}
+      propertyPath: opponentPlayerPos
+      value: 
+      objectReference: {fileID: 669362967}
+    - target: {fileID: 6449557663893357100, guid: fc68c3ade7816d84cafc2bea2e509c73, type: 3}
       propertyPath: gameManagerScripts
       value: 
       objectReference: {fileID: 708110906}
@@ -655,11 +659,11 @@ PrefabInstance:
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: p2HealthPoint.Array.data[0]
       value: 
-      objectReference: {fileID: 6021696602274932835}
+      objectReference: {fileID: 81885286208991156}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: p2HealthPoint.Array.data[1]
       value: 
-      objectReference: {fileID: 81885286208991156}
+      objectReference: {fileID: 6021696602274932835}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
 --- !u!1 &6021696602274932835 stripped
@@ -674,9 +678,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 645248202835691597, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
+      propertyPath: m_Name
+      value: P2Hp1
+      objectReference: {fileID: 0}
     - target: {fileID: 1482141124031703514, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505404368335687578, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
+      propertyPath: m_Name
+      value: P2Hp2
       objectReference: {fileID: 0}
     - target: {fileID: 6585737055705476818, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
       propertyPath: m_Camera
