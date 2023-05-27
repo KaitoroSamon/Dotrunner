@@ -135,6 +135,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 182105772}
     - target: {fileID: 152370875194586635, guid: ad27bf9114682c846aed433aa06ac3ec, type: 3}
+      propertyPath: opponentPlayerPos
+      value: 
+      objectReference: {fileID: 368085420}
+    - target: {fileID: 152370875194586635, guid: ad27bf9114682c846aed433aa06ac3ec, type: 3}
       propertyPath: gameManagerScripts
       value: 
       objectReference: {fileID: 708110906}
@@ -589,6 +593,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 708110906}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 708110906}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: HealthPoint.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -607,11 +615,11 @@ PrefabInstance:
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: paintPoint.Array.data[0]
       value: 
-      objectReference: {fileID: 796309296017618896}
+      objectReference: {fileID: 4811292770899666692}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: paintPoint.Array.data[1]
       value: 
-      objectReference: {fileID: 4811292770899666692}
+      objectReference: {fileID: 796309296017618896}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: HealthPoint.Array.data[0]
       value: 
@@ -631,19 +639,19 @@ PrefabInstance:
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: bucketPoint.Array.data[0]
       value: 
-      objectReference: {fileID: 432996131}
+      objectReference: {fileID: 1251279245}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: bucketPoint.Array.data[1]
       value: 
-      objectReference: {fileID: 1251279245}
+      objectReference: {fileID: 432996131}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: p1HealthPoint.Array.data[0]
       value: 
-      objectReference: {fileID: 6818004174942025817}
+      objectReference: {fileID: 3122475075976241905}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: p1HealthPoint.Array.data[1]
       value: 
-      objectReference: {fileID: 3122475075976241905}
+      objectReference: {fileID: 6818004174942025817}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: p2HealthPoint.Array.data[0]
       value: 
@@ -666,6 +674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1482141124031703514, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6585737055705476818, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
       propertyPath: m_Camera
       value: 
@@ -753,6 +765,10 @@ PrefabInstance:
     - target: {fileID: 6585737055705476819, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585737055705476821, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6585737055705476823, guid: a0fc2676130297e4b90c3a919934e091, type: 3}
       propertyPath: m_Name
