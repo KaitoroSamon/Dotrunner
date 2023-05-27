@@ -12,6 +12,8 @@ public class Map : MonoBehaviour
     private string[] textData;
     private string[,] dungeonMap;
 
+    private Object[,] objectMap;  //横山追記
+
     private int LineNumber; // 行数に相当
     private int ColumnNumber; // 列数に相当
 
@@ -91,7 +93,21 @@ public class Map : MonoBehaviour
         }
         mapRemake();
 
-        //横山加筆
+        //↓↓↓↓↓横山追記
+        //アイテムマップ
+        objectMap = new Object[,]
+        {
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null},
+            {null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null}
+        };
+
         //アイテム生成の処理
         for (int i = 1; i <= 10; i++)
         {
@@ -105,6 +121,7 @@ public class Map : MonoBehaviour
         {
             CreateItem(3, 6, 2, 14, "5");
         }
+        //↑↑↑↑↑
     }
 
     /// <summary>
@@ -272,7 +289,7 @@ public class Map : MonoBehaviour
                             if (dungeonMap[y, x] == "2" && gameManager.redRePaint > 0)
                             {
                                 gameManager.redRePaint--;
-                                dungeonMap[y, x] = "1";
+                                dungeonMap[y, x] = "1";    //横山追記
                             }
                             //塗る前のデータ保持
                             formerData = int.Parse(dungeonMap[y, x]);
@@ -290,47 +307,62 @@ public class Map : MonoBehaviour
         }
 
         //アイテムと重なった処置
+        int yoko = (int)converterPos.x;    //横山追記
+        int tate = (int)converterPos.y;    //横山追記
         switch (formerData)
         {
             case 3:
                 gameManager.addMoveCounter();
+                Destroy(objectMap[tate, yoko]);  //横山追記
+                objectMap[tate, yoko] = null;    //横山追記
                 formerData = 0;
                 break;
             case 4:
                 gameManager.addRePaint();
+                Destroy(objectMap[tate, yoko]);  //横山追記
+                objectMap[tate, yoko] = null;    //横山追記
                 formerData = 0;
                 break;
             case 5:
-                //横山加筆
-                //爆弾を使った後、おかしくなる時がある。
-                //爆発した際にアイテムが中に存在する場合は、一旦消滅させる用にする
                 //爆弾の処理
-                for (int y = 0; y < LineNumber; y++)
-                {
-                    for (int x = 0; x < ColumnNumber; x++)
-                    {
-                        if (y == converterPos.y && x == converterPos.x)
-                        {
-                            //上
-                            dungeonMap[y - 1, x] = "1";
-                            //下
-                            dungeonMap[y + 1, x] = "1";
-                            //左
-                            dungeonMap[y, x - 1] = "1";
-                            //左斜め上
-                            dungeonMap[y - 1, x - 1] = "1";
-                            //左斜め下
-                            dungeonMap[y + 1, x - 1] = "1";
-                            //右
-                            dungeonMap[y, x + 1] = "1";
-                            //右斜め上
-                            dungeonMap[y - 1, x + 1] = "1";
-                            //右斜め下
-                            dungeonMap[y + 1, x + 1] = "1";
-                        }
-                    }
-                }
-                formerData = 0;
+                //↓↓↓↓↓横山追記
+                Destroy(objectMap[tate, yoko]);
+                objectMap[tate, yoko] = null;
+
+                //上
+                dungeonMap[tate - 1, yoko] = "1";
+                Destroy(objectMap[tate - 1, yoko]);
+                objectMap[tate - 1, yoko] = null;
+                //下
+                dungeonMap[tate + 1, yoko] = "1";
+                Destroy(objectMap[tate + 1, yoko]);
+                objectMap[tate + 1, yoko] = null;
+                //左
+                dungeonMap[tate, yoko - 1] = "1";
+                Destroy(objectMap[tate, yoko - 1]);
+                objectMap[tate, yoko - 1] = null;
+                //左斜め上
+                dungeonMap[tate - 1, yoko - 1] = "1";
+                Destroy(objectMap[tate - 1, yoko - 1]);
+                objectMap[tate - 1, yoko - 1] = null;
+                //左斜め下
+                dungeonMap[tate + 1, yoko - 1] = "1";
+                Destroy(objectMap[tate + 1, yoko - 1]);
+                objectMap[tate + 1, yoko - 1] = null;
+                //右
+                dungeonMap[tate, yoko + 1] = "1";
+                Destroy(objectMap[tate, yoko + 1]);
+                objectMap[tate, yoko + 1] = null;
+                //右斜め上
+                dungeonMap[tate - 1, yoko + 1] = "1";
+                Destroy(objectMap[tate - 1, yoko + 1]);
+                objectMap[tate - 1, yoko + 1] = null;
+                //右斜め下
+                dungeonMap[tate + 1, yoko + 1] = "1";
+                Destroy(objectMap[tate + 1, yoko + 1]);
+                objectMap[tate + 1, yoko + 1] = null;
+                //↑↑↑↑↑
+
                 break;
             case 7:
                 SceneManager.LoadScene("redWin");
@@ -436,7 +468,7 @@ public class Map : MonoBehaviour
                             if (dungeonMap[y, x] == "1" && gameManager.redRePaint > 0)
                             {
                                 gameManager.redRePaint--;
-                                dungeonMap[y, x] = "2";
+                                dungeonMap[y, x] = "2";  //横山追記
                             }
                             //塗る前のデータ保持
                             formerData = int.Parse(dungeonMap[y, x]);
@@ -454,44 +486,61 @@ public class Map : MonoBehaviour
         }
 
         //アイテムと重なった処置
+        int yoko = (int)converterPos.x;    //横山追記
+        int tate = (int)converterPos.y;    //横山追記
         switch (formerData)
         {
             case 3:
                 gameManager.addMoveCounter();
+                Destroy(objectMap[tate, yoko]);  //横山追記
+                objectMap[tate, yoko] = null;    //横山追記
                 formerData = 0;
                 break;
             case 4:
                 gameManager.addRePaint();
+                Destroy(objectMap[tate, yoko]);  //横山追記
+                objectMap[tate, yoko] = null;    //横山追記
                 formerData = 0;
                 break;
             case 5:
-                //横山加筆
                 //爆弾の処理
-                for (int i = 0; i < LineNumber; i++)
-                {
-                    for (int j = 0; j < ColumnNumber; j++)
-                    {
-                        if (i == converterPos.y && j == converterPos.x)
-                        {
-                            //上
-                            dungeonMap[i - 1, j] = "2";
-                            //下
-                            dungeonMap[i + 1, j] = "2";
-                            //左
-                            dungeonMap[i, j - 1] = "2";
-                            //左斜め上
-                            dungeonMap[i - 1, j - 1] = "2";
-                            //左斜め下
-                            dungeonMap[i + 1, j - 1] = "2";
-                            //右
-                            dungeonMap[i, j + 1] = "2";
-                            //右斜め上
-                            dungeonMap[i - 1, j + 1] = "2";
-                            //右斜め下
-                            dungeonMap[i + 1, j + 1] = "2";
-                        }
-                    }
-                }
+                //↓↓↓↓↓横山追記
+                Destroy(objectMap[tate, yoko]);
+                objectMap[tate, yoko] = null;
+
+                //上
+                dungeonMap[tate - 1, yoko] = "2";
+                Destroy(objectMap[tate - 1, yoko]);
+                objectMap[tate - 1, yoko] = null;
+                //下
+                dungeonMap[tate + 1, yoko] = "2";
+                Destroy(objectMap[tate + 1, yoko]);
+                objectMap[tate + 1, yoko] = null;
+                //左
+                dungeonMap[tate, yoko - 1] = "2";
+                Destroy(objectMap[tate, yoko - 1]);
+                objectMap[tate, yoko - 1] = null;
+                //左斜め上
+                dungeonMap[tate - 1, yoko - 1] = "2";
+                Destroy(objectMap[tate - 1, yoko - 1]);
+                objectMap[tate - 1, yoko - 1] = null;
+                //左斜め下
+                dungeonMap[tate + 1, yoko - 1] = "2";
+                Destroy(objectMap[tate + 1, yoko - 1]);
+                objectMap[tate + 1, yoko - 1] = null;
+                //右
+                dungeonMap[tate, yoko + 1] = "2";
+                Destroy(objectMap[tate, yoko + 1]);
+                objectMap[tate, yoko + 1] = null;
+                //右斜め上
+                dungeonMap[tate - 1, yoko + 1] = "2";
+                Destroy(objectMap[tate - 1, yoko + 1]);
+                objectMap[tate - 1, yoko + 1] = null;
+                //右斜め下
+                dungeonMap[tate + 1, yoko + 1] = "2";
+                Destroy(objectMap[tate + 1, yoko + 1]);
+                objectMap[tate + 1, yoko + 1] = null;
+                //↑↑↑↑↑
                 formerData = 0;
                 break;
             case 6:
@@ -520,7 +569,7 @@ public class Map : MonoBehaviour
             && y < dungeonMap.GetLength(1);
     }
 
-    //横山加筆
+    //↓↓↓↓↓横山追記
     //アイテムをランダムで生成するためのメソッド
     void CreateItem(int tate_min, int tate_max, int yoko_min, int yoko_max, string Item)
     {
@@ -537,15 +586,15 @@ public class Map : MonoBehaviour
                 switch (dungeonMap[Tate, Yoko])
                 {
                     case "3"://ポーション
-                        Instantiate(Item1Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
+                        objectMap[Tate, Yoko] = Instantiate(Item1Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
                         break;
 
                     case "4"://バケツ
-                        Instantiate(Item2Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
+                        objectMap[Tate, Yoko] = Instantiate(Item2Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
                         break;
 
                     case "5"://爆弾
-                        Instantiate(Item3Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
+                        objectMap[Tate, Yoko] = Instantiate(Item3Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
                         break;
                 }
 
@@ -554,4 +603,5 @@ public class Map : MonoBehaviour
             }
         }
     }
+    //↑↑↑↑↑
 }
