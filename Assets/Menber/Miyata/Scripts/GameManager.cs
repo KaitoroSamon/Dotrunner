@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     //プレイヤー2のHP
     public int blueHp = 3;
 
-    //横山加筆
+    //↓↓↓↓↓横山追記
     //ポーションの最大所持数
     public int Portopn_limit = 9;
     //ポーションの所持数
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     private int move_up;
     //バケツの最大所持数
     public int RePaint_limit = 10;
+    //↑↑↑↑↑
 
     public bool oneTime = false;
 
@@ -56,12 +57,13 @@ public class GameManager : MonoBehaviour
         redPlayerManager = player1.GetComponent<RedPlayerManager>();
         bluePlayerManager = player2.GetComponent<BluePlayerManager>();
 
-        //横山加筆
+        //↓↓↓↓↓横山追記
         //初期化
         redRePaint = 0;
         blueRePaint = 0;
         portopn_p1 = 0;
         portopn_p2 = 0;
+        //↑↑↑↑↑
 
         PPDisplay.ppDisplay.PointDisplay1(redMaxMoveCounter);
         PPDisplay.ppDisplay.PointDisplay2(blueMaxMoveCounter);
@@ -110,7 +112,7 @@ public class GameManager : MonoBehaviour
     {
         if (player1Trun)
         {
-            //横山加筆
+            //横山追記
             redMaxMoveCounter = 3;
             move_up = redMaxMoveCounter + portopn_p1;
             redMaxMoveCounter = move_up;
@@ -123,7 +125,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //横山加筆
+            //横山追記
             blueMaxMoveCounter = 3;
             move_up = blueMaxMoveCounter + portopn_p2;
             blueMaxMoveCounter = move_up;
@@ -139,7 +141,7 @@ public class GameManager : MonoBehaviour
     //ポーションをとった処理
     public void addMoveCounter()
     {
-        //横山加筆
+        //横山追記
         //P1側の処理
         if (player1Trun)
         {
@@ -160,7 +162,7 @@ public class GameManager : MonoBehaviour
     //バケツをとった処理
     public void addRePaint()
     {
-        //横山加筆
+        //横山追記
         //P1側の処理
         if (player1Trun)
         {
@@ -184,8 +186,6 @@ public class GameManager : MonoBehaviour
         {
             if (RePaint_limit >= blueRePaint)
             {
-                Debug.Log("バケツ");
-
                 //バケツの所持数が９じゃなかったら
                 if (blueRePaint != 9)
                 {
