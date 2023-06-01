@@ -515,6 +515,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 373754143}
     - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 475180434}
+    - target: {fileID: 5983553654087057467, guid: addcf88e8b20cc1419f3ccd6c68388da, type: 3}
       propertyPath: bucketPoint.Array.size
       value: 2
       objectReference: {fileID: 0}
