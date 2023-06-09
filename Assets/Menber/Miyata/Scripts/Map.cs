@@ -86,6 +86,11 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
+        if(csvFile == null)
+        {
+            csvFile = Resources.Load("mapData/BaseMap") as TextAsset;
+        }
+
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
