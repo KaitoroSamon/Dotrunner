@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cbf6af71e9e7af44dbc194d4f82d6545, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,6 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapScrits: {fileID: 0}
   gameManagerScripts: {fileID: 0}
+  opponentPlayerPos: {fileID: 0}
+  moveCounter: 0
   cursor: {fileID: 5171902052934787976}
 --- !u!1 &5171902052934787976
 GameObject:
@@ -289,7 +291,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &8938328564660720467
 MonoBehaviour:

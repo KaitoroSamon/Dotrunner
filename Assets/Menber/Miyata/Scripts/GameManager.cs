@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    public TextAsset mapText; //マップの情報を取得
-
     bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
 
     GameObject playerObj1;
