@@ -9,24 +9,28 @@ public class PPDisplay : MonoBehaviour
     public static PPDisplay ppDisplay = null;
     public static RedPlayerManager redPlayerManager;
     public static BluePlayerManager bluePlayerManager;
+    public static GameManager gManager;
+
 
     [SerializeField]
     private GameObject player1;
     [SerializeField]
     private GameObject player2;
+    [SerializeField]
+    private GameObject gameManager;
 
     [SerializeField]
     [Header("PaintPointText")]
-    private Text[] paintPoint;//“h‚èƒ|ƒCƒ“ƒg‚Ì•\¦‚ğ‚·‚éƒeƒLƒXƒg‚ğƒAƒ^ƒbƒ`‚µ‚Ä‚­‚¾‚³‚¢
+    private Text[] paintPoint;
     [SerializeField]
     [Header("BucketPointText")]
-    private Text[] bucketPoint;//ƒoƒPƒc‚ÌŒÂ”•\¦‚ğ‚·‚éƒeƒLƒXƒg‚ğƒAƒ^ƒbƒ`‚µ‚Ä‚­‚¾‚³‚¢
-    //[SerializeField]
-    //[Header("Player1HP")]
-    //private GameObject[] p1HealthPoint;//HP‚ÌŒÂ”•\¦‚ğ‚·‚é‰æ‘œ‚ğƒAƒ^ƒbƒ`‚µ‚Ä‚­‚¾‚³‚¢
-    //[SerializeField]
-    //[Header("Player2HP")]
-    //private GameObject[] p2HealthPoint;//HP‚ÌŒÂ”•\¦‚ğ‚·‚é‰æ‘œ‚ğƒAƒ^ƒbƒ`‚µ‚Ä‚­‚¾‚³‚¢
+    private Text[] bucketPoint;
+    [SerializeField]
+    [Header("Player1HP")]
+    private GameObject[] p1HealthPoint;
+    [SerializeField]
+    [Header("Player2HP")]
+    private GameObject[] p2HealthPoint;
 
     private Text changeText;
 
@@ -36,6 +40,11 @@ public class PPDisplay : MonoBehaviour
     private int playerRed = 0;
     private int playerBlue = 1;
 
+    private int p1NowHP;
+    private int p2NowHP;
+
+    private int p1decNumber = 0;
+    private int p2decNumber = 0;
     private void Awake()
     {
         if (ppDisplay == null)
@@ -49,16 +58,33 @@ public class PPDisplay : MonoBehaviour
 
         bluePlayerManager = player2.GetComponent<BluePlayerManager>();
         redPlayerManager = player1.GetComponent<RedPlayerManager>();
+        gManager = gameManager.GetComponent<GameManager>();
     }
     private void Start()
     {
-        playerRed = 0;
-        playerBlue = 1;
-        //ppDisplay.BucketDisplay1(10);//ŒÄ‚Ño‚µA•\¦ƒeƒXƒgB‚±‚ÌŠÖ”‚ğƒoƒPƒcA“hƒ|ƒCƒ“ƒg‚ÌXV‚ÉŒÄ‚Ño‚µ‚Äˆø”‚ÅƒoƒPƒcA“hƒ|ƒCƒ“ƒg‚Ì•Ï”‚ğ‘—‚Á‚Ä‰º‚³‚¢B
+        //ppDisplay.BucketDisplay1(10);
+        p1NowHP = gManager.redHp;
+        p2NowHP = gManager.blueHp;
+
+        if(paintPoint[0].name == "PaintPointText2")
+        {
+            changeText = paintPoint[0];
+            paintPoint[0] = paintPoint[1];
+            paintPoint[1] = changeText;
+        }
+
+        if(bucketPoint[0].name == "BucketPointText2")
+        {
+            changeText = bucketPoint[0];
+            bucketPoint[0] = bucketPoint[1];
+            bucketPoint[1] = changeText;
+        }
+
     }
 
     private void Update()
     {
+        Debug.Log(gManager.redHp);
         if (redPlayerManager.moveCounter <= 0)
         {
             paintPoint[playerRed].text = "" + paintPoint1;
@@ -76,36 +102,45 @@ public class PPDisplay : MonoBehaviour
         {
             paintPoint[playerBlue].text = "" + bluePlayerManager.moveCounter;
         }
+
+        //HP
+        if(gManager.redHp < p1NowHP)
+        {
+            p1NowHP = gManager.redHp;
+            p1HealthPoint[p1decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
+            p1decNumber++;
+            Debug.Log("aaaaaaaaaaaaaaaaaaa");
+        }
+
+        if (gManager.blueHp < p2NowHP)
+        {
+            p2NowHP = gManager.blueHp;
+            p2HealthPoint[p2decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
+            p2decNumber++;
+        }
+        
+
     }
-    public void PointDisplay1(int Point1)//‚±‚ÌŠÖ”‚É‚Í¶‘¤‚É•\¦‚·‚é“hƒ|ƒCƒ“ƒg‚Ì’l‚ğ‘—‚Á‚Ä‚­‚¾‚³‚¢B
+    public void PointDisplay1(int Point1)//ï¿½ï¿½ï¿½ÌŠÖï¿½ï¿½É‚Íï¿½ï¿½ï¿½ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½Ì’lï¿½ğ‘—‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
     {
         paintPoint1 = Point1;
         paintPoint[playerRed].text = "" + paintPoint1;
     }
 
-    public void PointDisplay2(int Point2)//‚±‚ÌŠÖ”‚É‚Í‰E‘¤‚É•\¦‚·‚é“hƒ|ƒCƒ“ƒg‚Ì’l‚ğ‘—‚Á‚Ä‚­‚¾‚³‚¢B
+    public void PointDisplay2(int Point2)//ï¿½ï¿½ï¿½ÌŠÖï¿½ï¿½É‚Í‰Eï¿½ï¿½ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½Ì’lï¿½ğ‘—‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
     {
         paintPoint2 = Point2;
         paintPoint[playerBlue].text = "" + paintPoint2;
     }
 
-    public void BucketDisplay1(int BucketPoint1)//‚±‚ÌŠÖ”‚É‚Í¶‘¤‚É•\¦‚·‚éƒoƒPƒcƒ|ƒCƒ“ƒg‚Ì’l‚ğ‘—‚Á‚Ä‚­‚¾‚³‚¢B
+    public void BucketDisplay1(int BucketPoint1)//ï¿½ï¿½ï¿½ÌŠÖï¿½ï¿½É‚Íï¿½ï¿½ï¿½ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Pï¿½cï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½Ì’lï¿½ğ‘—‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
     {
         bucketPoint[playerRed].text = "" + BucketPoint1;
     }
 
-    public void BucketDisplay2(int BucketPoint2)//‚±‚ÌŠÖ”‚É‚Í‰E‘¤‚É•\¦‚·‚éƒoƒPƒcƒ|ƒCƒ“ƒg‚Ì’l‚ğ‘—‚Á‚Ä‚­‚¾‚³‚¢B
+    public void BucketDisplay2(int BucketPoint2)//ï¿½ï¿½ï¿½ÌŠÖï¿½ï¿½É‚Í‰Eï¿½ï¿½ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Pï¿½cï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½Ì’lï¿½ğ‘—‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
     {
         Debug.Log("dousa");
         bucketPoint[playerBlue].text = "" + BucketPoint2;
     }
-    //public void p1HPDisplay(int BucketPoint1)//‚±‚ÌŠÖ”‚É‚Í¶‘¤‚É•\¦‚·‚éƒoƒPƒcƒ|ƒCƒ“ƒg‚Ì’l‚ğ‘—‚Á‚Ä‚­‚¾‚³‚¢B
-    //{
-    //    //ƒn[ƒg‚ğÁ‚·ˆ—
-    //}
-
-    //public void p2HPDisplay(int BucketPoint2)//‚±‚ÌŠÖ”‚É‚Í‰E‘¤‚É•\¦‚·‚éƒoƒPƒcƒ|ƒCƒ“ƒg‚Ì’l‚ğ‘—‚Á‚Ä‚­‚¾‚³‚¢B
-    //{
-    //    //ƒn[ƒg‚ğÁ‚·ˆ—
-    //}
 }

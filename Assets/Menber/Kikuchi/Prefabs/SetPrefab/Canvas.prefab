@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 536000366891209438}
   - component: {fileID: 3868385371812076680}
   m_Layer: 5
-  m_Name: HPLeft1
+  m_Name: P1Hp2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5793937959770444703}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4066314735357596925}
   - component: {fileID: 1348404934160109272}
   m_Layer: 5
-  m_Name: HPRight2
+  m_Name: P2Hp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,8 +438,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7577334209405336359}
   - {fileID: 3354446359338312236}
+  - {fileID: 7577334209405336359}
   - {fileID: 5793937959292344319}
   m_Father: {fileID: 6585737055705476819}
   m_RootOrder: 3
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 8546078113915108477}
   - component: {fileID: 8479583811507682731}
   m_Layer: 5
-  m_Name: HPRight1
+  m_Name: P2Hp2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,7 +1599,7 @@ GameObject:
   - component: {fileID: 8189102262088586262}
   - component: {fileID: 1482141124031703514}
   m_Layer: 5
-  m_Name: HPLeft2
+  m_Name: P1Hp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1618,7 +1618,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5793937959770444703}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
