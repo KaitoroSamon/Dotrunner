@@ -409,7 +409,7 @@ public class Map : MonoBehaviour
                             break;
                         }
                         //バケツ所持していない状態で相手のマスを塗ろうとしたら飛ばす
-                        if (dungeonMap[y, x] == "1" && gameManager.redRePaint <= 0)
+                        if (dungeonMap[y, x] == "1" && gameManager.blueRePaint <= 0)
                         {
                             break;
                         }
@@ -465,9 +465,9 @@ public class Map : MonoBehaviour
                                     dungeonMap[tate - 1, yoko] == "6" || dungeonMap[tate, yoko - 1] == "6") { 
                             */
                             //相手のマスだったら
-                            if (dungeonMap[y, x] == "1" && gameManager.redRePaint > 0)
+                            if (dungeonMap[y, x] == "1" && gameManager.blueRePaint > 0)
                             {
-                                gameManager.redRePaint--;
+                                gameManager.blueRePaint--;
                                 dungeonMap[y, x] = "2";  //横山追記
                             }
                             //塗る前のデータ保持

@@ -80,7 +80,7 @@ public class PPDisplay : MonoBehaviour
             paintPoint[1] = changeText;
         }
 
-        if(bucketPoint[0].name == "BucketPointText2")
+        if(bucketPoint[0].name == "P2BucketPointText")
         {
             changeText = bucketPoint[0];
             bucketPoint[0] = bucketPoint[1];
@@ -91,7 +91,6 @@ public class PPDisplay : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(gManager.redHp);
         if (redPlayerManager.moveCounter <= 0)
         {
             paintPoint[playerRed].text = "" + paintPoint1;
@@ -119,7 +118,6 @@ public class PPDisplay : MonoBehaviour
             p1NowHP = gManager.redHp;
             p1HealthPoint[p1decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
             p1decNumber++;
-            Debug.Log("aaaaaaaaaaaaaaaaaaa");
         }
 
         if (gManager.blueHp < p2NowHP)
