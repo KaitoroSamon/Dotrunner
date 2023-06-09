@@ -32,6 +32,10 @@ public class PPDisplay : MonoBehaviour
     [Header("Player2HP")]
     private GameObject[] p2HealthPoint;
 
+    [SerializeField]
+    [Header("TurnText")]
+    private Text turnText;
+
     private Text changeText;
 
     private int paintPoint1;
@@ -45,6 +49,8 @@ public class PPDisplay : MonoBehaviour
 
     private int p1decNumber = 0;
     private int p2decNumber = 0;
+
+    private int nowTurn = 1;
     private void Awake()
     {
         if (ppDisplay == null)
@@ -62,6 +68,7 @@ public class PPDisplay : MonoBehaviour
     }
     private void Start()
     {
+        turnText.text = "Turn" + nowTurn;
         //ppDisplay.BucketDisplay1(10);
         p1NowHP = gManager.redHp;
         p2NowHP = gManager.blueHp;
@@ -103,8 +110,11 @@ public class PPDisplay : MonoBehaviour
             paintPoint[playerBlue].text = "" + bluePlayerManager.moveCounter;
         }
 
+        bucketPoint[playerRed].text = "" + gManager.redRePaint;
+        bucketPoint[playerBlue].text = "" + gManager.blueRePaint;
+
         //HP
-        if(gManager.redHp < p1NowHP)
+        if (gManager.redHp < p1NowHP)
         {
             p1NowHP = gManager.redHp;
             p1HealthPoint[p1decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
@@ -133,14 +143,20 @@ public class PPDisplay : MonoBehaviour
         paintPoint[playerBlue].text = "" + paintPoint2;
     }
 
-    public void BucketDisplay1(int BucketPoint1)//���̊֐��ɂ͍����ɕ\������o�P�c�|�C���g�̒l�𑗂��Ă��������B
+    public void TurnDisplay()
     {
-        bucketPoint[playerRed].text = "" + BucketPoint1;
+        nowTurn++;
+        turnText.text = "Turn" + nowTurn;
     }
 
-    public void BucketDisplay2(int BucketPoint2)//���̊֐��ɂ͉E���ɕ\������o�P�c�|�C���g�̒l�𑗂��Ă��������B
-    {
-        Debug.Log("dousa");
-        bucketPoint[playerBlue].text = "" + BucketPoint2;
-    }
+    //public void BucketDisplay1(int BucketPoint1)//���̊֐��ɂ͍����ɕ\������o�P�c�|�C���g�̒l�𑗂��Ă��������B
+    //{
+    //    bucketPoint[playerRed].text = "" + BucketPoint1;
+    //}
+
+    //public void BucketDisplay2(int BucketPoint2)//���̊֐��ɂ͉E���ɕ\������o�P�c�|�C���g�̒l�𑗂��Ă��������B
+    //{
+    //    Debug.Log("dousa");
+    //    bucketPoint[playerBlue].text = "" + BucketPoint2;
+    //}
 }
