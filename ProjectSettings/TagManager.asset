@@ -6,6 +6,10 @@ TagManager:
   tags:
   - SoundManager
   - Coin(Test)
+  - Enemy(Demo)
+  - Item(Demo)
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX

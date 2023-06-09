@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-public class MoveTest : MonoBehaviour
+
+public class Player : MonoBehaviour
 {
+
     private Rigidbody2D rigidBody;
 
     private void Start()
@@ -12,18 +12,39 @@ public class MoveTest : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        float x = Input.GetAxisRaw("Horizontal");
+    [SerializeField]
+    private float speed = 0.05f;
 
-        if (x > 0)
+    // Start is called before the first frame update
+
+
+    void Move()
+    {
+        Vector2 position = transform.position;
+
+        if (Input.GetKey("left"))
         {
-            rigidBody.AddForce(transform.right * 1.0f);
+            position.x -= speed;
         }
-        else if (x < 0)
+        else if (Input.GetKey("right"))
         {
-            rigidBody.AddForce(-transform.right * 1.0f);
+            position.x += speed;
         }
+        else if (Input.GetKey("up"))
+        {
+            position.y += speed;
+        }
+        else if (Input.GetKey("down"))
+        {
+            position.y -= speed;
+        }
+
+        transform.position = position;
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
