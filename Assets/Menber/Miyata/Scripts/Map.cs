@@ -313,6 +313,14 @@ public class Map : MonoBehaviour
                             formerData = dungeonMap[y, x];
                             firstPlace = carving(formerData, 1);
                             secondPlace = carving(formerData, 2);
+                            switch (secondPlace)
+                            {
+                                case "3":
+                                case "4":
+                                case "5":
+                                    setMapData(y, x, 2, 0);
+                                    break;
+                            }
                             //相手のマスだったら
                             if (carving(dungeonMap[y, x], 1) == "3" && gameManager.redRePaint > 0)
                             {
@@ -482,6 +490,14 @@ public class Map : MonoBehaviour
                             formerData = dungeonMap[y, x];
                             firstPlace = carving(formerData, 1);
                             secondPlace = carving(formerData, 2);
+                            switch (secondPlace)
+                            {
+                                case "3":
+                                case "4":
+                                case "5":
+                                    setMapData(y, x, 2, 0);
+                                    break;
+                            }
                             //相手のマスだったら
                             if (carving(dungeonMap[y, x], 1) == "2" && gameManager.blueRePaint > 0)
                             {
@@ -630,16 +646,16 @@ public class Map : MonoBehaviour
     public void setMapData(int o, int p, int digit, int setData)
     {
         int d = int.Parse(dungeonMap[o, p]);
+        //壱の位
         int n = d % 10;
-        int m = (n / 10) % 10; ;
+        //十の位
+        int m = (d / 10) % 10; ;
         int ans;
-        //一の位
         if (digit == 1)
         {
             n = setData;
             ans = (m * 10) + n;
         }
-        //十の位
         else
         {
             m = setData;

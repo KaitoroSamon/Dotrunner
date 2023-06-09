@@ -135,7 +135,7 @@ public class RedPlayerManager : MonoBehaviour
                 cursorImage.color = new Color32(255, 0, 30, 0);
                 nowMove = false;
             }
-            if(gameManager.redHp <= 0)
+            if(gameManager.redHp < 0)
             {
                 SceneManager.LoadScene("Result Scene");
             }

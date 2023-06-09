@@ -135,7 +135,7 @@ public class BluePlayerManager : MonoBehaviour
                 nowMove = false;
             }
 
-            if (gameManager.blueHp <= 0)
+            if (gameManager.blueHp < 0)
             {
                 SceneManager.LoadScene("ResultScenesA");
             }

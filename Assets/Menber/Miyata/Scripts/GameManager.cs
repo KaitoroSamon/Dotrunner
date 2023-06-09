@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject player1;
     //プレイヤー1のHP
-    public int redHp = 3;
+    public int redHp = 2;
     
 
     //最大塗り回数
@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject player2;
     //プレイヤー2のHP
-    public int blueHp = 3;
+    public int blueHp = 2;
 
     //↓↓↓↓↓横山追記
     //ポーションの最大所持数
-    public int Portopn_limit = 9;
+    public int Portopn_limit = 6;
     //ポーションの所持数
     public int portopn_p1 = 0;
     public int portopn_p2 = 0;
