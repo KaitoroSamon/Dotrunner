@@ -140,12 +140,12 @@ public class BluePlayerManager : MonoBehaviour
                     cursorImage.color = new Color32(30, 0, 255, 0);
                     nowMove = false;
                 }
-
-                if (gameManager.blueHp < 0)
-                {
-                    SceneManager.LoadScene("ResultScenesA");
-                }
             }
+        }
+        if (gameManager.blueHp <= 0)
+        {
+            //Debug.Log("<color=orange> Blue Knock Out </color>");
+            SceneManager.LoadScene("redWin");
         }
     }
 

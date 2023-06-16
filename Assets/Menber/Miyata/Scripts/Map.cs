@@ -591,7 +591,6 @@ public class Map : MonoBehaviour
             int Tate = Random.Range(tate_min, tate_max);
             int Yoko = Random.Range(yoko_min, yoko_max);
 
-            Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
             //何もマップに置いて無かったら
             if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0")
             {

@@ -38,9 +38,10 @@ public class StartSetting : MonoBehaviour
                 csvData.Add(str.Split(','));
             }
             ColumnNumber = csvData[0].Length;
-            LineNumber = csvData[0].Length;
+            LineNumber = csvData.Count -1;
             fieldMap = new string[LineNumber, ColumnNumber];
 
+            Debug.Log("Col" + ColumnNumber + "\nLine" + LineNumber);
             for(int i = 0; i < LineNumber; i++)
             {
                 string[] tempWord = csvData[i];
@@ -49,7 +50,7 @@ public class StartSetting : MonoBehaviour
                     fieldMap[i,j] = tempWord[j];
                 }
             }
-            
+            //Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
         }
         //ƒLƒƒƒbƒVƒ…‘Îô
         fs.Close();

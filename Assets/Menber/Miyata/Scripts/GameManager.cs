@@ -115,6 +115,16 @@ public class GameManager : MonoBehaviour
         {
             trunChange();
         }
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            redHp--;
+            Debug.Log("redHp" + redHp);
+        }
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            blueHp--;
+            Debug.Log("blueHp" + blueHp);
+        }
     }
 
     //ターンチェンジ
