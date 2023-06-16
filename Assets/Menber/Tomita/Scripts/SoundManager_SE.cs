@@ -23,6 +23,7 @@ public class SoundManager_SE : MonoBehaviour
 
     public void Play(int clip)
     {
+        Debug.Log("oto");
         Audio_Source_SE.volume = 1;
         Audio_Source_SE.clip = Audio_Clip_SE[clip];
         Audio_Source_SE.Play();
@@ -61,7 +62,7 @@ public class SoundManager_SE : MonoBehaviour
        
   
 
-        float moveX = Input.GetAxis("Horizontal");  
+        float moveX = Input.GetAxis("DS4square");  
 
         if (moveX != 0 && !isWalking)
         {
