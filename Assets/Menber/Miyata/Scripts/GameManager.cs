@@ -16,51 +16,49 @@ public class GameManager : MonoBehaviour
 
     bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
 
-    GameObject playerObj1;
-    GameObject playerObj2;
-
     //田中加筆
-    //最大塗り回数
-    private int redMaxMoveCounter = 3;
-    //バケツ所持数
-    public int redRePaint = 0;
-    public static RedPlayerManager redPlayerManager;
+    [Header("\nプレイヤー(赤色)")]
     [SerializeField]
     GameObject player1;
+    //最大塗り回数
+    private int redMaxMoveCounter = 3;
+    public RedPlayerManager redPlayerManager;
+    
     //プレイヤー1のHP
     public int redHp = 2;
-    
 
-    //最大塗り回数
-    private int blueMaxMoveCounter = 3;
-    //バケツ所持数
-    public int blueRePaint = 0;
-    public static BluePlayerManager bluePlayerManager;
+    [Header("\nプレイヤー(青色)")]
     [SerializeField]
     GameObject player2;
+    //最大塗り回数
+    private int blueMaxMoveCounter = 3;
+    public BluePlayerManager bluePlayerManager;
     //プレイヤー2のHP
     public int blueHp = 2;
 
+
+    [Header("\nポーション所持数")]
     //↓↓↓↓↓横山追記
     //ポーションの最大所持数
-    public int Portopn_limit = 6;
+    public int portion_limit = 6;
     //ポーションの所持数
-    public int portopn_p1 = 0;
-    public int portopn_p2 = 0;
+    public int portion_red = 0;
+    public int portion_blue = 0;
     //行動回数アップ変数
     private int move_up;
+
+    [Header("\nバケツの最大所持数")]
     //バケツの最大所持数
     public int RePaint_limit = 10;
     //↑↑↑↑↑
-
+    //バケツ所持数
+    public int redRePaint = 0;
+    public int blueRePaint = 0;
     public bool oneTime = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObj1 = GameObject.Find("Square");
-        playerObj2 = GameObject.Find("Square (1)");
-
         redPlayerManager = player1.GetComponent<RedPlayerManager>();
         bluePlayerManager = player2.GetComponent<BluePlayerManager>();
 
@@ -70,8 +68,8 @@ public class GameManager : MonoBehaviour
         //初期化
         redRePaint = 0;
         blueRePaint = 0;
-        portopn_p1 = 0;
-        portopn_p2 = 0;
+        portion_red = 0;
+        portion_blue = 0;
         //↑↑↑↑↑
 
         //菊地加筆
@@ -89,7 +87,7 @@ public class GameManager : MonoBehaviour
             if (oneTime == false)
             {
                 oneTime = true;
-                
+
                 // プレイヤー１の攻撃
                 //playerObj1.GetComponent<Player1>().Attack();//プレイヤー1の行動を呼び出す
 
@@ -104,7 +102,7 @@ public class GameManager : MonoBehaviour
             if (oneTime == false)
             {
                 oneTime = true;
-                
+
                 // プレイヤー２の攻撃
                 Debug.Log("<color=cyan> TrunChange! </color>");
                 //playerObj2.GetComponent<Player2>().Attack();
@@ -128,7 +126,7 @@ public class GameManager : MonoBehaviour
 
             //横山追記
             redMaxMoveCounter = 3;
-            move_up = redMaxMoveCounter + portopn_p1;
+            move_up = redMaxMoveCounter + portion_red;
             redMaxMoveCounter = move_up;
 
             //菊地加筆
@@ -143,7 +141,7 @@ public class GameManager : MonoBehaviour
 
             //横山追記
             blueMaxMoveCounter = 3;
-            move_up = blueMaxMoveCounter + portopn_p2;
+            move_up = blueMaxMoveCounter + portion_blue;
             blueMaxMoveCounter = move_up;
 
             //菊地加筆
@@ -164,17 +162,17 @@ public class GameManager : MonoBehaviour
         //P1側の処理
         if (player1Trun)
         {
-            if (Portopn_limit > portopn_p1)
+            if (portion_limit > portion_red)
             {
-                portopn_p1++;
+                portion_red++;
             }
         }
         //P2側の処理
         else
         {
-            if (Portopn_limit > portopn_p2)
+            if (portion_limit > portion_blue)
             {
-                portopn_p2++;
+                portion_blue++;
             }
         }
     }
@@ -211,7 +209,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     blueRePaint++;
-                    
+
                 }
             }
         }
