@@ -10,7 +10,7 @@ public class ResetButton : MonoBehaviour
     {
 
 
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
 
     }
 
@@ -27,7 +27,7 @@ public class ResetButton : MonoBehaviour
     {
         if (Input.GetKeyDown("a") || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
-            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
         }
     }
 }
