@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool stopInputKey = false;
 
-    bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
+    public static bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
 
     //田中加筆
     [Header("\nプレイヤー(赤色)")]

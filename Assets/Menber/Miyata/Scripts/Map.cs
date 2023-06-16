@@ -295,6 +295,9 @@ public class Map : MonoBehaviour
 
 
     //田中加筆
+    //相手の城にたどり着く際は塗ポイントぴったり使わないとゴールできない
+    //攻撃処理の追加
+    //切り分け
     /// <summary>
     /// RedPlayer処理
     /// </summary>
