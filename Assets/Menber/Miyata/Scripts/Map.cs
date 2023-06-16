@@ -79,6 +79,9 @@ public class Map : MonoBehaviour
 
     public int Item_Limit = 0;　　//横山加筆
     private int bomtype;  //横山加筆
+    public static int MakePortion1 = 9;
+    public static int MakePortion2 = 8;
+    public static int MakePortion3 = 11;
 
     private void Start()
     {
@@ -155,26 +158,26 @@ public class Map : MonoBehaviour
                             break;
                     }
                 }
-                //ポーション
-                if (Item_Limit >= 2 && Item_Limit < 5)
-                {
-                    CreateItem(0, 8, 1, 7, 3);
-                }
-                if (Item_Limit >= 4 && Item_Limit < 7)
-                {
-                    CreateItem(0, 8, 8, 14, 3);
-                }
                 //バケツ
-                if (Item_Limit >= 6 && Item_Limit < 9)
+                if (Item_Limit >= 2 && Item_Limit < 5)
                 {
                     CreateItem(0, 8, 1, 7, 4);
                 }
-                if (Item_Limit >= 8 && Item_Limit < 11)
+                if (Item_Limit >= 4 && Item_Limit < 7)
                 {
                     CreateItem(0, 8, 8, 14, 4);
                 }
+                //ポーション
+                if (Item_Limit >= 6 && Item_Limit < MakePortion1)
+                {
+                    CreateItem(0, 8, 1, 7, 3);
+                }
+                if (Item_Limit >= MakePortion2 && Item_Limit < MakePortion3)
+                {
+                    CreateItem(0, 8, 8, 14, 3);
+                }
 
-                if (Item_Limit == 13)
+                if (Item_Limit == 14)
                 {
                     break;
                 }
