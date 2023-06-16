@@ -14,13 +14,11 @@ public class SoundManager_SE : MonoBehaviour
 
     private bool isWalking = false;
 
-   // private Rigidbody2D rigidBody;
-
 
     private void Start()
     {
         _instance = this;
-       // rigidBody = GetComponent<Rigidbody2D>();
+     
     }
 
     public void Play(int clip)
@@ -81,29 +79,6 @@ public class SoundManager_SE : MonoBehaviour
             Stop();
         }
     }
-
-    /*
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-
-        if (other.gameObject.CompareTag("Item(Demo)"))
-        {
-            SoundManager_SE.Instance.Play(1);
-        }
-        if (other.gameObject.CompareTag("Player"))
-        {
-            SoundManager_SE.Instance.Play(2);
-        }
-        if (other.gameObject.CompareTag("Player2"))
-        {
-            SoundManager_SE.Instance.Play(3);
-        }
-        if (other.gameObject.CompareTag("Coin(Test)"))
-        {
-            SoundManager_SE.Instance.Play(4);
-        }
-
-    }*/
 
 
 }
