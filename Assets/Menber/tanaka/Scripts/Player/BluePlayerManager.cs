@@ -61,83 +61,86 @@ public class BluePlayerManager : MonoBehaviour
     //プレイヤーの相対移動度(一括移動は後で)
     void Update()
     {
-        //自ターンのみ動かす
-        if (myTrun)
+        if (!gameManager.stopInputKey)
         {
-            cursorImage.color = new Color32(30, 0, 255, 138);
-            animator.SetBool("Selection", true);
-
-            if (!nowMove)
+            //自ターンのみ動かす
+            if (myTrun)
             {
-                Dx = (int)Input.GetAxis("DpadX2");
-                Dy = (int)Input.GetAxis("DpadY2");
+                cursorImage.color = new Color32(30, 0, 255, 138);
+                animator.SetBool("Selection", true);
 
-                //カーソルを移動
-                if (Dx != 0 || Dy != 0)
+                if (!nowMove)
+                {
+                    Dx = (int)Input.GetAxis("DpadX2");
+                    Dy = (int)Input.GetAxis("DpadY2");
+
+                    //カーソルを移動
+                    if (Dx != 0 || Dy != 0)
+                    {
+                        nowMove = true;
+                        StartCoroutine(cursorMove());
+                    }
+                }
+
+                //塗り
+                if (!nowMove && Input.GetButtonDown("DS4circle2"))
                 {
                     nowMove = true;
-                    StartCoroutine(cursorMove());
+                    StartCoroutine(map.paintBlueMap(nowDirection));
+                    //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
+                    if (map.paint)
+                    {
+                        //マップ書き換え
+                        map.mapRemake();
+
+                        //プレイヤーモデルを動かす
+                        StartCoroutine(playerAnimation());
+
+                        //一回塗ったので行動を一減らす
+                        moveCounter--;
+                        map.paint = false;
+
+                    }
+                    else
+                    {
+                        Debug.Log("<color=red>隣接したマスがありません。</color>");
+                        nowMove = false;
+                    }
                 }
-            }
 
-            //塗り
-            if (!nowMove && Input.GetButtonDown("DS4circle2"))
-            {
-                nowMove = true;
-                StartCoroutine(map.paintBlueMap(nowDirection));
-                //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
-                if (map.paint)
+                //行動回数が0になるか
+                //ターン終了時ボタンを押したら終了
+                if (!nowMove && moveCounter <= 0)
                 {
-                    //マップ書き換え
-                    map.mapRemake();
-
-                    //プレイヤーモデルを動かす
-                    StartCoroutine(playerAnimation());
-
-                    //一回塗ったので行動を一減らす
-                    moveCounter--;
-                    map.paint = false;
-
-                }
-                else
-                {
-                    Debug.Log("<color=red>隣接したマスがありません。</color>");
+                    nowMove = true;
+                    animator.SetBool("Selection", false);
+                    myTrun = false;
+                    //マネージャーにも終了したと返す
+                    gameManager.trunChange();
+                    //ターン終了時カーソルを透明感
+                    cursorImage.color = new Color32(30, 0, 255, 0);
                     nowMove = false;
                 }
-            }
+                if (!nowMove && Input.GetButtonDown("DS4cross2"))
+                {
+                    nowMove = true;
+                    //再度確認
 
-            //行動回数が0になるか
-            //ターン終了時ボタンを押したら終了
-            if (!nowMove && moveCounter <= 0)
-            {
-                nowMove = true;
-                animator.SetBool("Selection", false);
-                myTrun = false;
-                //マネージャーにも終了したと返す
-                gameManager.trunChange();
-                //ターン終了時カーソルを透明感
-                cursorImage.color = new Color32(30, 0, 255, 0);
-                nowMove = false;
-            }
-            if (!nowMove && Input.GetButtonDown("DS4cross2"))
-            {
-                nowMove = true;
-                //再度確認
+                    animator.SetBool("Selection", false);
+                    //マネージャーにも終了したと返す
+                    gameManager.trunChange();
+                    //行動回数を０にする(バグ対策)
+                    moveCounter = 0;
+                    myTrun = false;
+                    //ターン終了時カーソルを透明にする
+                    cursorImage.color = new Color32(30, 0, 255, 0);
+                    nowMove = false;
+                }
 
-                animator.SetBool("Selection", false);
-                //マネージャーにも終了したと返す
-                gameManager.trunChange();
-                //行動回数を０にする(バグ対策)
-                moveCounter = 0;
-                myTrun = false;
-                //ターン終了時カーソルを透明にする
-                cursorImage.color = new Color32(30, 0, 255, 0);
-                nowMove = false;
-            }
-
-            if (gameManager.blueHp <= 0)
-            {
-                SceneManager.LoadScene("ResultScenesA");
+                if (gameManager.blueHp < 0)
+                {
+                    SceneManager.LoadScene("ResultScenesA");
+                }
             }
         }
     }

@@ -1,11 +1,18 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    Animator animator;
     [SerializeField]
-    public TextAsset mapText; //マップの情報を取得
+    GameObject CutIn;
+    [SerializeField]
+    Text CutInText;
+
+    public bool stopInputKey = false;
 
     bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
 
@@ -21,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject player1;
     //プレイヤー1のHP
-    public int redHp = 3;
+    public int redHp = 2;
     
 
     //最大塗り回数
@@ -32,11 +39,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject player2;
     //プレイヤー2のHP
-    public int blueHp = 3;
+    public int blueHp = 2;
 
     //↓↓↓↓↓横山追記
     //ポーションの最大所持数
-    public int Portopn_limit = 9;
+    public int Portopn_limit = 6;
     //ポーションの所持数
     public int portopn_p1 = 0;
     public int portopn_p2 = 0;
@@ -57,6 +64,8 @@ public class GameManager : MonoBehaviour
         redPlayerManager = player1.GetComponent<RedPlayerManager>();
         bluePlayerManager = player2.GetComponent<BluePlayerManager>();
 
+        animator = CutIn.GetComponent<Animator>();
+
         //↓↓↓↓↓横山追記
         //初期化
         redRePaint = 0;
@@ -65,10 +74,9 @@ public class GameManager : MonoBehaviour
         portopn_p2 = 0;
         //↑↑↑↑↑
 
+        //菊地加筆
         PPDisplay.ppDisplay.PointDisplay1(redMaxMoveCounter);
         PPDisplay.ppDisplay.PointDisplay2(blueMaxMoveCounter);
-        PPDisplay.ppDisplay.BucketDisplay1(redRePaint);
-        PPDisplay.ppDisplay.BucketDisplay2(blueRePaint);
     }
 
     // Update is called once per frame
@@ -77,9 +85,11 @@ public class GameManager : MonoBehaviour
 
         if (player1Trun)
         {
+            CutInText.color = new Color32(255, 122, 0, 255);
             if (oneTime == false)
             {
                 oneTime = true;
+                
                 // プレイヤー１の攻撃
                 //playerObj1.GetComponent<Player1>().Attack();//プレイヤー1の行動を呼び出す
 
@@ -90,9 +100,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            CutInText.color = new Color32(0, 122, 255, 255);
             if (oneTime == false)
             {
                 oneTime = true;
+                
                 // プレイヤー２の攻撃
                 Debug.Log("<color=cyan> TrunChange! </color>");
                 //playerObj2.GetComponent<Player2>().Attack();
@@ -112,6 +124,8 @@ public class GameManager : MonoBehaviour
     {
         if (player1Trun)
         {
+            StartCoroutine(CutInAnimator());
+
             //横山追記
             redMaxMoveCounter = 3;
             move_up = redMaxMoveCounter + portopn_p1;
@@ -125,6 +139,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            StartCoroutine(CutInAnimator());
+
             //横山追記
             blueMaxMoveCounter = 3;
             move_up = blueMaxMoveCounter + portopn_p2;
@@ -134,6 +150,9 @@ public class GameManager : MonoBehaviour
             PPDisplay.ppDisplay.PointDisplay2(blueMaxMoveCounter);//P2側の塗ポイントを更新して表示
 
             player1Trun = true;
+
+            //菊地加筆
+            PPDisplay.ppDisplay.TurnDisplay();
         }
         oneTime = false;
     }
@@ -177,8 +196,6 @@ public class GameManager : MonoBehaviour
                 {
                     redRePaint++;
                 }
-                //菊地加筆
-                PPDisplay.ppDisplay.BucketDisplay1(redRePaint);//P1のバケツポイントを更新して表示
             }
         }
         //P2側の処理
@@ -196,13 +213,15 @@ public class GameManager : MonoBehaviour
                     blueRePaint++;
                     
                 }
-                //菊地加筆
-                PPDisplay.ppDisplay.BucketDisplay2(blueRePaint);//P2のバケツポイントを更新して表示
             }
         }
     }
-    public void arrivalDestination()
+    private IEnumerator CutInAnimator()
     {
-        //リザルト処理
+        stopInputKey = true;
+        animator.SetBool("TrunChange", true);
+        yield return new WaitForSecondsRealtime(1f);
+        animator.SetBool("TrunChange", false);
+        stopInputKey = false;
     }
 }
