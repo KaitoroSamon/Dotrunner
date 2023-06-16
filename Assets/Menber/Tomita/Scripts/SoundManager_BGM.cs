@@ -22,6 +22,9 @@ public class SoundManager_BGM : MonoBehaviour
     private void Start()
     {
         _instance = this;
+        //ここで流す処理
+        Play(0);
+
     }
     public void Play(int clip)
     {
@@ -53,14 +56,12 @@ public class SoundManager_BGM : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
-        {
-            Play(0);
-        }
-
+      
+        //音を止める処理（必要なら）
         if (Input.GetKeyUp(KeyCode.X))
         {
             Stop();
         }
+        
     }
 }
