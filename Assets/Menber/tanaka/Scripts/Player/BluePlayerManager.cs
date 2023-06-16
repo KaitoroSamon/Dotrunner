@@ -9,10 +9,13 @@ public class BluePlayerManager : MonoBehaviour
     Animator animator;
     public static Map map;
     public static GameManager gameManager;
+    [Header("MapがついているGameObject")]
     [SerializeField]
     GameObject mapScrits;
+    [Header("\nGameManagerがついているGameObject")]
     [SerializeField]
     GameObject gameManagerScripts;
+    [Header("\n自分の子オブジェクトのスキン")]
     [SerializeField]
     GameObject opponentPlayerPos;
 
@@ -36,6 +39,7 @@ public class BluePlayerManager : MonoBehaviour
     float Dy = default;
     bool nowMove = false;
 
+    [Header("\n自分の孫オブジェクトのCursor")]
     [SerializeField]
     GameObject cursor;
     Image cursorImage;

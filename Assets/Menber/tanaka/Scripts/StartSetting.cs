@@ -14,6 +14,8 @@ public class StartSetting : MonoBehaviour
 
     private List<string[]> csvData = new List<string[]>();  //CSVファイルの中身を入れるリスト
 
+    //testの所をpublic static でマップ選択のほうで自由に変更する
+    ///StreamingAssets/csv/選択したマップ名.csv　で変更可
     private string test = "/StreamingAssets/csv/BaseMap.csv";
 
     void Awake()
@@ -32,7 +34,6 @@ public class StartSetting : MonoBehaviour
         {
             while (fs.Peek() != -1)
             {
-                Debug.Log("Loading Now");
                 var str = fs.ReadLine();
                 csvData.Add(str.Split(','));
             }
@@ -50,7 +51,9 @@ public class StartSetting : MonoBehaviour
             }
             
         }
+        //キャッシュ対策
         fs.Close();
+        csvData.Clear();
     }
 
     void Start()
