@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class Map : MonoBehaviour
 {
@@ -76,11 +77,16 @@ public class Map : MonoBehaviour
     [Header("アイテム生成なし")]
     public bool NotItemCreate = false;
 
+    public int Item_Limit = 0;　　//横山加筆
+    private int bomtype;  //横山加筆
+
     private void Start()
     {
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
+
+        Item_Limit = 0;　　//横山加筆
 
         /*
         if (csvFile == null)
@@ -109,18 +115,97 @@ public class Map : MonoBehaviour
         {
             //横山加筆
             //アイテム生成の処理
-            for (int i = 1; i <= 10; i++)
+            bomtype = Random.Range(1, 5);
+
+            while (true)
             {
-                CreateItem(0, 8, 1, 14, 3);
+                Item_Limit++;
+                //爆弾
+                if (Item_Limit == 1)
+                {
+                    switch (bomtype)
+                    {
+                        case 1:
+                            setMapData(4, 3, 2, 5);
+                            setMapData(7, 6, 2, 5);
+                            setMapData(1, 8, 2, 5);
+                            setMapData(4, 11, 2, 5);
+                            Debug.Log("タイプ１");
+                            break;
+                        case 2:
+                            setMapData(6, 3, 2, 5);
+                            setMapData(2, 4, 2, 5);
+                            setMapData(4, 7, 2, 5);
+                            setMapData(2, 11, 2, 5);
+                            Debug.Log("タイプ２");
+                            break;
+                        case 3:
+                            setMapData(5, 2, 2, 5);
+                            setMapData(3, 5, 2, 5);
+                            setMapData(3, 9, 2, 5);
+                            setMapData(5, 12, 2, 5);
+                            Debug.Log("タイプ３");
+                            break;
+                        case 4:
+                            setMapData(2, 3, 2, 5);
+                            setMapData(4, 7, 2, 5);
+                            setMapData(2, 11, 2, 5);
+                            setMapData(6, 12, 2, 5);
+                            Debug.Log("タイプ４");
+                            break;
+                    }
+                }
+                //ポーション
+                if (Item_Limit >= 2 && Item_Limit < 5)
+                {
+                    CreateItem(0, 8, 1, 7, 3);
+                }
+                if (Item_Limit >= 4 && Item_Limit < 7)
+                {
+                    CreateItem(0, 8, 8, 14, 3);
+                }
+                //バケツ
+                if (Item_Limit >= 6 && Item_Limit < 9)
+                {
+                    CreateItem(0, 8, 1, 7, 4);
+                }
+                if (Item_Limit >= 8 && Item_Limit < 11)
+                {
+                    CreateItem(0, 8, 8, 14, 4);
+                }
+
+                if (Item_Limit == 13)
+                {
+                    break;
+                }
+
             }
-            for (int i = 1; i <= 10; i++)
+
+            /*
+            //ポーション
+            for (int a = 1; a <= 3; a++)
             {
-                CreateItem(0, 8, 1, 14, 4);
+                CreateItem(0, 8, 1, 7, 3);
             }
-            for (int i = 1; i <= 5; i++)
+            for (int a = 1; a <= 3; a++)
             {
-                CreateItem(3, 6, 2, 13, 5);
+                CreateItem(0, 8, 8, 14, 3);
             }
+            //バケツ
+            for (int a = 1; a <= 3; a++)
+            {
+                CreateItem(0, 8, 1, 7, 4);
+            }
+            for (int a = 1; a <= 3; a++)
+            {
+                CreateItem(0, 8, 8, 14, 4);
+            }
+            */
+            //爆弾
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //CreateItem(3, 6, 2, 13, 5);
+            //}
         }
 
         mapRemake();
@@ -592,12 +677,41 @@ public class Map : MonoBehaviour
             int Yoko = Random.Range(yoko_min, yoko_max);
 
             Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
+
+            //縦の端っこにいたら
+            if (Tate == 0 || Tate == 8)
+            {
+                //何もマップに置いて無かったら(横)
+                if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0"
+                    && carving(StartSetting.fieldMap[Tate, Yoko + 1], 2) == "0"
+                    && carving(StartSetting.fieldMap[Tate, Yoko - 1], 2) == "0")
+                {
+                    setMapData(Tate, Yoko, 2, Item);//dungeonMap[Tate, Yoko] = Item;
+
+                    break;
+                }
+            }
+            else
+            {
+                //何もマップに置いて無かったら(縦と横)
+                if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0"
+                    && carving(StartSetting.fieldMap[Tate + 1, Yoko], 2) == "0"
+                    && carving(StartSetting.fieldMap[Tate - 1, Yoko], 2) == "0"
+                    && carving(StartSetting.fieldMap[Tate, Yoko + 1], 2) == "0"
+                    && carving(StartSetting.fieldMap[Tate, Yoko - 1], 2) == "0")
+                {
+                    setMapData(Tate, Yoko, 2, Item);//dungeonMap[Tate, Yoko] = Item;
+
+                    break;
+                }
+            }
+
+            /*
             //何もマップに置いて無かったら
             if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0")
             {
                 setMapData(Tate, Yoko, 2, Item);//dungeonMap[Tate, Yoko] = Item;
 
-                /*
                 switch (carving(dungeonMap[Tate, Yoko], 2))
                 {
                     case "3"://ポーション
@@ -612,14 +726,19 @@ public class Map : MonoBehaviour
                         Instantiate(Item3Square, new Vector3(-7.5f + Yoko, 3.5f - Tate, 0), Quaternion.identity);
                         break;
                 }
-                */
 
-                //処理を抜ける
-                break;
+            //処理を抜ける
+            break;
                 
             }
+            */
             cc++;
-            if (cc >= 20) Debug.LogError("ERROR"); break;
+            if (cc >= 20)
+            {
+                Item_Limit--;
+                Debug.LogError("ERROR"); 
+                break;
+            }
         }
     }
     //dungeonMap[,] 桁数
