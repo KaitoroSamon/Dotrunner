@@ -28,13 +28,7 @@ public class Map : MonoBehaviour
      **************************************/
 
 
-    /* StartSetting　から持ってくる
-    private string[] textData;
-    private string[,] fieldMap;
-    private int LineNumber; // 行数に相当
-    private int ColumnNumber; // 列数に相当
-    */
-
+    [Header("マップタイル(Prefab)をセット")]
     [SerializeField]
     private GameObject NothingSquare;
     [SerializeField]
@@ -79,7 +73,7 @@ public class Map : MonoBehaviour
     private bool setRedPlayer = false;
     private bool setBluePlayer = false;
 
-    //デバッグ用
+    [Header("アイテム生成なし")]
     public bool NotItemCreate = false;
 
     private void Start()
@@ -571,14 +565,14 @@ public class Map : MonoBehaviour
     }
 
 
-    public Vector2 positionConverter(Vector2 pos)
+    private Vector2 positionConverter(Vector2 pos)
     {
         pos = new Vector2(pos.x + 7.5f, pos.y + 4.5f);
         return pos;
 
     }
 
-    private bool IsArrayRange(int x, int y)
+    private static bool IsArrayRange(int x, int y)
     {
         return true
             && x >= 0
@@ -597,7 +591,6 @@ public class Map : MonoBehaviour
             int Tate = Random.Range(tate_min, tate_max);
             int Yoko = Random.Range(yoko_min, yoko_max);
 
-            Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
             //何もマップに置いて無かったら
             if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0")
             {
@@ -629,7 +622,7 @@ public class Map : MonoBehaviour
         }
     }
     //dungeonMap[,] 桁数
-    public string carving(string num, int digit)
+    public static string carving(string num, int digit)
     {
         if (num != null)
         {
@@ -641,7 +634,7 @@ public class Map : MonoBehaviour
         return null;
     }
     //一次、二次、桁数、変更する数字
-    public void setMapData(int o, int p, int digit, int setData)
+    public static void setMapData(int o, int p, int digit, int setData)
     {
         int d = int.Parse(StartSetting.fieldMap[o, p]);
         //壱の位

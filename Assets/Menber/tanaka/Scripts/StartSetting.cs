@@ -14,6 +14,8 @@ public class StartSetting : MonoBehaviour
 
     private List<string[]> csvData = new List<string[]>();  //CSVファイルの中身を入れるリスト
 
+    //testの所をpublic static でマップ選択のほうで自由に変更する
+    ///StreamingAssets/csv/選択したマップ名.csv　で変更可
     private string test = "/StreamingAssets/csv/BaseMap.csv";
 
     void Awake()
@@ -32,14 +34,14 @@ public class StartSetting : MonoBehaviour
         {
             while (fs.Peek() != -1)
             {
-                Debug.Log("Loading Now");
                 var str = fs.ReadLine();
                 csvData.Add(str.Split(','));
             }
             ColumnNumber = csvData[0].Length;
-            LineNumber = csvData[0].Length;
+            LineNumber = csvData.Count -1;
             fieldMap = new string[LineNumber, ColumnNumber];
 
+            Debug.Log("Col" + ColumnNumber + "\nLine" + LineNumber);
             for(int i = 0; i < LineNumber; i++)
             {
                 string[] tempWord = csvData[i];
@@ -48,9 +50,11 @@ public class StartSetting : MonoBehaviour
                     fieldMap[i,j] = tempWord[j];
                 }
             }
-            
+            //Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
         }
+        //キャッシュ対策
         fs.Close();
+        csvData.Clear();
     }
 
     void Start()

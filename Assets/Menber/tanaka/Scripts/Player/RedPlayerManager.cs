@@ -7,12 +7,15 @@ using UnityEngine.SceneManagement;
 public class RedPlayerManager : MonoBehaviour
 {
     Animator animator;
-    public static Map map;
-    public static GameManager gameManager;
+    public Map map;
+    public GameManager gameManager;
+    [Header("MapがついているGameObject")]
     [SerializeField]
     GameObject mapScrits;
+    [Header("GameManagerがついているGameObject")]
     [SerializeField]
     GameObject gameManagerScripts;
+    [Header("自分の子オブジェクトのスキン")]
     [SerializeField]
     GameObject opponentPlayerPos;
 
@@ -36,6 +39,7 @@ public class RedPlayerManager : MonoBehaviour
     float Dy = default;
     bool nowMove = false;
 
+    [Header("\n自分の孫オブジェクトのCursor")]
     [SerializeField]
     GameObject cursor;
     Image cursorImage;
@@ -137,13 +141,13 @@ public class RedPlayerManager : MonoBehaviour
                     cursorImage.color = new Color32(255, 0, 30, 0);
                     nowMove = false;
                 }
-                if (gameManager.redHp < 0)
-                {
-                    SceneManager.LoadScene("Result Scene");
-                }
             }
         }
-        
+        if (gameManager.redHp <= 0)
+        {
+            //Debug.Log("<color=cyan> Red Knock Out </color>");
+            SceneManager.LoadScene("blueWin");
+        }
     }
 
     /// <summary>
