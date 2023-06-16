@@ -1,6 +1,7 @@
 //using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,14 +28,12 @@ public class Map : MonoBehaviour
      **************************************/
 
 
-    [SerializeField]
-    public TextAsset csvFile; //マップの情報取得
-
+    /* StartSetting　から持ってくる
     private string[] textData;
-    private string[,] dungeonMap;
-
+    private string[,] fieldMap;
     private int LineNumber; // 行数に相当
     private int ColumnNumber; // 列数に相当
+    */
 
     [SerializeField]
     private GameObject NothingSquare;
@@ -53,7 +52,6 @@ public class Map : MonoBehaviour
     [SerializeField]
     private GameObject GoalSquare;
 
-    //田中さん加筆
     //塗った元のマスのデータ保持
     private string formerData = default;
     private string firstPlace = default;
@@ -84,38 +82,34 @@ public class Map : MonoBehaviour
     //デバッグ用
     public bool NotItemCreate = false;
 
-    private void Awake()
+    private void Start()
     {
-        if(csvFile == null)
-        {
-            csvFile = Resources.Load("mapData/BaseMap") as TextAsset;
-        }
-
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
 
+        /*
+        if (csvFile == null)
+        {
+            csvFile = Resources.Load("mapData/BaseMap") as TextAsset;
+        }
         string textLines = csvFile.text; // テキストの全体データの代入
-
         // 改行でデータを分割して配列に代入
         textData = textLines.Split('\n');
-
         // 行数と列数の取得
         ColumnNumber = textData[0].Split(',').Length;
         LineNumber = textData.Length;
-
         // ２次元配列の定義
         dungeonMap = new string[LineNumber, ColumnNumber];
-
         for (int i = 0; i < LineNumber; i++)
         {
             string[] tempWords = textData[i].Split(',');
-
             for (int j = 0; j < ColumnNumber; j++)
             {
                 dungeonMap[i, j] = tempWords[j];
             }
         }
+        */
 
         if (!NotItemCreate)
         {
@@ -151,13 +145,13 @@ public class Map : MonoBehaviour
         }
         this.transform.DetachChildren();
 
-        for (int i = 0; i < LineNumber; i++)
+        for (int i = 0; i < StartSetting.LineNumber; i++)
         {
-            for (int j = 0; j < ColumnNumber; j++)
+            for (int j = 0; j < StartSetting.ColumnNumber; j++)
             {
-                if (dungeonMap[i, j] != null)
+                if (StartSetting.fieldMap[i, j] != null)
                 {
-                    switch (carving(dungeonMap[i, j], 1))
+                    switch (carving(StartSetting.fieldMap[i, j], 1))
                     {
                         case "0"://なし(塗れる)
                             Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
@@ -195,7 +189,7 @@ public class Map : MonoBehaviour
                             }
                             break;
                     }
-                    switch (carving(dungeonMap[i, j], 2))
+                    switch (carving(StartSetting.fieldMap[i, j], 2))
                     {
                         case "0": //なし
                             break;
@@ -234,17 +228,17 @@ public class Map : MonoBehaviour
         //paintがtureになるまで続ける
         while (!paint)
         {
-            for (int y = 0; y < LineNumber; y++)
+            for (int y = 0; y < StartSetting.LineNumber; y++)
             {
 
-                for (int x = 0; x < ColumnNumber; x++)
+                for (int x = 0; x < StartSetting.ColumnNumber; x++)
                 {
 
                     if (y == converterPos.y && x == converterPos.x)
                     {
 
                         Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
-                        Debug.Log("マスデータ" + dungeonMap[y, x]);
+                        Debug.Log("マスデータ" + StartSetting.fieldMap[y, x]);
 
                         top = new Vector2(converterPos.x, converterPos.y - 1);
                         bottom = new Vector2(converterPos.x, converterPos.y + 1);
@@ -252,13 +246,13 @@ public class Map : MonoBehaviour
                         left = new Vector2(converterPos.x - 1, converterPos.y);
 
                         //塗ろうとしているマスが塗れないなら終了
-                        if (carving(dungeonMap[y, x], 1) == "1" || carving(dungeonMap[y, x], 1) == "2" || carving(dungeonMap[y, x], 1) == "4")
+                        if (carving(StartSetting.fieldMap[y, x], 1) == "1" || carving(StartSetting.fieldMap[y, x], 1) == "2" || carving(StartSetting.fieldMap[y, x], 1) == "4")
                         {
                             Debug.Log("自分の陣地");
                             break;
                         }
                         //バケツ所持していない状態で相手のマスを塗ろうとしたら飛ばす
-                        if (carving(dungeonMap[y, x], 1) == "3" && gameManager.redRePaint <= 0)
+                        if (carving(StartSetting.fieldMap[y, x], 1) == "3" && gameManager.redRePaint <= 0)
                         {
                             Debug.Log("バケツがありません");
                             break;
@@ -266,9 +260,9 @@ public class Map : MonoBehaviour
                         //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
                         if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
                         {
-                            if (carving(dungeonMap[(int)top.y, (int)top.x], 1) == "1" ||
-                                carving(dungeonMap[(int)top.y, (int)top.x], 1) == "2" ||
-                                carving(dungeonMap[(int)top.y, (int)top.x], 1) == "4")
+                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "2" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "4")
                             {
                                 Debug.Log("上");
                                 neighbor = true;
@@ -277,9 +271,9 @@ public class Map : MonoBehaviour
                         //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
                         if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
-                            if (carving(dungeonMap[(int)right.y, (int)right.x], 1) == "1" ||
-                                carving(dungeonMap[(int)right.y, (int)right.x], 1) == "2" ||
-                                carving(dungeonMap[(int)right.y, (int)right.x], 1) == "4")
+                            if (carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "2" ||
+                                carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "4")
                             {
                                 Debug.Log("右");
                                 neighbor = true;
@@ -288,9 +282,9 @@ public class Map : MonoBehaviour
                         //下のマスが配列外でないdungeonMap[(int)bottom.y, (int)bottom.x] != null
                         if (!neighbor && IsArrayRange((int)bottom.y, (int)bottom.x))
                         {
-                            if (carving(dungeonMap[(int)bottom.y, (int)bottom.x], 1) == "1" ||
-                                carving(dungeonMap[(int)bottom.y, (int)bottom.x], 1) == "2" ||
-                                carving(dungeonMap[(int)bottom.y, (int)bottom.x], 1) == "4")
+                            if (carving(StartSetting.fieldMap[(int)bottom.y, (int)bottom.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)bottom.y, (int)bottom.x], 1) == "2" ||
+                                carving(StartSetting.fieldMap[(int)bottom.y, (int)bottom.x], 1) == "4")
                             {
                                 Debug.Log("下");
                                 neighbor = true;
@@ -299,9 +293,9 @@ public class Map : MonoBehaviour
                         //左のマスが配列外でないdungeonMap[(int)left.y, (int)left.x] != null
                         if (!neighbor && IsArrayRange((int)left.y, (int)left.x))
                         {
-                            if (carving(dungeonMap[(int)left.y, (int)left.x], 1) == "1" ||
-                                carving(dungeonMap[(int)left.y, (int)left.x], 1) == "2" ||
-                                carving(dungeonMap[(int)left.y, (int)left.x], 1) == "4")
+                            if (carving(StartSetting.fieldMap[(int)left.y, (int)left.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)left.y, (int)left.x], 1) == "2" ||
+                                carving(StartSetting.fieldMap[(int)left.y, (int)left.x], 1) == "4")
                             {
                                 Debug.Log("左");
                                 neighbor = true;
@@ -310,7 +304,7 @@ public class Map : MonoBehaviour
                         if (neighbor)
                         {
                             //塗る前のデータ保持
-                            formerData = dungeonMap[y, x];
+                            formerData = StartSetting.fieldMap[y, x];
                             firstPlace = carving(formerData, 1);
                             secondPlace = carving(formerData, 2);
                             switch (secondPlace)
@@ -322,7 +316,7 @@ public class Map : MonoBehaviour
                                     break;
                             }
                             //相手のマスだったら
-                            if (carving(dungeonMap[y, x], 1) == "3" && gameManager.redRePaint > 0)
+                            if (carving(StartSetting.fieldMap[y, x], 1) == "3" && gameManager.redRePaint > 0)
                             {
                                 gameManager.redRePaint--;
                                 setMapData(y, x, 1, 2); //dungeonMap[y, x] = "1";
@@ -358,9 +352,9 @@ public class Map : MonoBehaviour
                 //爆弾を使った後、おかしくなる時がある。
                 //爆発した際にアイテムが中に存在する場合は、一旦消滅させる用にする
                 //爆弾の処理
-                for (int y = 0; y < LineNumber; y++)
+                for (int y = 0; y < StartSetting.LineNumber; y++)
                 {
-                    for (int x = 0; x < ColumnNumber; x++)
+                    for (int x = 0; x < StartSetting.ColumnNumber; x++)
                     {
                         if (y == converterPos.y && x == converterPos.x)
                         {
@@ -412,10 +406,10 @@ public class Map : MonoBehaviour
         //paintがtureになるまで続ける
         while (!paint)
         {
-            for (int y = 0; y < LineNumber; y++)
+            for (int y = 0; y < StartSetting.LineNumber; y++)
             {
 
-                for (int x = 0; x < ColumnNumber; x++)
+                for (int x = 0; x < StartSetting.ColumnNumber; x++)
                 {
 
                     if (y == converterPos.y && x == converterPos.x)
@@ -423,7 +417,7 @@ public class Map : MonoBehaviour
 
                         Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
                         //Debug.Log("[" + tate + "]" + "[" + yoko + "]");
-                        Debug.Log("マスデータ" + dungeonMap[y, x]);
+                        Debug.Log("マスデータ" + StartSetting.fieldMap[y, x]);
 
                         top = new Vector2(converterPos.x, converterPos.y - 1);
                         bottom = new Vector2(converterPos.x, converterPos.y + 1);
@@ -431,21 +425,21 @@ public class Map : MonoBehaviour
                         left = new Vector2(converterPos.x - 1, converterPos.y);
 
                         //塗ろうとしているマスが塗れないなら終了
-                        if (carving(dungeonMap[y, x], 1) == "1" || carving(dungeonMap[y, x], 1) == "3" || carving(dungeonMap[y, x], 1) == "5")
+                        if (carving(StartSetting.fieldMap[y, x], 1) == "1" || carving(StartSetting.fieldMap[y, x], 1) == "3" || carving(StartSetting.fieldMap[y, x], 1) == "5")
                         {
                             break;
                         }
                         //バケツ所持していない状態で相手のマスを塗ろうとしたら飛ばす
-                        if (carving(dungeonMap[y, x], 1) == "2" && gameManager.blueRePaint <= 0)
+                        if (carving(StartSetting.fieldMap[y, x], 1) == "2" && gameManager.blueRePaint <= 0)
                         {
                             break;
                         }
                         //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
                         if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
                         {
-                            if (carving(dungeonMap[(int)top.y, (int)top.x], 1) == "1" ||
-                                carving(dungeonMap[(int)top.y, (int)top.x], 1) == "3" ||
-                                carving(dungeonMap[(int)top.y, (int)top.x], 1) == "5")
+                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "3" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "5")
                             {
                                 Debug.Log("上");
                                 neighbor = true;
@@ -454,9 +448,9 @@ public class Map : MonoBehaviour
                         //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
                         if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
-                            if (carving(dungeonMap[(int)right.y, (int)right.x], 1) == "1" ||
-                                carving(dungeonMap[(int)right.y, (int)right.x], 1) == "3" ||
-                                carving(dungeonMap[(int)right.y, (int)right.x], 1) == "5")
+                            if (carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "3" ||
+                                carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "5")
                             {
                                 Debug.Log("右");
                                 neighbor = true;
@@ -465,9 +459,9 @@ public class Map : MonoBehaviour
                         //下のマスが配列外でないdungeonMap[(int)bottom.y, (int)bottom.x] != null
                         if (!neighbor && IsArrayRange((int)bottom.y, (int)bottom.x))
                         {
-                            if (carving(dungeonMap[(int)bottom.y, (int)bottom.x], 1) == "1" ||
-                                carving(dungeonMap[(int)bottom.y, (int)bottom.x], 1) == "3" ||
-                                carving(dungeonMap[(int)bottom.y, (int)bottom.x], 1) == "5")
+                            if (carving(StartSetting.fieldMap[(int)bottom.y, (int)bottom.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)bottom.y, (int)bottom.x], 1) == "3" ||
+                                carving(StartSetting.fieldMap[(int)bottom.y, (int)bottom.x], 1) == "5")
                             {
                                 Debug.Log("下");
                                 neighbor = true;
@@ -476,9 +470,9 @@ public class Map : MonoBehaviour
                         //左のマスが配列外でないdungeonMap[(int)left.y, (int)left.x] != null
                         if (!neighbor && IsArrayRange((int)left.y, (int)left.x))
                         {
-                            if (carving(dungeonMap[(int)left.y, (int)left.x], 1) == "1" ||
-                                carving(dungeonMap[(int)left.y, (int)left.x], 1) == "3" ||
-                                carving(dungeonMap[(int)left.y, (int)left.x], 1) == "5")
+                            if (carving(StartSetting.fieldMap[(int)left.y, (int)left.x], 1) == "1" ||
+                                carving(StartSetting.fieldMap[(int)left.y, (int)left.x], 1) == "3" ||
+                                carving(StartSetting.fieldMap[(int)left.y, (int)left.x], 1) == "5")
                             {
                                 Debug.Log("左");
                                 neighbor = true;
@@ -487,7 +481,7 @@ public class Map : MonoBehaviour
                         if (neighbor)
                         {
                             //塗る前のデータ保持
-                            formerData = dungeonMap[y, x];
+                            formerData = StartSetting.fieldMap[y, x];
                             firstPlace = carving(formerData, 1);
                             secondPlace = carving(formerData, 2);
                             switch (secondPlace)
@@ -499,7 +493,7 @@ public class Map : MonoBehaviour
                                     break;
                             }
                             //相手のマスだったら
-                            if (carving(dungeonMap[y, x], 1) == "2" && gameManager.blueRePaint > 0)
+                            if (carving(StartSetting.fieldMap[y, x], 1) == "2" && gameManager.blueRePaint > 0)
                             {
                                 gameManager.blueRePaint--;
                                 setMapData(y, x, 1, 3); // dungeonMap[y, x] = "2";
@@ -533,9 +527,9 @@ public class Map : MonoBehaviour
             case "5":
                 //横山加筆
                 //爆弾の処理
-                for (int y = 0; y < LineNumber; y++)
+                for (int y = 0; y < StartSetting.LineNumber; y++)
                 {
-                    for (int x = 0; x < ColumnNumber; x++)
+                    for (int x = 0; x < StartSetting.ColumnNumber; x++)
                     {
                         if (y == converterPos.y && x == converterPos.x)
                         {
@@ -589,21 +583,23 @@ public class Map : MonoBehaviour
         return true
             && x >= 0
             && y >= 0
-            && x < dungeonMap.GetLength(0)
-            && y < dungeonMap.GetLength(1);
+            && x < StartSetting.fieldMap.GetLength(0)
+            && y < StartSetting.fieldMap.GetLength(1);
     }
 
     //横山加筆
     //アイテムをランダムで生成するためのメソッド
     void CreateItem(int tate_min, int tate_max, int yoko_min, int yoko_max, int Item)
     {
+        int cc = 0;
         while (true)
         {
             int Tate = Random.Range(tate_min, tate_max);
             int Yoko = Random.Range(yoko_min, yoko_max);
 
+            Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
             //何もマップに置いて無かったら
-            if (carving(dungeonMap[Tate, Yoko], 2) == "0")
+            if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0")
             {
                 setMapData(Tate, Yoko, 2, Item);//dungeonMap[Tate, Yoko] = Item;
 
@@ -628,6 +624,8 @@ public class Map : MonoBehaviour
                 break;
                 
             }
+            cc++;
+            if (cc >= 20) Debug.LogError("ERROR"); break;
         }
     }
     //dungeonMap[,] 桁数
@@ -645,7 +643,7 @@ public class Map : MonoBehaviour
     //一次、二次、桁数、変更する数字
     public void setMapData(int o, int p, int digit, int setData)
     {
-        int d = int.Parse(dungeonMap[o, p]);
+        int d = int.Parse(StartSetting.fieldMap[o, p]);
         //壱の位
         int n = d % 10;
         //十の位
@@ -663,6 +661,6 @@ public class Map : MonoBehaviour
         }
 
         //Debug.Log(ans);
-        dungeonMap[o, p] = ans.ToString("D2");
+        StartSetting.fieldMap[o, p] = ans.ToString("D2");
     }
 }
