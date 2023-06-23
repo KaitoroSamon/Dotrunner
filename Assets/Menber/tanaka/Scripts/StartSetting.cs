@@ -24,12 +24,14 @@ public class StartSetting : MonoBehaviour
 #if UNITY_EDITOR
         StreamReader fs = 
             new StreamReader(Application.dataPath + test);
+        /*
 #elif UNITY_STANDALONE_OSX
             StreamReader fs = 
-            new StreamReader(Application.dataPath + "/Resources/Data/StreamingAssets/csv/EnemySpown.csv");    
+            new StreamReader(Application.dataPath + "/Resources/Data/StreamingAssets/csv/EnemySpown.csv");  
+        */
 #elif UNITY_STANDALONE_WIN
             StreamReader fs = 
-            new StreamReader(Application.dataPath + "/StreamingAssets/csv/EnemySpown.csv");    
+            new StreamReader(Application.dataPath + test);    
 #endif
         {
             while (fs.Peek() != -1)
@@ -38,7 +40,7 @@ public class StartSetting : MonoBehaviour
                 csvData.Add(str.Split(','));
             }
             ColumnNumber = csvData[0].Length;
-            LineNumber = csvData.Count -1;
+            LineNumber = csvData.Count;
             fieldMap = new string[LineNumber, ColumnNumber];
 
             Debug.Log("Col" + ColumnNumber + "\nLine" + LineNumber);
