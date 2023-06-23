@@ -182,32 +182,6 @@ public class Map : MonoBehaviour
                 }
 
             }
-
-            /*
-            //ポーション
-            for (int a = 1; a <= 3; a++)
-            {
-                CreateItem(0, 8, 1, 7, 3);
-            }
-            for (int a = 1; a <= 3; a++)
-            {
-                CreateItem(0, 8, 8, 14, 3);
-            }
-            //バケツ
-            for (int a = 1; a <= 3; a++)
-            {
-                CreateItem(0, 8, 1, 7, 4);
-            }
-            for (int a = 1; a <= 3; a++)
-            {
-                CreateItem(0, 8, 8, 14, 4);
-            }
-            */
-            //爆弾
-            //for (int i = 1; i <= 5; i++)
-            //{
-            //CreateItem(3, 6, 2, 13, 5);
-            //}
         }
 
         mapRemake();
@@ -446,8 +420,6 @@ public class Map : MonoBehaviour
                 break;
             case "5":
                 //横山加筆
-                //爆弾を使った後、おかしくなる時がある。
-                //爆発した際にアイテムが中に存在する場合は、一旦消滅させる用にする
                 //爆弾の処理
                 for (int y = 0; y < StartSetting.LineNumber; y++)
                 {
@@ -456,21 +428,45 @@ public class Map : MonoBehaviour
                         if (y == converterPos.y && x == converterPos.x)
                         {
                             //上
-                            setMapData(y - 1, x, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            if (carving(StartSetting.fieldMap[y - 1, x], 1) != "1")
+                            {
+                                setMapData(y - 1, x, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //下
-                            setMapData(y + 1, x, 1, 2);//dungeonMap[y + 1, x] = "1";
+                            if (carving(StartSetting.fieldMap[y + 1, x], 1) != "1")
+                            {
+                                setMapData(y + 1, x, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //左
-                            setMapData(y, x - 1, 1, 2);//dungeonMap[y, x - 1] = "1";
+                            if (carving(StartSetting.fieldMap[y, x - 1], 1) != "1")
+                            {
+                                setMapData(y, x - 1, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //右
-                            setMapData(y, x + 1, 1, 2);//dungeonMap[y, x + 1] = "1";
+                            if (carving(StartSetting.fieldMap[y, x + 1], 1) != "1")
+                            {
+                                setMapData(y, x + 1, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //左斜め上
-                            setMapData(y - 1, x - 1, 1, 2);//dungeonMap[y - 1, x - 1] = "1";
+                            if (carving(StartSetting.fieldMap[y - 1, x - 1], 1) != "1")
+                            {
+                                setMapData(y - 1, x - 1, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //左斜め下
-                            setMapData(y + 1, x - 1, 1, 2);//dungeonMap[y + 1, x - 1] = "1";
+                            if (carving(StartSetting.fieldMap[y + 1, x - 1], 1) != "1")
+                            {
+                                setMapData(y + 1, x - 1, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //右斜め上
-                            setMapData(y - 1, x + 1, 1, 2);//dungeonMap[y - 1, x + 1] = "1";
+                            if (carving(StartSetting.fieldMap[y - 1, x + 1], 1) != "1")
+                            {
+                                setMapData(y - 1, x + 1, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                             //右斜め下
-                            setMapData(y + 1, x + 1, 1, 2);//dungeonMap[y + 1, x + 1] = "1";
+                            if (carving(StartSetting.fieldMap[y + 1, x + 1], 1) != "1")
+                            {
+                                setMapData(y + 1, x + 1, 1, 2);//dungeonMap[y - 1, x] = "1";
+                            }
                         }
                     }
                 }
@@ -646,21 +642,45 @@ public class Map : MonoBehaviour
                         if (y == converterPos.y && x == converterPos.x)
                         {
                             //上
-                            setMapData(y - 1, x, 1, 3);//dungeonMap[y - 1, x] = "1";
+                            if (carving(StartSetting.fieldMap[y - 1, x], 1) != "1")
+                            {
+                                setMapData(y - 1, x, 1, 3);//dungeonMap[y - 1, x] = "1";
+                            }
                             //下
-                            setMapData(y + 1, x, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            if (carving(StartSetting.fieldMap[y + 1, x], 1) != "1")
+                            {
+                                setMapData(y + 1, x, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                             //左
-                            setMapData(y, x - 1, 1, 3);//dungeonMap[y, x - 1] = "1";
+                            if (carving(StartSetting.fieldMap[y, x - 1], 1) != "1")
+                            {
+                                setMapData(y, x - 1, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                             //右
-                            setMapData(y, x + 1, 1, 3);//dungeonMap[y, x + 1] = "1";
+                            if (carving(StartSetting.fieldMap[y, x + 1], 1) != "1")
+                            {
+                                setMapData(y, x + 1, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                             //左斜め上
-                            setMapData(y - 1, x - 1, 1, 3);//dungeonMap[y - 1, x - 1] = "1";
+                            if (carving(StartSetting.fieldMap[y - 1, x - 1], 1) != "1")
+                            {
+                                setMapData(y - 1, x - 1, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                             //左斜め下
-                            setMapData(y + 1, x - 1, 1, 3);//dungeonMap[y + 1, x - 1] = "1";
+                            if (carving(StartSetting.fieldMap[y + 1, x - 1], 1) != "1")
+                            {
+                                setMapData(y + 1, x - 1, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                             //右斜め上
-                            setMapData(y - 1, x + 1, 1, 3);//dungeonMap[y - 1, x + 1] = "1";
+                            if (carving(StartSetting.fieldMap[y - 1, x + 1], 1) != "1")
+                            {
+                                setMapData(y - 1, x + 1, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                             //右斜め下
-                            setMapData(y + 1, x + 1, 1, 3);//dungeonMap[y + 1, x + 1] = "1";
+                            if (carving(StartSetting.fieldMap[y + 1, x + 1], 1) != "1")
+                            {
+                                setMapData(y + 1, x + 1, 1, 3);//dungeonMap[y + 1, x] = "1";
+                            }
                         }
                     }
                 }
