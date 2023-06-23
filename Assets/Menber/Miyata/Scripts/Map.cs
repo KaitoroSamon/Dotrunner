@@ -78,9 +78,9 @@ public class Map : MonoBehaviour
 
     public int Item_Limit = 0;　　//横山加筆
     private int bomtype;  //横山加筆
-    public static int MakePortion1 = 9;
-    public static int MakePortion2 = 8;
-    public static int MakePortion3 = 11;
+    public static int MakePortion1;  //横山加筆
+    public static int MakePortion2;  //横山加筆
+    public static int MakePortion3;  //横山加筆
 
     private void Start()
     {
