@@ -25,7 +25,8 @@ public class RestartButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("b") || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        string name = "DS4-2"; //“o˜^‚µ‚½–¼‘O
+        if (Input.GetButtonDown(name))
         {
             SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
         }
