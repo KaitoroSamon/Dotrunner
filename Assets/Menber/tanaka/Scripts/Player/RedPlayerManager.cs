@@ -190,6 +190,7 @@ public class RedPlayerManager : MonoBehaviour
         //C³ˆÄŒ
         if (playerModel.transform.position == opponentPlayerPos.transform.position)
         {
+            GameManager.isRedAttack = true;
             gameManager.blueHp--;
             gameManager.subMoveCounter();
         }

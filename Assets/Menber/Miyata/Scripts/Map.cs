@@ -414,7 +414,6 @@ public class Map : MonoBehaviour
                             //相手のマスだったら
                             if (carving(StartSetting.fieldMap[y, x], 1) == "3" && gameManager.redRePaint > 0)
                             {
-                                GameManager.isRedAttack = true;
                                 gameManager.redRePaint--;
                                 setMapData(y, x, 1, 2); //dungeonMap[y, x] = "1";
                             }
@@ -606,7 +605,6 @@ public class Map : MonoBehaviour
                             //相手のマスだったら
                             if (carving(StartSetting.fieldMap[y, x], 1) == "2" && gameManager.blueRePaint > 0)
                             {
-                                GameManager.isBlueAttack = true;
                                 gameManager.blueRePaint--;
                                 setMapData(y, x, 1, 3); // dungeonMap[y, x] = "2";
                             }
