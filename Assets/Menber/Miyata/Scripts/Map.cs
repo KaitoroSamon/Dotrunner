@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using static UnityEditor.Progress;
 
 public class Map : MonoBehaviour
@@ -386,12 +385,24 @@ public class Map : MonoBehaviour
                                 neighbor = true;
                             }
                         }
+
+                        //ゴールする時ピッタリ「０」でないとゴールできない
+                        if (!GameManager.notPerfectGoal)
+                        {
+                            if (carving(StartSetting.fieldMap[y, x], 1) == "5" && RedPlayerManager.moveCounter - 1 != 0)
+                            {
+                                Debug.Log("<color=red>行動回数が0でないとゴールできません</color>");
+                                neighbor = false;
+                            }
+                        }
+
                         if (neighbor)
                         {
                             //塗る前のデータ保持
                             formerData = StartSetting.fieldMap[y, x];
                             firstPlace = carving(formerData, 1);
                             secondPlace = carving(formerData, 2);
+
                             switch (secondPlace)
                             {
                                 case "3":
@@ -403,6 +414,7 @@ public class Map : MonoBehaviour
                             //相手のマスだったら
                             if (carving(StartSetting.fieldMap[y, x], 1) == "3" && gameManager.redRePaint > 0)
                             {
+                                GameManager.isRedAttack = true;
                                 gameManager.redRePaint--;
                                 setMapData(y, x, 1, 2); //dungeonMap[y, x] = "1";
                             }
@@ -467,11 +479,14 @@ public class Map : MonoBehaviour
                 break;
             default: break;
         }
+        //ゴール到着処理
+        //仕様抜けあり
         switch (firstPlace)
         {
             case "5":
-                SceneManager.LoadScene("redWin");
                 firstPlace = null;
+                GameManager.nextScene = "redWin";
+                gameManager.sceneLoadtime();
                 break;
             default: break;
         }
@@ -563,6 +578,17 @@ public class Map : MonoBehaviour
                                 neighbor = true;
                             }
                         }
+
+                        //ゴールする時ピッタリ「０」でないとゴールできない
+                        if (!GameManager.notPerfectGoal)
+                        {
+                            if (carving(StartSetting.fieldMap[y, x], 1) == "4" && RedPlayerManager.moveCounter - 1 != 0)
+                            {
+                                Debug.Log("<color=red>行動回数が0でないとゴールできません</color>");
+                                neighbor = false;
+                            }
+                        }
+
                         if (neighbor)
                         {
                             //塗る前のデータ保持
@@ -580,6 +606,7 @@ public class Map : MonoBehaviour
                             //相手のマスだったら
                             if (carving(StartSetting.fieldMap[y, x], 1) == "2" && gameManager.blueRePaint > 0)
                             {
+                                GameManager.isBlueAttack = true;
                                 gameManager.blueRePaint--;
                                 setMapData(y, x, 1, 3); // dungeonMap[y, x] = "2";
                             }
@@ -643,11 +670,14 @@ public class Map : MonoBehaviour
 
             default: break;
         }
+        //ゴール到着処理
+        //仕様抜けあり
         switch (firstPlace)
         {
             case "4":
-                SceneManager.LoadScene("blueWin");
                 firstPlace = null;
+                GameManager.nextScene = "blueWin";
+                gameManager.sceneLoadtime();
                 break;
             default: break;
 
@@ -682,7 +712,7 @@ public class Map : MonoBehaviour
             int Tate = Random.Range(tate_min, tate_max);
             int Yoko = Random.Range(yoko_min, yoko_max);
 
-            Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
+            //Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
 
             //縦の端っこにいたら
             if (Tate == 0 || Tate == 8)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Text CutInText;
 
-    public bool stopInputKey = false;
+    public static bool stopInputKey = false;
 
     public static bool player1Trun = true; //どちらが攻撃しているかを保存しておくフィールド
+
+    public static string nextScene = default;
+
+    public bool nowWait = true;
 
     //田中加筆
     [Header("\nプレイヤー(赤色)")]
@@ -22,8 +27,12 @@ public class GameManager : MonoBehaviour
     GameObject player1;
     //最大塗り回数
     private int redMaxMoveCounter = 3;
+    private int nextRedMaxMoveCounter = default;
     public RedPlayerManager redPlayerManager;
-    
+
+    //攻撃した次のターン　塗りポイント半減　切り下げ
+    public static bool isRedAttack = false;
+
     //プレイヤー1のHP
     public int redHp = 2;
 
@@ -32,7 +41,12 @@ public class GameManager : MonoBehaviour
     GameObject player2;
     //最大塗り回数
     private int blueMaxMoveCounter = 3;
+    private int nextBlueMaxMoveCounter = default;
     public BluePlayerManager bluePlayerManager;
+
+    //攻撃した次のターン　塗りポイント半減　切り下げ
+    public static bool isBlueAttack = false;
+
     //プレイヤー2のHP
     public int blueHp = 2;
 
@@ -56,6 +70,12 @@ public class GameManager : MonoBehaviour
     public int blueRePaint = 0;
     public bool oneTime = false;
 
+
+    //デバッグ専用(ピッタリゴールしなくてよい)
+    public static bool notPerfectGoal = false;
+    [Header("デバッグ専用(アタッチしなくてもよい)")]
+    [SerializeField]
+    GameObject GoalFlag = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +83,9 @@ public class GameManager : MonoBehaviour
         bluePlayerManager = player2.GetComponent<BluePlayerManager>();
 
         animator = CutIn.GetComponent<Animator>();
+
+        nextRedMaxMoveCounter = redMaxMoveCounter;
+        nextBlueMaxMoveCounter = blueMaxMoveCounter;
 
         //↓↓↓↓↓横山追記
         //初期化
@@ -93,7 +116,7 @@ public class GameManager : MonoBehaviour
 
                 Debug.Log("<color=orange> TrunChange! </color>");
 
-                redPlayerManager.PlayertrunUpdate(player1Trun, redMaxMoveCounter, redRePaint);
+                redPlayerManager.PlayertrunUpdate(player1Trun, nextRedMaxMoveCounter, redRePaint);
             }
         }
         else
@@ -107,7 +130,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("<color=cyan> TrunChange! </color>");
                 //playerObj2.GetComponent<Player2>().Attack();
 
-                bluePlayerManager.PlayertrunUpdate(!player1Trun, blueMaxMoveCounter, blueRePaint);
+                bluePlayerManager.PlayertrunUpdate(!player1Trun, nextBlueMaxMoveCounter, blueRePaint);
             }
         }
         //デバッグ用
@@ -125,6 +148,19 @@ public class GameManager : MonoBehaviour
             blueHp--;
             Debug.Log("blueHp" + blueHp);
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (notPerfectGoal)
+            {
+                notPerfectGoal = false;
+                if(GoalFlag != null) GoalFlag.SetActive(notPerfectGoal);
+            }
+            else
+            {
+                notPerfectGoal = true;
+                if (GoalFlag != null) GoalFlag.SetActive(notPerfectGoal);
+            }
+        }
     }
 
     //ターンチェンジ
@@ -139,8 +175,17 @@ public class GameManager : MonoBehaviour
             move_up = redMaxMoveCounter + portion_red;
             redMaxMoveCounter = move_up;
 
+            nextRedMaxMoveCounter = redMaxMoveCounter;
+
+            //塗りポイント半減　切り下げ
+            if (isRedAttack)
+            {
+                nextRedMaxMoveCounter = (int)Mathf.Floor(nextRedMaxMoveCounter / 2);
+                isRedAttack = false;
+            }
+
             //菊地加筆
-            PPDisplay.ppDisplay.PointDisplay1(redMaxMoveCounter);//P1側の塗ポイントを更新して表示
+            PPDisplay.ppDisplay.PointDisplay1(nextRedMaxMoveCounter);//P1側の塗ポイントを更新して表示
 
 
             player1Trun = false;
@@ -154,8 +199,17 @@ public class GameManager : MonoBehaviour
             move_up = blueMaxMoveCounter + portion_blue;
             blueMaxMoveCounter = move_up;
 
+            nextBlueMaxMoveCounter = blueMaxMoveCounter;
+
+            //塗りポイント半減　切り下げ
+            if (isBlueAttack)
+            {
+                nextBlueMaxMoveCounter = (int)Mathf.Floor(nextBlueMaxMoveCounter / 2);
+                isBlueAttack = false;
+            }
+
             //菊地加筆
-            PPDisplay.ppDisplay.PointDisplay2(blueMaxMoveCounter);//P2側の塗ポイントを更新して表示
+            PPDisplay.ppDisplay.PointDisplay2(nextBlueMaxMoveCounter);//P2側の塗ポイントを更新して表示
 
             player1Trun = true;
 
@@ -183,6 +237,25 @@ public class GameManager : MonoBehaviour
             if (portion_limit > portion_blue)
             {
                 portion_blue++;
+            }
+        }
+    }
+    public void subMoveCounter()
+    {
+        //P1側の処理
+        if (player1Trun)
+        {
+            if (portion_blue > 0)
+            {
+                portion_blue--;
+            }
+        }
+        //P2側の処理
+        else
+        {
+            if (portion_red > 0)
+            {
+                portion_red--;
             }
         }
     }
@@ -228,8 +301,22 @@ public class GameManager : MonoBehaviour
     {
         stopInputKey = true;
         animator.SetBool("TrunChange", true);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(1.5f);
         animator.SetBool("TrunChange", false);
         stopInputKey = false;
+    }
+
+    /// <summary>
+    /// 次のシーンに移動する猶予時間
+    /// 演出などもここで行う
+    /// </summary>
+    public void sceneLoadtime()
+    {
+        stopInputKey = true;
+        Invoke("ChangeScene", 2.0f);
+    }
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 }

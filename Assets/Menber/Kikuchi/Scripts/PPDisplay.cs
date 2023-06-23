@@ -18,6 +18,7 @@ public class PPDisplay : MonoBehaviour
     private GameObject player2;
     [SerializeField]
     private GameObject gameManager;
+    private Animator animator;
 
     [Header("\n塗りポイントテキスト")]
     [SerializeField]
@@ -116,18 +117,20 @@ public class PPDisplay : MonoBehaviour
         bucketPoint[playerRed].text = "" + gManager.redRePaint;
         bucketPoint[playerBlue].text = "" + gManager.blueRePaint;
 
-        //HPの値が元の値より減ったら配列で順番にHPオブジェクトを透明にして行く処理
+        //HPの値が元の値より減ったら配列で順番にHPの減少アニメーションをして行く処理
         if (gManager.redHp < p1NowHP)
         {
             p1NowHP = gManager.redHp;
-            p1HealthPoint[p1decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
+            animator = p1HealthPoint[p1decNumber].GetComponent<Animator>();
+            animator.SetBool("HPDecrease", true);
             p1decNumber++;
         }
 
         if (gManager.blueHp < p2NowHP)
         {
             p2NowHP = gManager.blueHp;
-            p2HealthPoint[p2decNumber].GetComponent<Image>().color = new Color(0, 0, 0, -255);
+            animator = p2HealthPoint[p2decNumber].GetComponent<Animator>();
+            animator.SetBool("HPDecrease", true);
             p2decNumber++;
         }
         
