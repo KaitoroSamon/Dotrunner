@@ -730,7 +730,7 @@ public class Map : MonoBehaviour
             else
             {
                 //何もマップに置いて無かったら(縦と横)
-                if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0"
+                    if (carving(StartSetting.fieldMap[Tate, Yoko], 2) == "0"
                     && carving(StartSetting.fieldMap[Tate + 1, Yoko], 2) == "0"
                     && carving(StartSetting.fieldMap[Tate - 1, Yoko], 2) == "0"
                     && carving(StartSetting.fieldMap[Tate, Yoko + 1], 2) == "0"
