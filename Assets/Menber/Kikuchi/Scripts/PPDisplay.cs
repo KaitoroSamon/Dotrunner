@@ -19,21 +19,23 @@ public class PPDisplay : MonoBehaviour
     [SerializeField]
     private GameObject gameManager;
 
+    [Header("\n塗りポイントテキスト")]
     [SerializeField]
-    [Header("PaintPointText")]
     private Text[] paintPoint;
+
+    [Header("\nバケツポイントテキスト")]
     [SerializeField]
-    [Header("BucketPointText")]
     private Text[] bucketPoint;
+
+    [Header("\nPlayer1のHPUI")]
     [SerializeField]
-    [Header("Player1HP")]
     private GameObject[] p1HealthPoint;
+    [Header("\nPlayer2のHPUI")]
     [SerializeField]
-    [Header("Player2HP")]
     private GameObject[] p2HealthPoint;
 
+    [Header("ターン表示のテキスト")]
     [SerializeField]
-    [Header("TurnText")]
     private Text turnText;
 
     private Text changeText;
@@ -55,18 +57,18 @@ public class PPDisplay : MonoBehaviour
     {
         if (ppDisplay == null)
         {
-            ppDisplay = this;
+            ppDisplay = this; //ppDisplayがまだないならstaticなppDisplayというクラスを作成
         }
         else
         {
             Destroy(this.gameObject);
         }
 
-        bluePlayerManager = player2.GetComponent<BluePlayerManager>();
-        redPlayerManager = player1.GetComponent<RedPlayerManager>();
-        gManager = gameManager.GetComponent<GameManager>();
+        bluePlayerManager = player2.GetComponent<BluePlayerManager>();//青プレイヤーのスクリプト取得
+        redPlayerManager = player1.GetComponent<RedPlayerManager>();//赤プレイヤーのスクリプト取得
+        gManager = gameManager.GetComponent<GameManager>();//ゲームマネージャーの取得
     }
-    private void Start()
+    private void Start() //ペイントポイント、バケツポイントが赤、青どっちが一つ目にアタッチされてもでもいいようにする処理
     {
         turnText.text = "Turn" + nowTurn;
         //ppDisplay.BucketDisplay1(10);
@@ -89,17 +91,17 @@ public class PPDisplay : MonoBehaviour
 
     }
 
-    private void Update()
+    private void Update()//塗りポイントの表示とターン進行中にリアルタイムの値を表示するための処理
     {
-        if (redPlayerManager.moveCounter <= 0)
+        if (redPlayerManager.moveCounter <= 0) //moveCounterが0の間(赤のターン以外の間)はpaintPoint1の値を表示
         {
             paintPoint[playerRed].text = "" + paintPoint1;
         }
-        else
+        else//それ以外の時はmoveCounterの値を表示。
         {
             paintPoint[playerRed].text = "" + redPlayerManager.moveCounter;
         }
-
+        //上記と同じ処理
         if (bluePlayerManager.moveCounter <= 0)
         {
             paintPoint[playerBlue].text = "" + paintPoint2;
@@ -109,10 +111,12 @@ public class PPDisplay : MonoBehaviour
             paintPoint[playerBlue].text = "" + bluePlayerManager.moveCounter;
         }
 
+        //バケツポイントの値をリアルタイムで表示するための処理
+
         bucketPoint[playerRed].text = "" + gManager.redRePaint;
         bucketPoint[playerBlue].text = "" + gManager.blueRePaint;
 
-        //HP
+        //HPの値が元の値より減ったら配列で順番にHPオブジェクトを透明にして行く処理
         if (gManager.redHp < p1NowHP)
         {
             p1NowHP = gManager.redHp;
@@ -129,32 +133,22 @@ public class PPDisplay : MonoBehaviour
         
 
     }
-    public void PointDisplay1(int Point1)//���̊֐��ɂ͍����ɕ\������h�|�C���g�̒l�𑗂��Ă��������B
+    public void PointDisplay1(int Point1)//引数でペイントポイントに入れたい値を取得して代入、表示を行う処理
     {
         paintPoint1 = Point1;
         paintPoint[playerRed].text = "" + paintPoint1;
     }
 
-    public void PointDisplay2(int Point2)//���̊֐��ɂ͉E���ɕ\������h�|�C���g�̒l�𑗂��Ă��������B
+    public void PointDisplay2(int Point2)
     {
         paintPoint2 = Point2;
         paintPoint[playerBlue].text = "" + paintPoint2;
     }
 
-    public void TurnDisplay()
+    public void TurnDisplay()//呼ばれたらターンの値を増やして表示する。
     {
         nowTurn++;
         turnText.text = "Turn" + nowTurn;
     }
 
-    //public void BucketDisplay1(int BucketPoint1)//���̊֐��ɂ͍����ɕ\������o�P�c�|�C���g�̒l�𑗂��Ă��������B
-    //{
-    //    bucketPoint[playerRed].text = "" + BucketPoint1;
-    //}
-
-    //public void BucketDisplay2(int BucketPoint2)//���̊֐��ɂ͉E���ɕ\������o�P�c�|�C���g�̒l�𑗂��Ă��������B
-    //{
-    //    Debug.Log("dousa");
-    //    bucketPoint[playerBlue].text = "" + BucketPoint2;
-    //}
 }
