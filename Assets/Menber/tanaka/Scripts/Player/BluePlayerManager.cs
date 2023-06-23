@@ -65,7 +65,7 @@ public class BluePlayerManager : MonoBehaviour
     //プレイヤーの相対移動度(一括移動は後で)
     void Update()
     {
-        if (!gameManager.stopInputKey)
+        if (!GameManager.stopInputKey)
         {
             //自ターンのみ動かす
             if (myTrun)
@@ -140,12 +140,13 @@ public class BluePlayerManager : MonoBehaviour
                     cursorImage.color = new Color32(30, 0, 255, 0);
                     nowMove = false;
                 }
-
-                if (gameManager.blueHp < 0)
-                {
-                    SceneManager.LoadScene("ResultScenesA");
-                }
             }
+        }
+        if (gameManager.blueHp <= 0)
+        {
+            //Debug.Log("<color=orange> Blue Knock Out </color>");
+            GameManager.nextScene = "redWin";
+            gameManager.sceneLoadtime();
         }
     }
 
@@ -183,9 +184,13 @@ public class BluePlayerManager : MonoBehaviour
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
 
+
+        //修正案件
         if (playerModel.transform.position == opponentPlayerPos.transform.position)
         {
             gameManager.redHp--;
+            gameManager.subMoveCounter();
+            
         }
 
         yield return null;

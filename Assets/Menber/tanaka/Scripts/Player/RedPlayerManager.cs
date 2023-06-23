@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class RedPlayerManager : MonoBehaviour
 {
@@ -67,7 +66,7 @@ public class RedPlayerManager : MonoBehaviour
     //プレイヤーの相対移動度(一括移動は後で)
     void Update()
     {
-        if (!gameManager.stopInputKey)
+        if (!GameManager.stopInputKey)
         {
             //自ターンのみ動かす
             if (myTrun)
@@ -141,13 +140,14 @@ public class RedPlayerManager : MonoBehaviour
                     cursorImage.color = new Color32(255, 0, 30, 0);
                     nowMove = false;
                 }
-                if (gameManager.redHp < 0)
-                {
-                    SceneManager.LoadScene("Result Scene");
-                }
             }
         }
-        
+        if (gameManager.redHp <= 0)
+        {
+            //Debug.Log("<color=cyan> Red Knock Out </color>");
+            GameManager.nextScene = "blueWin";
+            gameManager.sceneLoadtime();
+        }
     }
 
     /// <summary>
@@ -184,9 +184,12 @@ public class RedPlayerManager : MonoBehaviour
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
 
-        if(playerModel.transform.position == opponentPlayerPos.transform.position)
+
+        //修正案件
+        if (playerModel.transform.position == opponentPlayerPos.transform.position)
         {
             gameManager.blueHp--;
+            gameManager.subMoveCounter();
         }
 
         yield return null;
