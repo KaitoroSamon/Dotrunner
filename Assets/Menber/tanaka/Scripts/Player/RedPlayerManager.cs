@@ -61,6 +61,8 @@ public class RedPlayerManager : MonoBehaviour
         animator = cursor.GetComponent<Animator>();
 
         //スキン設定
+        //カーソルを透明にする
+        cursorImage.color = new Color32(0, 0, 0, 0);
     }
 
     //プレイヤーの相対移動度(一括移動は後で)
@@ -71,7 +73,7 @@ public class RedPlayerManager : MonoBehaviour
             //自ターンのみ動かす
             if (myTrun)
             {
-                cursorImage.color = new Color32(255, 0, 30, 138);
+                cursorImage.color = new Color32(255, 0, 0, 255);
                 animator.SetBool("Selection", true);
 
                 if (!nowMove)
@@ -121,8 +123,8 @@ public class RedPlayerManager : MonoBehaviour
                     myTrun = false;
                     //マネージャーにも終了したと返す
                     gameManager.trunChange();
-                    //ターン終了時カーソルを透明
-                    cursorImage.color = new Color32(255, 0, 30, 0);
+                    //ターン終了時カーソルを透明にする
+                    cursorImage.color = new Color32(0, 0, 0, 0);
                     nowMove = false;
                 }
                 if (!nowMove && Input.GetButtonDown("DS4cross"))
@@ -137,7 +139,7 @@ public class RedPlayerManager : MonoBehaviour
                     moveCounter = 0;
                     myTrun = false;
                     //ターン終了時カーソルを透明にする
-                    cursorImage.color = new Color32(255, 0, 30, 0);
+                    cursorImage.color = new Color32(0, 0, 0, 0);
                     nowMove = false;
                 }
             }

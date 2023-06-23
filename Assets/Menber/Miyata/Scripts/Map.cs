@@ -582,7 +582,7 @@ public class Map : MonoBehaviour
                         //ゴールする時ピッタリ「０」でないとゴールできない
                         if (!GameManager.notPerfectGoal)
                         {
-                            if (carving(StartSetting.fieldMap[y, x], 1) == "4" && RedPlayerManager.moveCounter - 1 != 0)
+                            if (carving(StartSetting.fieldMap[y, x], 1) == "4" && BluePlayerManager.moveCounter - 1 != 0)
                             {
                                 Debug.Log("<color=red>行動回数が0でないとゴールできません</color>");
                                 neighbor = false;
