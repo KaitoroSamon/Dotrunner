@@ -71,7 +71,7 @@ public class PPDisplay : MonoBehaviour
     }
     private void Start() //ペイントポイント、バケツポイントが赤、青どっちが一つ目にアタッチされてもでもいいようにする処理
     {
-        turnText.text = "Turn" + nowTurn;
+        turnText.text = "Turn " + nowTurn;
         //ppDisplay.BucketDisplay1(10);
         p1NowHP = gManager.redHp;
         p2NowHP = gManager.blueHp;
@@ -151,7 +151,7 @@ public class PPDisplay : MonoBehaviour
     public void TurnDisplay()//呼ばれたらターンの値を増やして表示する。
     {
         nowTurn++;
-        turnText.text = "Turn" + nowTurn;
+        turnText.text = "Turn " + nowTurn;
     }
 
 }
