@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class Map : MonoBehaviour
 {
@@ -90,7 +90,16 @@ public class Map : MonoBehaviour
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
 
-        Item_Limit = 0;　　//横山加筆
+        formerData = default;
+        firstPlace = default;
+        secondPlace = default;
+        paint = false;
+        neighbor = false;
+        setRedPlayer = false; 
+        setBluePlayer = false;
+
+
+    Item_Limit = 0;　　//横山加筆
 
         /*
         if (csvFile == null)
@@ -277,8 +286,6 @@ public class Map : MonoBehaviour
 
 
     //田中加筆
-    //相手の城にたどり着く際は塗ポイントぴったり使わないとゴールできない
-    //攻撃処理の追加
     //切り分け
     /// <summary>
     /// RedPlayer処理
