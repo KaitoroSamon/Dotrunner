@@ -44,7 +44,9 @@ public class Map : MonoBehaviour
     [SerializeField]
     private GameObject Item3Square;
     [SerializeField]
-    private GameObject GoalSquare;
+    private GameObject RedGoalSquare;
+    [SerializeField]
+    private GameObject BlueGoalSquare;
 
     //塗った元のマスのデータ保持
     private string formerData = default;
@@ -113,7 +115,7 @@ public class Map : MonoBehaviour
         }
         */
 
-        if (!NotItemCreate)
+        if (!NotItemCreate && !tutorialManager.tutorialNow)
         {
             //横山加筆
             //アイテム生成の処理
@@ -225,7 +227,7 @@ public class Map : MonoBehaviour
                             break;
 
                         case "4"://赤側ゴール
-                            Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            Instantiate(RedGoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             //一人目のプレイヤー配置
                             if (!setRedPlayer)
                             {
@@ -235,9 +237,9 @@ public class Map : MonoBehaviour
                             break;
 
                         case "5"://青側ゴール
-                            Instantiate(GoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            Instantiate(BlueGoalSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
                             //二人目のプレイヤー配置
-                            if (!setBluePlayer)
+                            if (!setBluePlayer && !tutorialManager.tutorialNow)
                             {
                                 BluePlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
                                 setBluePlayer = true;
@@ -251,6 +253,10 @@ public class Map : MonoBehaviour
                         case "1": //赤プレイヤー
                             break;
                         case "2": //青プレイヤー
+                            if (tutorialManager.tutorialNow)
+                            {
+                                BluePlayerManager.PlayerUpdate(new Vector2(-7.5f + j, 3.5f - i));
+                            }
                             break;
                         case "3": //ポーション
                             Instantiate(Item1Square, new Vector3(-7.5f + j, 3.5f - i, -1), Quaternion.identity, this.transform);
@@ -407,13 +413,31 @@ public class Map : MonoBehaviour
                 gameManager.addMoveCounter();
                 formerData = null;
                 secondPlace = null;
+
+                if (tutorialManager.tutorialNow && !tutorialManager.launch05)
+                {
+                    tutorialManager.launch05 = true;
+                }
+
                 break;
             case "4":
                 gameManager.addRePaint();
                 formerData = null;
                 secondPlace = null;
+
+                if (tutorialManager.tutorialNow && !tutorialManager.launch02)
+                {
+                    tutorialManager.launch02 = true;
+                }
+
                 break;
             case "5":
+
+                if (tutorialManager.tutorialNow && !tutorialManager.launch06)
+                {
+                    tutorialManager.launch06 = true;
+                }
+
                 //横山加筆
                 //爆弾の処理
                 for (int y = 0; y < StartSetting.LineNumber; y++)

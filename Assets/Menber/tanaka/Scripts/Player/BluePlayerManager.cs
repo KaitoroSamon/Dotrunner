@@ -46,22 +46,24 @@ public class BluePlayerManager : MonoBehaviour
 
     GameObject playerModel;
 
-    private void Awake()
+    void Start()
     {
+        
         map = mapScrits.GetComponent<Map>();
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         cursorImage = cursor.GetComponent<Image>();
         playerModel = transform.Find("PlayerModel").gameObject;
         //初期座標はマップから受け取り
-    }
 
-    void Start()
-    {
         animator = cursor.GetComponent<Animator>();
 
         //スキン設定
         //カーソルを透明にする
         cursorImage.color = new Color32(0, 0, 0, 0);
+        if (tutorialManager.tutorialNow)
+        {
+            cursor.gameObject.SetActive(false);
+        }
     }
 
     //プレイヤーの相対移動度(一括移動は後で)

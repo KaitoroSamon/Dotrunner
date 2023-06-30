@@ -11,7 +11,15 @@ public class CountRandom : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-         rnd = Random.Range(0,2);
+        if (!tutorialManager.tutorialNow)
+        {
+            Rand();
+        }
+    }
+
+    void Rand()
+    {
+        rnd = Random.Range(0, 2);
         Debug.Log(rnd);
         if (rnd == 1)
         {
@@ -22,7 +30,7 @@ public class CountRandom : MonoBehaviour
             Map.MakePortion2 = 9;  //‰¡ŽR‰Á•M
             Map.MakePortion3 = 12;  //‰¡ŽR‰Á•M
         }
-       
+
         else
         {
             GameManager.player1Trun = false;
@@ -32,12 +40,5 @@ public class CountRandom : MonoBehaviour
             Map.MakePortion2 = 8;  //‰¡ŽR‰Á•M
             Map.MakePortion3 = 12;  //‰¡ŽR‰Á•M
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
     }
 }
