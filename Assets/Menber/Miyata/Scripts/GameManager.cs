@@ -133,6 +133,10 @@ public class GameManager : MonoBehaviour
                 bluePlayerManager.PlayertrunUpdate(!player1Trun, nextBlueMaxMoveCounter, blueRePaint);
             }
         }
+        if (tutorialManager.tutorialNow)
+        {
+            if (!player1Trun) trunChange();
+        }
         //デバッグ用
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -166,6 +170,7 @@ public class GameManager : MonoBehaviour
     //ターンチェンジ
     public void trunChange()
     {
+
         if (player1Trun)
         {
             StartCoroutine(CutInAnimator());
@@ -180,6 +185,11 @@ public class GameManager : MonoBehaviour
             //塗りポイント半減　切り下げ
             if (isRedAttack)
             {
+                if (tutorialManager.tutorialNow && !tutorialManager.launch04)
+                {
+                    tutorialManager.launch04 = true;
+                }
+
                 nextRedMaxMoveCounter = (int)Mathf.Floor(nextRedMaxMoveCounter / 2);
                 isRedAttack = false;
             }
@@ -313,6 +323,10 @@ public class GameManager : MonoBehaviour
     public void sceneLoadtime()
     {
         stopInputKey = true;
+        if (tutorialManager.tutorialNow)
+        {
+            nextScene = "TitleScene";
+        }
         Invoke("ChangeScene", 2.0f);
     }
     public void ChangeScene()

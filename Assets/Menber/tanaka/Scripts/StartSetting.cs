@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class StartSetting : MonoBehaviour
 {
+
     public static int ColumnNumber;
     public static int LineNumber;
     public static string[,] fieldMap;
@@ -20,6 +21,11 @@ public class StartSetting : MonoBehaviour
 
     void Awake()
     {
+        if (tutorialManager.tutorialNow)
+        {
+            test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
+        }
+
         // Path‚ª•Ï‚í‚é‚Ì‚Å•ªŠò
 #if UNITY_EDITOR
         StreamReader fs = 

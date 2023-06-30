@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class RedPlayerManager : MonoBehaviour
 {
     Animator animator;
-    public Map map;
-    public GameManager gameManager;
+    public static Map map;
+    public static GameManager gameManager;
     [Header("MapがついているGameObject")]
     [SerializeField]
     GameObject mapScrits;
@@ -45,7 +45,7 @@ public class RedPlayerManager : MonoBehaviour
 
     GameObject playerModel;
 
-    private void Awake()
+    void Start()
     {
         map = mapScrits.GetComponent<Map>();
         gameManager = gameManagerScripts.GetComponent<GameManager>();
@@ -54,10 +54,7 @@ public class RedPlayerManager : MonoBehaviour
         //初期座標
         //this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
         //cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
-    }
 
-    void Start()
-    {
         animator = cursor.GetComponent<Animator>();
 
         //スキン設定
@@ -73,6 +70,12 @@ public class RedPlayerManager : MonoBehaviour
             //自ターンのみ動かす
             if (myTrun)
             {
+
+                if (tutorialManager.tutorialNow && !tutorialManager.launch01)
+                {
+                    tutorialManager.launch01 = true;
+                }
+
                 cursorImage.color = new Color32(255, 0, 0, 255);
                 animator.SetBool("Selection", true);
 
@@ -92,6 +95,11 @@ public class RedPlayerManager : MonoBehaviour
                 //塗り
                 if (!nowMove && Input.GetButtonDown("DS4circle"))
                 {
+                    if (tutorialManager.tutorialNow && !tutorialManager.launch03 && gameManager.redRePaint > 0)
+                    {
+                        tutorialManager.launch03 = true;
+                    }
+
                     nowMove = true;
                     StartCoroutine(map.paintRedMap(nowDirection));
                     //プレイヤーの座標に現在の座標を足した数値をマネージャーに渡す
@@ -127,7 +135,7 @@ public class RedPlayerManager : MonoBehaviour
                     cursorImage.color = new Color32(0, 0, 0, 0);
                     nowMove = false;
                 }
-                if (!nowMove && Input.GetButtonDown("DS4cross"))
+                if (!tutorialManager.tutorialNow && !nowMove && Input.GetButtonDown("DS4cross"))
                 {
                     nowMove = true;
                     //再度確認
@@ -193,6 +201,7 @@ public class RedPlayerManager : MonoBehaviour
             GameManager.isRedAttack = true;
             gameManager.blueHp--;
             gameManager.subMoveCounter();
+
         }
 
         yield return null;
