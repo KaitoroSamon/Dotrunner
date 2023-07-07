@@ -13,6 +13,8 @@ public class SEManager : MonoBehaviour
 
     public AudioSource Audio_Source_SE;
 
+    public float Audio_Source_SE_Vol;
+
 
     public enum SE_TYPE
     {
@@ -44,7 +46,6 @@ public class SEManager : MonoBehaviour
     {
         if(Audio_Clip_SE[(int)clip] != null)
         {
-            Audio_Source_SE.volume = 1;
             Audio_Source_SE.clip = Audio_Clip_SE[(int)clip];
             Audio_Source_SE.PlayOneShot(Audio_Clip_SE[(int)clip]);
         }
@@ -52,6 +53,11 @@ public class SEManager : MonoBehaviour
         {
             Debug.Log("éwíËÇ≥ÇÍÇΩSEÇ™Ç†ÇËÇ‹ÇπÇÒÅB");
         }
+    }
+
+    public void SEVolumeChange(float volume)
+    {
+        Audio_Source_SE.volume = volume;
     }
 
     private void Update()

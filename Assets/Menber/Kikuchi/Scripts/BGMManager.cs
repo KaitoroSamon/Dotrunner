@@ -12,7 +12,7 @@ public class BGMManager : MonoBehaviour
 
     public AudioClip[] Audio_Clip_BGM;
 
-    public float[] Audio_Clip_BGM_Vol;
+    public float Audio_Clip_BGM_Vol;
 
 
     public AudioSource Audio_Source_BGM;
@@ -41,18 +41,16 @@ public class BGMManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //Ç±Ç±Ç≈ó¨Ç∑èàóù
-        Play(bgmType);
-
-    }
     public void Play(BGM_TYPE clip)
     {
-        Audio_Source_BGM.volume = Audio_Clip_BGM_Vol[(int)clip];
+        Audio_Source_BGM.volume = Audio_Clip_BGM_Vol;
         Audio_Source_BGM.clip = Audio_Clip_BGM[(int)clip];
         Audio_Source_BGM.Play();
 
     }
 
+    public void BGMVolumeChange(float volume)
+    {
+        Audio_Source_BGM.volume = volume;
+    }
 }
