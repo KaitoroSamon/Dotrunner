@@ -32,11 +32,17 @@ public class Map : MonoBehaviour
     [SerializeField]
     private GameObject NothingSquare;
     [SerializeField]
+    private GameObject NothingSquare2;
+    [SerializeField]
     private GameObject WallSquare;
     [SerializeField]
     private GameObject Player1Square;
     [SerializeField]
+    private GameObject Player1Square2;
+    [SerializeField]
     private GameObject Player2Square;
+    [SerializeField]
+    private GameObject Player2Square2;
     [SerializeField]
     private GameObject Item1Square;
     [SerializeField]
@@ -47,6 +53,8 @@ public class Map : MonoBehaviour
     private GameObject RedGoalSquare;
     [SerializeField]
     private GameObject BlueGoalSquare;
+
+    private int cou = 0;
 
     //塗った元のマスのデータ保持
     private string formerData = default;
@@ -90,7 +98,7 @@ public class Map : MonoBehaviour
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
 
-        /*どれかがバグの原因
+        //どれかがバグの原因
         formerData = default;
         firstPlace = default;
         secondPlace = default;
@@ -98,7 +106,7 @@ public class Map : MonoBehaviour
         neighbor = false;
         setRedPlayer = false; 
         setBluePlayer = false;
-        */
+        
 
     Item_Limit = 0;　　//横山加筆
 
@@ -205,6 +213,7 @@ public class Map : MonoBehaviour
     /// </summary>
     public void mapRemake()
     {
+        cou = 0;
         //最初に以前のマップ画像を消す
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -221,7 +230,14 @@ public class Map : MonoBehaviour
                     switch (carving(StartSetting.fieldMap[i, j], 1))
                     {
                         case "0"://なし(塗れる)
-                            Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            if(cou % 2 != 0)
+                            {
+                                Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
+                            else
+                            {
+                                Instantiate(NothingSquare2, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
                             break;
 
                         case "1"://なし(塗れない)
@@ -229,11 +245,25 @@ public class Map : MonoBehaviour
                             break;
 
                         case "2"://赤マス
-                            Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            if (cou % 2 != 0)
+                            {
+                                Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
+                            else
+                            {
+                                Instantiate(Player1Square2, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
                             break;
 
                         case "3"://青マス
-                            Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            if (cou % 2 != 0)
+                            {
+                                Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
+                            else
+                            {
+                                Instantiate(Player2Square2, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
                             break;
 
                         case "4"://赤側ゴール
@@ -280,6 +310,7 @@ public class Map : MonoBehaviour
                         case "6": //プレイヤー重なり
                             break;
                     }
+                    cou++;
                 }
             }
         }

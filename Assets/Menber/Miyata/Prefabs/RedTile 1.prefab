@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7962343950207600379}
   - component: {fileID: 1396572667622946612}
   m_Layer: 0
-  m_Name: RedTile
+  m_Name: RedTile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f85b3632ce741934eb8fd8627378a57f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eae028ff80954474cb5aa42a8b87e1f3, type: 3}
   m_Color: {r: 1, g: 0.23529412, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

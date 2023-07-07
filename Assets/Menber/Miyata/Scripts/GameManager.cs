@@ -87,21 +87,17 @@ public class GameManager : MonoBehaviour
         nextRedMaxMoveCounter = redMaxMoveCounter;
         nextBlueMaxMoveCounter = blueMaxMoveCounter;
 
-        /*どれかがバグの原因
+        //どれかがバグの原因
         stopInputKey = false;
         player1Trun = true;
         nextScene = default;
         nowWait = true;
-        redMaxMoveCounter = 3;
-        nextRedMaxMoveCounter = default;
         isRedAttack = false;
         redHp = 2;
-        blueMaxMoveCounter = 3;
-        nextBlueMaxMoveCounter = default;
         isBlueAttack = false;
         blueHp = 2;
         oneTime = false;
-        */
+        
 
         //↓↓↓↓↓横山追記
         //初期化

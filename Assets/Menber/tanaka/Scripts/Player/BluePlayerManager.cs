@@ -66,7 +66,6 @@ public class BluePlayerManager : MonoBehaviour
         nowPos = default;
         moveCounter = default;
         rePaint = default;
-        nowDirection = default;
         nowMove = false;
 
         if (tutorialManager.tutorialNow)
