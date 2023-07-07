@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         nextRedMaxMoveCounter = redMaxMoveCounter;
         nextBlueMaxMoveCounter = blueMaxMoveCounter;
 
+        /*どれかがバグの原因
         stopInputKey = false;
         player1Trun = true;
         nextScene = default;
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
         isBlueAttack = false;
         blueHp = 2;
         oneTime = false;
+        */
 
         //↓↓↓↓↓横山追記
         //初期化

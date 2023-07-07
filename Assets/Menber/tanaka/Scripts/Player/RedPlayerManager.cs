@@ -60,12 +60,14 @@ public class RedPlayerManager : MonoBehaviour
         //カーソルを透明にする
         cursorImage.color = new Color32(0, 0, 0, 0);
 
+        /*
         myTrun = false;
         nowPos = default;
         moveCounter = default;
         rePaint = default;
         nowDirection = default;
         nowMove = false;
+        */
     }
 
     //プレイヤーの相対移動度(一括移動は後で)

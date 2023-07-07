@@ -90,6 +90,7 @@ public class Map : MonoBehaviour
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
 
+        /*どれかがバグの原因
         formerData = default;
         firstPlace = default;
         secondPlace = default;
@@ -97,7 +98,7 @@ public class Map : MonoBehaviour
         neighbor = false;
         setRedPlayer = false; 
         setBluePlayer = false;
-
+        */
 
     Item_Limit = 0;　　//横山加筆
 
