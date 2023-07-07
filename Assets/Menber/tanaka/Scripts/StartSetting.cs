@@ -17,7 +17,8 @@ public class StartSetting : MonoBehaviour
 
     //testの所をpublic static でマップ選択のほうで自由に変更する
     ///StreamingAssets/csv/選択したマップ名.csv　で変更可
-    private string test = "/StreamingAssets/csv/BaseMap.csv";
+    public string test = "/StreamingAssets/csv/BaseMap.csv";
+
 
     void Awake()
     {

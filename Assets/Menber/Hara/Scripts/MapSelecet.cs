@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MapSelecet : MonoBehaviour
 {
+    [SerializeField]
+    StartSetting set;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +19,9 @@ public class MapSelecet : MonoBehaviour
     {
         
     }
+    public void Onclick()
+    {
+        set.test = "/StreamingAssets/csv/BaseMap.csv";
+    }
+
 }
