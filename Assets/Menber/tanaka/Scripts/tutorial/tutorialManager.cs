@@ -5,7 +5,7 @@ using UnityEngine.Windows;
 
 public class tutorialManager : MonoBehaviour
 {
-    public static bool tutorialNow = true;
+    public static bool tutorialNow = false;
 
     public static bool launch01 = false;
     private bool close01 = false;
