@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+//using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,6 +86,20 @@ public class GameManager : MonoBehaviour
 
         nextRedMaxMoveCounter = redMaxMoveCounter;
         nextBlueMaxMoveCounter = blueMaxMoveCounter;
+
+        stopInputKey = false;
+        player1Trun = true;
+        nextScene = default;
+        nowWait = true;
+        redMaxMoveCounter = 3;
+        nextRedMaxMoveCounter = default;
+        isRedAttack = false;
+        redHp = 2;
+        blueMaxMoveCounter = 3;
+        nextBlueMaxMoveCounter = default;
+        isBlueAttack = false;
+        blueHp = 2;
+        oneTime = false;
 
         //↓↓↓↓↓横山追記
         //初期化

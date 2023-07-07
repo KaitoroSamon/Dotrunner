@@ -22,6 +22,10 @@ public class StartSetting : MonoBehaviour
 
     void Awake()
     {
+        //‰Šú‰»
+        ColumnNumber = 0;
+        LineNumber = 0;
+
         if (tutorialManager.tutorialNow)
         {
             test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";

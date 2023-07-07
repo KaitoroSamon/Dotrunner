@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Menber/Hara/Scene/Alpha/TitleScene.unity
-    guid: 85ff88eb471819641805b0bf95081da1
+    path: Assets/BuildScene/TitleScene.unity
+    guid: 0df8446b9bf3ec34eb2f3dcf1f051fee
   - enabled: 1
-    path: Assets/Menber/Hara/Scene/Alpha/MainScene.unity
-    guid: 5d4f0e92db866dd43844ac8efbc1dd55
+    path: Assets/BuildScene/MainScene.unity
+    guid: e6468616b733afd4782e48b25562c50f
   - enabled: 1
-    path: Assets/Menber/OosakiScenes/blueWin.unity
-    guid: 4fc11b9fea8b8734d8fedf1d941f51a6
+    path: Assets/BuildScene/redWin.unity
+    guid: 51815a7352c505e49b2541bace5476f8
   - enabled: 1
-    path: Assets/Menber/OosakiScenes/redWin.unity
-    guid: 36600354b5e08254fb66c57d4ed4ee68
+    path: Assets/BuildScene/blueWin.unity
+    guid: 1fc43159281946548a1941446357cad4
   m_configObjects: {}
