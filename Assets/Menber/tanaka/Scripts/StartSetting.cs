@@ -17,7 +17,7 @@ public class StartSetting : MonoBehaviour
 
     //testの所をpublic static でマップ選択のほうで自由に変更する
     ///StreamingAssets/csv/選択したマップ名.csv　で変更可
-    public string test = "/StreamingAssets/csv/BaseMap.csv";
+    public  string test = "/StreamingAssets/csv/BaseMap.csv";
 
 
     void Awake()
@@ -25,11 +25,11 @@ public class StartSetting : MonoBehaviour
         //初期化
         ColumnNumber = 0;
         LineNumber = 0;
-
-        if (tutorialManager.tutorialNow)
-        {
-            test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
-        }
+        
+        //if (tutorialManager.tutorialNow)
+        //{
+        //    test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
+        //}
 
         // Pathが変わるので分岐
 #if UNITY_EDITOR
