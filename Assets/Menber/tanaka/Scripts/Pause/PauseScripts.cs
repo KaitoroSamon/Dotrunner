@@ -65,7 +65,7 @@ public class PauseScripts : MonoBehaviour
     public void LoadTitle()
     {
         pauseActive = false;
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("TitleScene");
     }
     public void EndGame()
     {

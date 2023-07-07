@@ -45,6 +45,10 @@ public class RedPlayerManager : MonoBehaviour
 
     GameObject playerModel;
 
+    [Header("\nƒXƒLƒ“‚S•ûŒü")]
+    [SerializeField]
+    List<Sprite> sprites = new List<Sprite>();
+
     void Start()
     {
         map = mapScrits.GetComponent<Map>();

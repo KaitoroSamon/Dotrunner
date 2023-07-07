@@ -328,16 +328,6 @@ public class Map : MonoBehaviour
                             Debug.Log("バケツがありません");
                             break;
                         }
-                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
-                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
-                        {
-                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "2" ||
-                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "4")
-                            {
-                                Debug.Log("上");
-                                neighbor = true;
-                            }
-                        }
                         //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
                         if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
@@ -345,6 +335,16 @@ public class Map : MonoBehaviour
                                 carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "4")
                             {
                                 Debug.Log("右");
+                                neighbor = true;
+                            }
+                        }
+                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
+                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
+                        {
+                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "2" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "4")
+                            {
+                                Debug.Log("上");
                                 neighbor = true;
                             }
                         }
@@ -556,16 +556,6 @@ public class Map : MonoBehaviour
                         {
                             break;
                         }
-                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
-                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
-                        {
-                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "3" ||
-                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "5")
-                            {
-                                Debug.Log("上");
-                                neighbor = true;
-                            }
-                        }
                         //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
                         if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
@@ -573,6 +563,16 @@ public class Map : MonoBehaviour
                                 carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "5")
                             {
                                 Debug.Log("右");
+                                neighbor = true;
+                            }
+                        }
+                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
+                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
+                        {
+                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "3" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "5")
+                            {
+                                Debug.Log("上");
                                 neighbor = true;
                             }
                         }

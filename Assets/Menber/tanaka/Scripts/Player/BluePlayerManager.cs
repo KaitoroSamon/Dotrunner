@@ -46,6 +46,10 @@ public class BluePlayerManager : MonoBehaviour
 
     GameObject playerModel;
 
+    [Header("\nƒXƒLƒ“‚S•ûŒü")]
+    [SerializeField]
+    List<Sprite> sprites = new List<Sprite>();
+
     void Start()
     {
         
