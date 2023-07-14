@@ -136,6 +136,11 @@ MonoBehaviour:
   moveCounter: 0
   nowDirection: {x: 0, y: 0}
   cursor: {fileID: 6449557665293789779}
+  sprites:
+  - {fileID: 21300000, guid: cbf6af71e9e7af44dbc194d4f82d6545, type: 3}
+  - {fileID: 21300000, guid: f4124f1d3f8e876428a6ba638e9c6a89, type: 3}
+  - {fileID: 21300000, guid: 7ea870beac8d24c48b328079b5f881e6, type: 3}
+  - {fileID: 21300000, guid: 97a3ed17220d461449eba703298fd77d, type: 3}
 --- !u!1 &6449557664951667691
 GameObject:
   m_ObjectHideFlags: 0

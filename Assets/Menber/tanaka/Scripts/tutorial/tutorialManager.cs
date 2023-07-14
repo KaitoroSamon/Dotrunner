@@ -5,7 +5,7 @@ using UnityEngine.Windows;
 
 public class tutorialManager : MonoBehaviour
 {
-    public static bool tutorialNow = true;
+    public static bool tutorialNow = false;
 
     public static bool launch01 = false;
     private bool close01 = false;
@@ -33,6 +33,23 @@ public class tutorialManager : MonoBehaviour
     GameObject tutorial05;
     [SerializeField]
     GameObject tutorial06;
+
+    private void Start()
+    {
+        //èâä˙âª
+        launch01 = false;
+        close01 = false;
+        launch02 = false;
+        close02 = false;
+        launch03 = false;
+        close03 = false;
+        launch04 = false;
+        close04 = false;
+        launch05 = false;
+        close05 = false;
+        launch06 = false;
+        close06 = false;
+    }
 
     void Update()
     {

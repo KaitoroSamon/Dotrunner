@@ -29,7 +29,9 @@ public class Test : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))//勝敗の判別をしたらスコア等に移動する処理（仮）
         {
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#endif
         }
     }
 
