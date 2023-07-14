@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class Map : MonoBehaviour
 {
@@ -32,11 +32,17 @@ public class Map : MonoBehaviour
     [SerializeField]
     private GameObject NothingSquare;
     [SerializeField]
+    private GameObject NothingSquare2;
+    [SerializeField]
     private GameObject WallSquare;
     [SerializeField]
     private GameObject Player1Square;
     [SerializeField]
+    private GameObject Player1Square2;
+    [SerializeField]
     private GameObject Player2Square;
+    [SerializeField]
+    private GameObject Player2Square2;
     [SerializeField]
     private GameObject Item1Square;
     [SerializeField]
@@ -47,6 +53,8 @@ public class Map : MonoBehaviour
     private GameObject RedGoalSquare;
     [SerializeField]
     private GameObject BlueGoalSquare;
+
+    private int cou = 0;
 
     //塗った元のマスのデータ保持
     private string formerData = default;
@@ -90,7 +98,17 @@ public class Map : MonoBehaviour
         RedPlayerManager = RedPlayerManagerScripts.GetComponent<RedPlayerManager>();
         BluePlayerManager = BluePlayerManagerScripts.GetComponent<BluePlayerManager>();
 
-        Item_Limit = 0;　　//横山加筆
+        //どれかがバグの原因
+        formerData = default;
+        firstPlace = default;
+        secondPlace = default;
+        paint = false;
+        neighbor = false;
+        setRedPlayer = false; 
+        setBluePlayer = false;
+        
+
+    Item_Limit = 0;　　//横山加筆
 
         /*
         if (csvFile == null)
@@ -195,6 +213,7 @@ public class Map : MonoBehaviour
     /// </summary>
     public void mapRemake()
     {
+        cou = 0;
         //最初に以前のマップ画像を消す
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -211,7 +230,14 @@ public class Map : MonoBehaviour
                     switch (carving(StartSetting.fieldMap[i, j], 1))
                     {
                         case "0"://なし(塗れる)
-                            Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            if(cou % 2 != 0)
+                            {
+                                Instantiate(NothingSquare, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
+                            else
+                            {
+                                Instantiate(NothingSquare2, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
                             break;
 
                         case "1"://なし(塗れない)
@@ -219,11 +245,25 @@ public class Map : MonoBehaviour
                             break;
 
                         case "2"://赤マス
-                            Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            if (cou % 2 != 0)
+                            {
+                                Instantiate(Player1Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
+                            else
+                            {
+                                Instantiate(Player1Square2, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
                             break;
 
                         case "3"://青マス
-                            Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            if (cou % 2 != 0)
+                            {
+                                Instantiate(Player2Square, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
+                            else
+                            {
+                                Instantiate(Player2Square2, new Vector3(-7.5f + j, 3.5f - i, 0), Quaternion.identity, this.transform);
+                            }
                             break;
 
                         case "4"://赤側ゴール
@@ -270,6 +310,7 @@ public class Map : MonoBehaviour
                         case "6": //プレイヤー重なり
                             break;
                     }
+                    cou++;
                 }
             }
         }
@@ -277,8 +318,6 @@ public class Map : MonoBehaviour
 
 
     //田中加筆
-    //相手の城にたどり着く際は塗ポイントぴったり使わないとゴールできない
-    //攻撃処理の追加
     //切り分け
     /// <summary>
     /// RedPlayer処理
@@ -321,16 +360,6 @@ public class Map : MonoBehaviour
                             Debug.Log("バケツがありません");
                             break;
                         }
-                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
-                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
-                        {
-                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "2" ||
-                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "4")
-                            {
-                                Debug.Log("上");
-                                neighbor = true;
-                            }
-                        }
                         //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
                         if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
@@ -338,6 +367,16 @@ public class Map : MonoBehaviour
                                 carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "4")
                             {
                                 Debug.Log("右");
+                                neighbor = true;
+                            }
+                        }
+                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
+                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
+                        {
+                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "2" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "4")
+                            {
+                                Debug.Log("上");
                                 neighbor = true;
                             }
                         }
@@ -549,16 +588,6 @@ public class Map : MonoBehaviour
                         {
                             break;
                         }
-                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
-                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
-                        {
-                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "3" ||
-                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "5")
-                            {
-                                Debug.Log("上");
-                                neighbor = true;
-                            }
-                        }
                         //右のマスが配列外でない dungeonMap[(int)right.y, (int)right.x] != null
                         if (!neighbor && IsArrayRange((int)right.y, (int)right.x))
                         {
@@ -566,6 +595,16 @@ public class Map : MonoBehaviour
                                 carving(StartSetting.fieldMap[(int)right.y, (int)right.x], 1) == "5")
                             {
                                 Debug.Log("右");
+                                neighbor = true;
+                            }
+                        }
+                        //上のマスが配列外でない dungeonMap[(int)top.y, (int)top.x] != null
+                        if (!neighbor && IsArrayRange((int)top.y, (int)top.x))
+                        {
+                            if (carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "3" ||
+                                carving(StartSetting.fieldMap[(int)top.y, (int)top.x], 1) == "5")
+                            {
+                                Debug.Log("上");
                                 neighbor = true;
                             }
                         }

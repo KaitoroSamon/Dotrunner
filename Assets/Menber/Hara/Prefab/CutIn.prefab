@@ -177,7 +177,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trun Change
+  m_Text: Turn Change
 --- !u!1 &9080105712599986883
 GameObject:
   m_ObjectHideFlags: 0
