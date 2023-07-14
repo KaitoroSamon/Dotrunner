@@ -47,3 +47,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BGM
+    uniqueID: 273867531
+    locked: 0

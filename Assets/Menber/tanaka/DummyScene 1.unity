@@ -737,9 +737,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NothingSquare: {fileID: 2970747645344951186, guid: 29cabca58c3a05d458d968d90441d195, type: 3}
+  NothingSquare2: {fileID: 2970747645344951186, guid: a91e189268cc14844832615713868e4b, type: 3}
   WallSquare: {fileID: 3878822647961478664, guid: d1f7657650b18564b9be81ea10d31968, type: 3}
   Player1Square: {fileID: 2970747645344951186, guid: 8cd33ff69910104438c04dbe391786d6, type: 3}
+  Player1Square2: {fileID: 2970747645344951186, guid: fc0285a17258090438e092735871c867, type: 3}
   Player2Square: {fileID: 2970747645344951186, guid: 54b090143cd08d141a5c7e74f2ec75fb, type: 3}
+  Player2Square2: {fileID: 2970747645344951186, guid: 7d3389d6d06dcdc4caca290959fbf73a, type: 3}
   Item1Square: {fileID: 8177368741335348506, guid: 69700f3b9a68d7b4690b8d8c3bf916b1, type: 3}
   Item2Square: {fileID: 8177368741335348506, guid: dcd938de256e8bc4fa5c9bce633bcd56, type: 3}
   Item3Square: {fileID: 8177368741335348506, guid: d000b1ba6f3effc43aa5086666b78406, type: 3}
