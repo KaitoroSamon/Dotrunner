@@ -23,7 +23,6 @@ public class BGMManager : MonoBehaviour
         PLAY = 2,
         END = 3,
     }
-    BGM_TYPE bgmType = BGM_TYPE.TITLE;
 
     void Awake()
     {
@@ -40,14 +39,22 @@ public class BGMManager : MonoBehaviour
 
     private void Start()
     {
-        //PlayBGM(BGM_TYPE.TITLE,0.6f);
+        PlayBGM(BGM_TYPE.TITLE,0.6f);
     }
 
     public void PlayBGM(BGM_TYPE clip ,float BGMVol)
     {
-        Audio_Source_BGM.volume = BGMVol;
-        Audio_Source_BGM.clip = Audio_Clip_BGM[(int)clip];
-        Audio_Source_BGM.Play();
+        if(Audio_Clip_BGM[(int)clip]!= null)
+        {
+            Audio_Source_BGM.volume = BGMVol;
+            Audio_Source_BGM.clip = Audio_Clip_BGM[(int)clip];
+            Audio_Source_BGM.Play();
+        }
+        else
+        {
+            Debug.Log("BGMƒNƒŠƒbƒv‚ª‚ ‚è‚Ü‚¹‚ñ");
+        }
+        
 
     }
 

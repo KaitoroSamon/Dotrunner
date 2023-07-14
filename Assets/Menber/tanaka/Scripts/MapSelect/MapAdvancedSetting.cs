@@ -226,5 +226,6 @@ public class MapAdvancedSetting : MonoBehaviour
     public void MoveScene()
     {
         SceneManager.LoadScene("MainScene");
+        BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.PLAY, 0.6f);//‹e’n‰Á•M
     }
 }

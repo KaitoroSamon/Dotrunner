@@ -147,6 +147,7 @@ public class MapSelect : MonoBehaviour
                             break;
                         case 1:
                             BaseMap();
+                            mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 2:
                             tanaka_map01();

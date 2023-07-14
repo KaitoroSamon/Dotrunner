@@ -33,10 +33,12 @@ public class SceneChange2 : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "TitleScene")
         {
             SceneManager.LoadScene("MapSelect", LoadSceneMode.Single);
+            BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.STAGESELECT,0.6f);//‹e’n‰Á•M
         }
         else
         {
             SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+            BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.TITLE, 0.6f);//‹e’n‰Á•M
         }
     }
 
