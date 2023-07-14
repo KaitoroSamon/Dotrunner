@@ -13,16 +13,20 @@ public class StartSetting : MonoBehaviour
 
     public static StartSetting startSetting;
 
-    private List<string[]> csvData = new List<string[]>();  //CSV�t�@�C���̒��g�����郊�X�g
+    private List<string[]> csvData = new List<string[]>();
 
-    //test�̏���public static �Ń}�b�v�I���̂ق��Ŏ��R�ɕύX����
-    ///StreamingAssets/csv/�I�������}�b�v��.csv�@�ŕύX��
-    public  string test = null;
+    public static string test = "/StreamingAssets/csv/tanaka_map01.csv";
 
+    /*
+    "/StreamingAssets/csv/TutorialMapOnePlayer.csv"
+    "/StreamingAssets/csv/BaseMap.csv"
+    "/StreamingAssets/csv/tanaka_map01.csv"
+    "/StreamingAssets/csv/Tomita_Map_Sample5.csv"
+    "/StreamingAssets/csv/Tomita_Map_Sample4.csv"
+    */
 
     void Awake()
     {
-        //������
         ColumnNumber = 0;
         LineNumber = 0;
         
@@ -31,7 +35,6 @@ public class StartSetting : MonoBehaviour
             test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
         }
 
-        // Path���ς��̂ŕ���
 #if UNITY_EDITOR
         StreamReader fs = 
             new StreamReader(Application.dataPath + test);
@@ -65,13 +68,15 @@ public class StartSetting : MonoBehaviour
             }
             //Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
         }
-        //�L���b�V���΍�
+
         fs.Close();
         csvData.Clear();
     }
 
+    /*
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    */
 }

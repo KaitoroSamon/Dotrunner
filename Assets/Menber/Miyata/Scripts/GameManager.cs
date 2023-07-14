@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     public static string nextScene = default;
 
+    [Header("アイテム生成なし")]
+    public static bool NotItemCreate = true;
+
     public bool nowWait = true;
 
     //田中加筆
@@ -89,7 +92,6 @@ public class GameManager : MonoBehaviour
 
         //どれかがバグの原因
         stopInputKey = false;
-        player1Trun = true;
         nextScene = default;
         nowWait = true;
         isRedAttack = false;
