@@ -12,12 +12,15 @@ public class BGMManager : MonoBehaviour
 
     public AudioClip[] Audio_Clip_BGM;
 
+    [HideInInspector]
     public float Audio_Clip_BGM_Vol;
 
 
     public AudioSource Audio_Source_BGM;
 
-    //float volume;
+    [SerializeField]
+    GameObject BackGround;
+
 
     public enum BGM_TYPE
     {
@@ -26,7 +29,6 @@ public class BGMManager : MonoBehaviour
         PLAY = 2,
         END = 3,
     }
-    BGM_TYPE bgmType = BGM_TYPE.TITLE;
 
     void Awake()
     {
@@ -41,12 +43,24 @@ public class BGMManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Play(BGMManager.BGM_TYPE.TITLE);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+
+        }
+    }
+
     public void Play(BGM_TYPE clip)
     {
         Audio_Source_BGM.volume = Audio_Clip_BGM_Vol;
         Audio_Source_BGM.clip = Audio_Clip_BGM[(int)clip];
         Audio_Source_BGM.Play();
-
     }
 
     public void BGMVolumeChange(float volume)
