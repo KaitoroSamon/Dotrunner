@@ -83,9 +83,6 @@ public class Map : MonoBehaviour
     private bool setRedPlayer = false;
     private bool setBluePlayer = false;
 
-    [Header("アイテム生成なし")]
-    public bool NotItemCreate = false;
-
     public int Item_Limit = 0;　　//横山加筆
     private int bomtype;  //横山加筆
     public static int MakePortion1;  //横山加筆
@@ -133,7 +130,7 @@ public class Map : MonoBehaviour
         }
         */
 
-        if (!NotItemCreate && !tutorialManager.tutorialNow)
+        if (!GameManager.NotItemCreate && !tutorialManager.tutorialNow)
         {
             //横山加筆
             //アイテム生成の処理

@@ -13,25 +13,28 @@ public class StartSetting : MonoBehaviour
 
     public static StartSetting startSetting;
 
-    private List<string[]> csvData = new List<string[]>();  //CSVファイルの中身を入れるリスト
+    private List<string[]> csvData = new List<string[]>();
 
-    //testの所をpublic static でマップ選択のほうで自由に変更する
-    ///StreamingAssets/csv/選択したマップ名.csv　で変更可
-    public  string test = "/StreamingAssets/csv/BaseMap.csv";
+    public static string test = "/StreamingAssets/csv/BaseMap.csv";
 
+    /*
+    "/StreamingAssets/csv/TutorialMapOnePlayer.csv"
+    "/StreamingAssets/csv/BaseMap.csv"
+    "/StreamingAssets/csv/tanaka_map01.csv"
+    "/StreamingAssets/csv/Tomita_Map_Sample5.csv"
+    "/StreamingAssets/csv/Tomita_Map_Sample4.csv"
+    */
 
     void Awake()
     {
-        //初期化
         ColumnNumber = 0;
         LineNumber = 0;
         
-        //if (tutorialManager.tutorialNow)
-        //{
-        //    test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
-        //}
+        if (tutorialManager.tutorialNow)
+        {
+            test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
+        }
 
-        // Pathが変わるので分岐
 #if UNITY_EDITOR
         StreamReader fs = 
             new StreamReader(Application.dataPath + test);
@@ -65,13 +68,15 @@ public class StartSetting : MonoBehaviour
             }
             //Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
         }
-        //キャッシュ対策
+
         fs.Close();
         csvData.Clear();
     }
 
+    /*
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    */
 }
