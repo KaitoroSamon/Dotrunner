@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public static string nextScene = default;
 
     [Header("アイテム生成なし")]
-    public static bool NotItemCreate = true;
+    public static bool NotItemCreate = false;
 
     public bool nowWait = true;
 
@@ -337,10 +337,6 @@ public class GameManager : MonoBehaviour
     public void sceneLoadtime()
     {
         stopInputKey = true;
-        if (tutorialManager.tutorialNow)
-        {
-            nextScene = "TitleScene";
-        }
         Invoke("ChangeScene", 2.0f);
     }
     public void ChangeScene()

@@ -44,6 +44,9 @@ public class MapAdvancedSetting : MonoBehaviour
     [SerializeField]
     GameObject lockAttack = default;
 
+    [SerializeField]
+    Animator anim;
+
     void Start()
     {
         GameManager.NotItemCreate = false;
@@ -58,6 +61,7 @@ public class MapAdvancedSetting : MonoBehaviour
     {
         if (!stopAdvancedSettingKey)
         {
+            anim.SetBool("animStop", false);
             if (!nowMove)
             {
                 Reload();
@@ -117,6 +121,14 @@ public class MapAdvancedSetting : MonoBehaviour
                     MapSelect.StopMapSelectKey = false;
                 }
             }
+        }
+
+        if (LockItem && Input.GetKeyDown(KeyCode.F12))
+        {
+            LockItem = false;
+            lockItem.SetActive(true);
+            checkBoxText[0].text = "ê∂ê¨Ç∑ÇÈ";
+            GameManager.NotItemCreate = true;
         }
     }
 

@@ -45,6 +45,9 @@ public class MapSelect : MonoBehaviour
     [SerializeField]
     GameObject lockAttack = default;
 
+    [SerializeField]
+    Animator anim;
+
     private void Start()
     {
         buttonSelectNow = 0;
@@ -57,6 +60,7 @@ public class MapSelect : MonoBehaviour
     {
         if (!StopMapSelectKey)
         {
+            anim.SetBool("animStop", false);
             if (!nowMove)
             {
                 Dx = (int)Input.GetAxis("DpadX");
@@ -139,18 +143,22 @@ public class MapSelect : MonoBehaviour
                     {
                         case 0:
                             TutorialMapOnePlayer();
+                            mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 1:
                             BaseMap();
                             break;
                         case 2:
                             tanaka_map01();
+                            mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 3:
                             Tomita_Map_Sample2();
+                            mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 4:
                             Tomita_Map_Sample4();
+                            mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 5:
                             TitleBack();
@@ -163,6 +171,7 @@ public class MapSelect : MonoBehaviour
                         lockItem.SetActive(MapAdvancedSetting.LockItem);
                         lockAttack.SetActive(MapAdvancedSetting.LockAttack);
                         StopMapSelectKey = true;
+                        anim.SetBool("animStop", true);
                         MapAdvancedSetting.stopAdvancedSettingKey = false;
                     }
                 }

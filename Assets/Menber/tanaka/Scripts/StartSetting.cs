@@ -15,7 +15,7 @@ public class StartSetting : MonoBehaviour
 
     private List<string[]> csvData = new List<string[]>();
 
-    public static string test = "/StreamingAssets/csv/tanaka_map01.csv";
+    public static string test = "/StreamingAssets/csv/BaseMap.csv";
 
     /*
     "/StreamingAssets/csv/TutorialMapOnePlayer.csv"

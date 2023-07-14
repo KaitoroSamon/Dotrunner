@@ -30,7 +30,14 @@ public class SceneChange2 : MonoBehaviour
     }
     public void TitleChange()
     {
-        SceneManager.LoadScene("MapSelect", LoadSceneMode.Single);
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            SceneManager.LoadScene("MapSelect", LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+        }
     }
 
     IEnumerator Color_FadeOut()
