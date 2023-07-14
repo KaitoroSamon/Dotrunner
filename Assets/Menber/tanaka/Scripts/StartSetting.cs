@@ -13,25 +13,25 @@ public class StartSetting : MonoBehaviour
 
     public static StartSetting startSetting;
 
-    private List<string[]> csvData = new List<string[]>();  //CSVƒtƒ@ƒCƒ‹‚Ì’†g‚ğ“ü‚ê‚éƒŠƒXƒg
+    private List<string[]> csvData = new List<string[]>();  //CSVï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ì’ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½éƒŠï¿½Xï¿½g
 
-    //test‚ÌŠ‚ğpublic static ‚Åƒ}ƒbƒv‘I‘ğ‚Ì‚Ù‚¤‚Å©—R‚É•ÏX‚·‚é
-    ///StreamingAssets/csv/‘I‘ğ‚µ‚½ƒ}ƒbƒv–¼.csv@‚Å•ÏX‰Â
-    public  string test = "/StreamingAssets/csv/BaseMap.csv";
+    //testï¿½Ìï¿½ï¿½ï¿½public static ï¿½Åƒ}ï¿½bï¿½vï¿½Iï¿½ï¿½ï¿½Ì‚Ù‚ï¿½ï¿½Åï¿½ï¿½Rï¿½É•ÏXï¿½ï¿½ï¿½ï¿½
+    ///StreamingAssets/csv/ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½ï¿½.csvï¿½@ï¿½Å•ÏXï¿½ï¿½
+    public  string test = null;
 
 
     void Awake()
     {
-        //‰Šú‰»
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         ColumnNumber = 0;
         LineNumber = 0;
         
-        //if (tutorialManager.tutorialNow)
-        //{
-        //    test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
-        //}
+        if (tutorialManager.tutorialNow)
+        {
+            test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
+        }
 
-        // Path‚ª•Ï‚í‚é‚Ì‚Å•ªŠò
+        // Pathï¿½ï¿½ï¿½Ï‚ï¿½ï¿½Ì‚Å•ï¿½ï¿½ï¿½
 #if UNITY_EDITOR
         StreamReader fs = 
             new StreamReader(Application.dataPath + test);
@@ -65,7 +65,7 @@ public class StartSetting : MonoBehaviour
             }
             //Debug.Log(string.Join(",", StartSetting.fieldMap.Cast<string>()));
         }
-        //ƒLƒƒƒbƒVƒ…‘Îô
+        //ï¿½Lï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½Îï¿½
         fs.Close();
         csvData.Clear();
     }

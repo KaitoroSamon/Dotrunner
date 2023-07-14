@@ -21,13 +21,49 @@ public class MapSelect : MonoBehaviour
 
 
     }
-    public void OnClick()
+    public void TutorialMapOnePlayer()
     {
-        set.test = "/StreamingAssets/csv/Tomita_MapSample2.csv";
-        SceneManager.LoadScene("Wa", LoadSceneMode.Single);
-        Debug.Log("aaa");
-
+        tutorialManager.tutorialNow=true;
+        set.test = "/StreamingAssets/csv/TutorialMapOnePlayer.csv";
+        MoveScene();
     }
 
+    public void BaseMap()
+    {
+        tutorialManager.tutorialNow=false;
+        set.test = "/StreamingAssets/csv/BaseMap.csv";
+        MoveScene();
+    }
+
+    public void tanaka_map01()
+    {
+        tutorialManager.tutorialNow=false;
+        set.test = "/StreamingAssets/csv/tanaka_map01.csv";
+        MoveScene();
+    }
+
+    public void Tomita_Map_Sample2()
+    {
+        tutorialManager.tutorialNow=false;
+        set.test = "/StreamingAssets/csv/Tomita_Map_Sample2.csv";
+        MoveScene();
+    }
+
+    public void Tomita_Map_Sample4()
+    {
+        tutorialManager.tutorialNow=false;
+        set.test = "/StreamingAssets/csv/Tomita_Map_Sample4.csv";
+        MoveScene();
+    }
+
+    public void TitleBack()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void MoveScene()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
 
 }
