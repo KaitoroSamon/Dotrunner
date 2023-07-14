@@ -12,9 +12,6 @@ public class BGMManager : MonoBehaviour
 
     public AudioClip[] Audio_Clip_BGM;
 
-    public float Audio_Clip_BGM_Vol = 1;
-
-
     public AudioSource Audio_Source_BGM;
 
     //float volume;
@@ -43,12 +40,12 @@ public class BGMManager : MonoBehaviour
 
     private void Start()
     {
-        //Play(BGM_TYPE.TITLE);
+        //PlayBGM(BGM_TYPE.TITLE,0.6f);
     }
 
-    public void Play(BGM_TYPE clip)
+    public void PlayBGM(BGM_TYPE clip ,float BGMVol)
     {
-        Audio_Source_BGM.volume = Audio_Clip_BGM_Vol;
+        Audio_Source_BGM.volume = BGMVol;
         Audio_Source_BGM.clip = Audio_Clip_BGM[(int)clip];
         Audio_Source_BGM.Play();
 
@@ -58,4 +55,14 @@ public class BGMManager : MonoBehaviour
     {
         Audio_Source_BGM.volume = volume;
     }
+
+    /*
+       private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            PlayBGM(BGM_TYPE.PLAY,0.6f);
+        }
+    }
+    */
 }
