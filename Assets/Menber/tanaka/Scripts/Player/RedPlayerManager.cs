@@ -45,21 +45,27 @@ public class RedPlayerManager : MonoBehaviour
 
     GameObject playerModel;
 
+    [Header("\nスキン４方向")]
+    [SerializeField]
+    List<Sprite> sprites = new List<Sprite>();
+
     void Start()
     {
         map = mapScrits.GetComponent<Map>();
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         cursorImage = cursor.GetComponent<Image>();
         playerModel = transform.Find("PlayerModel").gameObject;
-        //初期座標
-        //this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
-        //cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
-
         animator = cursor.GetComponent<Animator>();
-
         //スキン設定
         //カーソルを透明にする
         cursorImage.color = new Color32(0, 0, 0, 0);
+        
+        myTrun = false;
+        nowPos = default;
+        moveCounter = default;
+        rePaint = default;
+        nowMove = false;
+        
     }
 
     //プレイヤーの相対移動度(一括移動は後で)
