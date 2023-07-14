@@ -950,6 +950,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6756457658808399048, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6756457658808399055, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
       propertyPath: m_Camera
       value: 
@@ -958,18 +962,58 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901088460}
+    - target: {fileID: 6756457659330046461, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756457659620986695, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756457659620986695, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756457659620986695, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a6271d0e3bf7b4c4081b0d9bbbeef7e4, type: 3}
+    - target: {fileID: 6756457659620986695, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6756457659655312905, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901088460}
+    - target: {fileID: 6756457659655312949, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6756457659955627465, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901088460}
+    - target: {fileID: 6756457659955627466, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756457660404702655, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cbf6af71e9e7af44dbc194d4f82d6545, type: 3}
+    - target: {fileID: 6756457660404702655, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6756457660473275923, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901088460}
+    - target: {fileID: 6756457660473275935, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6756457660519312756, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1022,5 +1066,9 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901088460}
+    - target: {fileID: 6756457660625861628, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a27b410d2edff54c84915cf04a9fec1, type: 3}
