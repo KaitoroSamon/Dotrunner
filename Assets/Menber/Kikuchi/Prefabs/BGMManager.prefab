@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Audio_Clip_BGM:
   - {fileID: 8300000, guid: 94b69624638c9f440af36fc4db49f385, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: ef0d072fb36d7524398fad2ba1218a49, type: 3}
   - {fileID: 8300000, guid: dfe9cbb3c812a0b428d015ec0518654f, type: 3}
   - {fileID: 8300000, guid: a8110a7069b482941ac3263ce7f4d75c, type: 3}
   Audio_Source_BGM: {fileID: 6609147995999124367}
