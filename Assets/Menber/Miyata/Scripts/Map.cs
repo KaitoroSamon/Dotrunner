@@ -1,4 +1,4 @@
-//using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -337,7 +337,7 @@ public class Map : MonoBehaviour
                     if (y == converterPos.y && x == converterPos.x)
                     {
 
-                        Debug.Log("縦[" + converterPos.y + "]　" + "横[" + converterPos.x + "]");
+                        Debug.Log("縦[" + converterPos.y + "]" + "横[" + converterPos.x + "]");
                         Debug.Log("マスデータ" + StartSetting.fieldMap[y, x]);
 
                         top = new Vector2(converterPos.x, converterPos.y - 1);

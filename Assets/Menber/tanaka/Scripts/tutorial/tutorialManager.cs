@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -10,7 +10,7 @@ public class tutorialManager : MonoBehaviour
     public static bool launch01 = false;
     private bool close01 = false;
     public static bool launch02 = false;
-    private bool close02 = false;
+    public static bool close02 = false;
     public static bool launch03 = false;
     private bool close03 = false;
     public static bool launch04 = false;
@@ -36,7 +36,7 @@ public class tutorialManager : MonoBehaviour
 
     private void Start()
     {
-        //‰Šú‰»
+        //åˆæœŸåŒ–
         launch01 = false;
         close01 = false;
         launch02 = false;

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,32 +15,32 @@ public class MapAdvancedSetting : MonoBehaviour
 
     private int cicleAttack = 2;
 
-    //ƒJ[ƒ\ƒ‹‚ÌˆÊ’uŠÇ—
+    //ã‚«ãƒ¼ã‚½ãƒ«ã®ä½ç½®ç®¡ç†
     private int checkBoxSelectNow = 0;
 
-    //ƒRƒ“ƒgƒ[ƒ‰[‚©‚ç‚Ì“ü—Íó•t
+    //ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‹ã‚‰ã®å…¥åŠ›å—ä»˜
     float Dy = default;
 
-    [Header("ƒ`ƒFƒbƒNƒ{ƒbƒNƒX")]
+    [Header("ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹")]
     [SerializeField]
     List<Image> checkBoxs = new List<Image>();
 
-    [Header("ƒ`ƒFƒbƒNƒ{ƒbƒNƒXƒeƒLƒXƒg")]
+    [Header("ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField]
     List<Text> checkBoxText = new List<Text>();
 
-    [Header("ƒ}ƒbƒvà–¾ƒeƒLƒXƒg")]
+    [Header("ãƒãƒƒãƒ—èª¬æ˜ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField]
     Text featureText = default;
 
-    [Header("ƒJ[ƒ\ƒ‹(¬)")]
+    [Header("ã‚«ãƒ¼ã‚½ãƒ«(å°)")]
     [SerializeField]
     GameObject cursorSmall = default;
 
-    [Header("ƒAƒCƒeƒ€ƒJƒM")]
+    [Header("ã‚¢ã‚¤ãƒ†ãƒ ã‚«ã‚®")]
     [SerializeField]
     GameObject lockItem = default;
-    [Header("UŒ‚ƒJƒM")]
+    [Header("æ”»æ’ƒã‚«ã‚®")]
     [SerializeField]
     GameObject lockAttack = default;
 
@@ -66,10 +66,10 @@ public class MapAdvancedSetting : MonoBehaviour
             {
                 Reload();
                 Dy = (int)Input.GetAxis("DpadY");
-                //ƒJ[ƒ\ƒ‹‚ğˆÚ“®
+                //ã‚«ãƒ¼ã‚½ãƒ«ã‚’ç§»å‹•
                 if (Dy != 0)
                 {
-                    //‰º–îˆó‚ğ‰Ÿ‚µ‚½
+                    //ä¸‹çŸ¢å°ã‚’æŠ¼ã—ãŸ
                     if (Dy < 0)
                     {
                         if (checkBoxSelectNow >= 2)
@@ -85,7 +85,7 @@ public class MapAdvancedSetting : MonoBehaviour
                             StartCoroutine(coolTime());
                         }
                     }
-                    //ã–îˆó‚ğ‰Ÿ‚µ‚½
+                    //ä¸ŠçŸ¢å°ã‚’æŠ¼ã—ãŸ
                     else
                     {
                         if (checkBoxSelectNow <= 0)
@@ -127,7 +127,7 @@ public class MapAdvancedSetting : MonoBehaviour
         {
             LockItem = false;
             lockItem.SetActive(true);
-            checkBoxText[0].text = "¶¬‚·‚é";
+            checkBoxText[0].text = "ç”Ÿæˆã™ã‚‹";
             GameManager.NotItemCreate = true;
         }
     }
@@ -144,12 +144,12 @@ public class MapAdvancedSetting : MonoBehaviour
     {
         if (LockItem)
         {
-            checkBoxText[0].text = "¶¬‚µ‚È‚¢";
+            checkBoxText[0].text = "ç”Ÿæˆã—ãªã„";
             GameManager.NotItemCreate = true;
         }
         if (LockAttack)
         {
-            checkBoxText[1].text = "1P æU";
+            checkBoxText[1].text = "1P å…ˆæ”»";
             checkBoxText[1].color = new Color32(255, 0, 0, 255);
             CountRandom.lockFirst = true;
             CountRandom.lockSecond = false;
@@ -167,12 +167,12 @@ public class MapAdvancedSetting : MonoBehaviour
                     {
                         if (!GameManager.NotItemCreate)
                         {
-                            checkBoxText[checkBoxSelectNow].text = "¶¬‚µ‚È‚¢";
+                            checkBoxText[checkBoxSelectNow].text = "ç”Ÿæˆã—ãªã„";
                             GameManager.NotItemCreate = true;
                         }
                         else
                         {
-                            checkBoxText[checkBoxSelectNow].text = "¶¬‚·‚é";
+                            checkBoxText[checkBoxSelectNow].text = "ç”Ÿæˆã™ã‚‹";
                             GameManager.NotItemCreate = false;
                         }
                     }
@@ -192,21 +192,21 @@ public class MapAdvancedSetting : MonoBehaviour
                         }
                         if (cicleAttack == 0)
                         {
-                            checkBoxText[checkBoxSelectNow].text = "1P æU";
+                            checkBoxText[checkBoxSelectNow].text = "1P å…ˆæ”»";
                             checkBoxText[checkBoxSelectNow].color = new Color32(255, 0, 0, 255);
                             CountRandom.lockFirst = true;
                             CountRandom.lockSecond = false;
                         }
                         else if (cicleAttack == 1)
                         {
-                            checkBoxText[checkBoxSelectNow].text = "2P æU";
+                            checkBoxText[checkBoxSelectNow].text = "2P å…ˆæ”»";
                             checkBoxText[checkBoxSelectNow].color = new Color32(0, 255, 255, 255);
                             CountRandom.lockFirst = false;
                             CountRandom.lockSecond = true;
                         }
                         else
                         {
-                            checkBoxText[checkBoxSelectNow].text = "ƒ‰ƒ“ƒ_ƒ€";
+                            checkBoxText[checkBoxSelectNow].text = "ãƒ©ãƒ³ãƒ€ãƒ ";
                             checkBoxText[checkBoxSelectNow].color = new Color32(255, 255, 255, 255);
                             CountRandom.lockFirst = false;
                             CountRandom.lockSecond = false;
@@ -226,6 +226,6 @@ public class MapAdvancedSetting : MonoBehaviour
     public void MoveScene()
     {
         SceneManager.LoadScene("MainScene");
-        BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.PLAY, 0.6f);//‹e’n‰Á•M
+        BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.PLAY, 0.6f);//èŠåœ°åŠ ç­†
     }
 }

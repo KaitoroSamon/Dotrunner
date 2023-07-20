@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 /*
-3-ƒQ[ƒ€ƒpƒbƒh‚Ì\šƒL[“ü—Í‚Å‘I‘ğ‚Å‚«‚é‚æ‚¤‚É‚·‚é
-3.5-‘I‘ğ’†‚Ìƒ}ƒX‚Ì•ûŒü‚ÉƒGƒtƒFƒNƒg‚ğ“ü‚ê‚í‚©‚è‚â‚·‚¢‚æ‚¤‚É‚·‚é
-4-BƒL[“ü—ÍŒãƒ}ƒX‚ÌF‚ğ•ÏX‚·‚é
-5-ÅŒã‚ÉF‚ğ•ÏX‚µ‚½•ûŒü‚ÉƒvƒŒƒCƒ„[‚ğˆÚ“®‚³‚¹‚é
-5.1-ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì’Ç‰Ái‚ä‚Á‚­‚èˆÚ“®‚³‚¹‚éj
-5.2-ƒAƒCƒeƒ€‚ª‚ ‚éƒ}ƒX‚ğ‘I‘ğ‚µ‚½‚çƒAƒCƒeƒ€‚Ìæ“¾A”­“®‚ğs‚¤
-6-‚à‚¤ˆêl‚ÌƒvƒŒƒCƒ„[‚Ì“®ì‚ğó‚¯•t‚¯‚é
-7-“Á’è‚Ìƒ}ƒX‚Éæ‚Á‚½‚çI—¹‚³‚¹‚é[‘Šè‚Ìé‚É‚½‚Ç‚è’…‚­Û‚Í“hƒ|ƒCƒ“ƒg‚Ò‚Á‚½‚èg‚í‚È‚¢‚ÆƒS[ƒ‹‚Å‚«‚È‚¢]
-8-ƒvƒŒƒCƒ„[‚ÌHP‚ğŠÇ—‚·‚é[‘Šè‚Æ“¯‚¶ƒ}ƒX‚Éæ‚é‚ÆUŒ‚(UŒ‚‚µ‚½‘¤‚ªŸ‚Ì©•ª‚Ìƒ^[ƒ“s“®•s‰Â)]
-9-ƒ}ƒX‚Ì‚È‚¢êŠ‚É‚ÍˆÚ“®‚Å‚«‚È‚¢‚æ‚¤‚É‚·‚é
-10-ƒ^[ƒ“I—¹ƒ{ƒ^ƒ“‚ğXƒL[‚É“ü‚ê‚é
-11-ƒLƒƒƒ‰‘I‘ğ‰æ–Ê‚Åó‚¯æ‚Á‚½ID‚É‡‚í‚¹‚ÄƒvƒŒƒCƒ„[ƒXƒLƒ“‚ğ•ÏX‚·‚é
+3-ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã®åå­—ã‚­ãƒ¼å…¥åŠ›ã§é¸æŠã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+3.5-é¸æŠä¸­ã®ãƒã‚¹ã®æ–¹å‘ã«ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å…¥ã‚Œã‚ã‹ã‚Šã‚„ã™ã„ã‚ˆã†ã«ã™ã‚‹
+4-Bã‚­ãƒ¼å…¥åŠ›å¾Œãƒã‚¹ã®è‰²ã‚’å¤‰æ›´ã™ã‚‹
+5-æœ€å¾Œã«è‰²ã‚’å¤‰æ›´ã—ãŸæ–¹å‘ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç§»å‹•ã•ã›ã‚‹
+5.1-ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è¿½åŠ ï¼ˆã‚†ã£ãã‚Šç§»å‹•ã•ã›ã‚‹ï¼‰
+5.2-ã‚¢ã‚¤ãƒ†ãƒ ãŒã‚ã‚‹ãƒã‚¹ã‚’é¸æŠã—ãŸã‚‰ã‚¢ã‚¤ãƒ†ãƒ ã®å–å¾—ã€ç™ºå‹•ã‚’è¡Œã†
+6-ã‚‚ã†ä¸€äººã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ä½œã‚’å—ã‘ä»˜ã‘ã‚‹
+7-ç‰¹å®šã®ãƒã‚¹ã«ä¹—ã£ãŸã‚‰çµ‚äº†ã•ã›ã‚‹[ç›¸æ‰‹ã®åŸã«ãŸã©ã‚Šç€ãéš›ã¯å¡—ãƒã‚¤ãƒ³ãƒˆã´ã£ãŸã‚Šä½¿ã‚ãªã„ã¨ã‚´ãƒ¼ãƒ«ã§ããªã„]
+8-ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®HPã‚’ç®¡ç†ã™ã‚‹[ç›¸æ‰‹ã¨åŒã˜ãƒã‚¹ã«ä¹—ã‚‹ã¨æ”»æ’ƒ(æ”»æ’ƒã—ãŸå´ãŒæ¬¡ã®è‡ªåˆ†ã®ã‚¿ãƒ¼ãƒ³è¡Œå‹•ä¸å¯)]
+9-ãƒã‚¹ã®ãªã„å ´æ‰€ã«ã¯ç§»å‹•ã§ããªã„ã‚ˆã†ã«ã™ã‚‹
+10-ã‚¿ãƒ¼ãƒ³çµ‚äº†ãƒœã‚¿ãƒ³ã‚’Xã‚­ãƒ¼ã«å…¥ã‚Œã‚‹
+11-ã‚­ãƒ£ãƒ©é¸æŠç”»é¢ã§å—ã‘å–ã£ãŸIDã«åˆã‚ã›ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¹ã‚­ãƒ³ã‚’å¤‰æ›´ã™ã‚‹
 */
 
 public class PlayerManager : MonoBehaviour
@@ -28,22 +28,22 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     GameObject gameManagerScripts;
 
-    //©•ª‚Ìƒ^[ƒ“‚©‚Ç‚¤‚©H(ƒ}ƒl[ƒWƒƒ[‚©‚çó‚¯æ‚è)
+    //è‡ªåˆ†ã®ã‚¿ãƒ¼ãƒ³ã‹ã©ã†ã‹ï¼Ÿ(ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰å—ã‘å–ã‚Š)
     private bool myTrun = false;
 
-    //¡‚Ì©•ª‚ÌÀ•W(ƒ}ƒl[ƒWƒƒ[‚©‚çó‚¯æ‚è)
+    //ä»Šã®è‡ªåˆ†ã®åº§æ¨™(ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰å—ã‘å–ã‚Š)
     private Vector2 nowPos = default;
 
-    //ˆÚ“®‚Å‚«‚é‰ñ”
+    //ç§»å‹•ã§ãã‚‹å›æ•°
     private int moveCounter = default;
 
-    //“h‚è‘Ö‚¦‚¹‚é‰ñ”
+    //å¡—ã‚Šæ›¿ãˆã›ã‚‹å›æ•°
     private int rePaint = default;
 
-    //‘I‘ğ’†‚Ì•ûŒü
+    //é¸æŠä¸­ã®æ–¹å‘
     private Vector2 nowDirection = default;
 
-    //ƒRƒ“ƒgƒ[ƒ‰[‚©‚ç‚ÌƒL[ó‚¯æ‚è—p
+    //ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‹ã‚‰ã®ã‚­ãƒ¼å—ã‘å–ã‚Šç”¨
     float Dx = default;
     float Dy = default;
     bool nowMove = false;
@@ -60,7 +60,7 @@ public class PlayerManager : MonoBehaviour
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         cursorImage = cursor.GetComponent<Image>();
         playerModel = transform.Find("PlayerModel").gameObject;
-        //‰ŠúÀ•W
+        //åˆæœŸåº§æ¨™
         //this.gameObject.transform.position = new Vector3(-7.5f, -0.5f, 0);
         //cursor.transform.position = new Vector3(-7.5f, -0.5f, 0);
     }
@@ -69,13 +69,13 @@ public class PlayerManager : MonoBehaviour
     {
         animator = cursor.GetComponent<Animator>();
 
-        //ƒXƒLƒ“İ’è
+        //ã‚¹ã‚­ãƒ³è¨­å®š
     }
 
-    //ƒvƒŒƒCƒ„[‚Ì‘Š‘ÎˆÚ“®“x(ˆêŠ‡ˆÚ“®‚ÍŒã‚Å)
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç›¸å¯¾ç§»å‹•åº¦(ä¸€æ‹¬ç§»å‹•ã¯å¾Œã§)
     void Update()
     {
-        //©ƒ^[ƒ“‚Ì‚İ“®‚©‚·
+        //è‡ªã‚¿ãƒ¼ãƒ³ã®ã¿å‹•ã‹ã™
         if (myTrun)
         {
             cursorImage.color = new Color32(255, 0, 217, 138);
@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour
                 Dx = (int)Input.GetAxis("DpadX");
                 Dy = (int)Input.GetAxis("DpadY");
 
-                //ƒJ[ƒ\ƒ‹‚ğˆÚ“®
+                //ã‚«ãƒ¼ã‚½ãƒ«ã‚’ç§»å‹•
                 if (Dx != 0 || Dy != 0)
                 {
                     nowMove = true;
@@ -94,41 +94,41 @@ public class PlayerManager : MonoBehaviour
                 }
             }
 
-            //“h‚è
+            //å¡—ã‚Š
             if (!nowMove && Input.GetButtonDown("DS4circle"))
             {
                 nowMove = true;
                 StartCoroutine(map.paintRedMap(nowDirection));
-                //ƒvƒŒƒCƒ„[‚ÌÀ•W‚ÉŒ»İ‚ÌÀ•W‚ğ‘«‚µ‚½”’l‚ğƒ}ƒl[ƒWƒƒ[‚É“n‚·
+                //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™ã«ç¾åœ¨ã®åº§æ¨™ã‚’è¶³ã—ãŸæ•°å€¤ã‚’ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«æ¸¡ã™
                 if (map.paint)
                 {
-                    //ƒ}ƒbƒv‘‚«Š·‚¦
+                    //ãƒãƒƒãƒ—æ›¸ãæ›ãˆ
                     map.mapRemake();
 
-                    //ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ğ“®‚©‚·
+                    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’å‹•ã‹ã™
                     StartCoroutine(playerAnimation());
 
-                    //ˆê‰ñ“h‚Á‚½‚Ì‚Ås“®‚ğˆêŒ¸‚ç‚·
+                    //ä¸€å›å¡—ã£ãŸã®ã§è¡Œå‹•ã‚’ä¸€æ¸›ã‚‰ã™
                     moveCounter--;
                     map.paint = false;
                 }
                 else
                 {
-                    Debug.Log("<color=red>—×Ú‚µ‚½ƒ}ƒX‚ª‚ ‚è‚Ü‚¹‚ñB</color>");
+                    Debug.Log("<color=red>éš£æ¥ã—ãŸãƒã‚¹ãŒã‚ã‚Šã¾ã›ã‚“ã€‚</color>");
                     nowMove = false;
                 }
             }
 
-            //s“®‰ñ”‚ª0‚É‚È‚é‚©
-            //ƒ^[ƒ“I—¹ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚çI—¹
+            //è¡Œå‹•å›æ•°ãŒ0ã«ãªã‚‹ã‹
+            //ã‚¿ãƒ¼ãƒ³çµ‚äº†æ™‚ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚‰çµ‚äº†
             if (!nowMove && moveCounter <= 0)
             {
                 nowMove = true;
                 animator.SetBool("Selection", false);
                 myTrun = false;
-                //ƒ}ƒl[ƒWƒƒ[‚É‚àI—¹‚µ‚½‚Æ•Ô‚·
+                //ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ã‚‚çµ‚äº†ã—ãŸã¨è¿”ã™
                 gameManager.trunChange();
-                //ƒ^[ƒ“I—¹ƒJ[ƒ\ƒ‹‚ğ“§–¾Š´
+                //ã‚¿ãƒ¼ãƒ³çµ‚äº†æ™‚ã‚«ãƒ¼ã‚½ãƒ«ã‚’é€æ˜æ„Ÿ
                 cursorImage.color = new Color32(255, 0, 217, 0);
                 cursor.transform.position = this.transform.position;
                 nowMove = false;
@@ -136,15 +136,15 @@ public class PlayerManager : MonoBehaviour
             if (!nowMove && Input.GetButtonDown("DS4cross"))
             {
                 nowMove = true;
-                //Ä“xŠm”F
+                //å†åº¦ç¢ºèª
 
                 animator.SetBool("Selection", false);
-                //ƒ}ƒl[ƒWƒƒ[‚É‚àI—¹‚µ‚½‚Æ•Ô‚·
+                //ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ã‚‚çµ‚äº†ã—ãŸã¨è¿”ã™
                 gameManager.trunChange();
-                //s“®‰ñ”‚ğ‚O‚É‚·‚é(ƒoƒO‘Îô)
+                //è¡Œå‹•å›æ•°ã‚’ï¼ã«ã™ã‚‹(ãƒã‚°å¯¾ç­–)
                 moveCounter = 0;
                 myTrun = false;
-                //ƒ^[ƒ“I—¹ƒJ[ƒ\ƒ‹‚ğ“§–¾‚É‚·‚é
+                //ã‚¿ãƒ¼ãƒ³çµ‚äº†æ™‚ã‚«ãƒ¼ã‚½ãƒ«ã‚’é€æ˜ã«ã™ã‚‹
                 cursorImage.color = new Color32(255, 0, 217, 0);
                 cursor.transform.position = this.transform.position;
                 nowMove = false;
@@ -153,7 +153,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒ\ƒ‹‚ğ“®‚©‚·ˆ—
+    /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’å‹•ã‹ã™å‡¦ç†
     /// </summary>
     /// <returns></returns>
     private IEnumerator cursorMove()
@@ -166,12 +166,12 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ÌˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®ç§»å‹•ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‡¦ç†
     /// </summary>
     /// <returns></returns>
     private IEnumerator playerAnimation()
     {
-        //“h‚Á‚½ƒ}ƒX‚ÉˆÚ“®‚·‚é
+        //å¡—ã£ãŸãƒã‚¹ã«ç§»å‹•ã™ã‚‹
         playerModel.transform.position = new Vector3(cursor.transform.position.x + Dx,
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
@@ -182,7 +182,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[î•ñ‘—‚èæ(ƒQ[ƒ€ƒ}ƒbƒv‚æ‚è)
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æƒ…å ±é€ã‚Šå…ˆ(ã‚²ãƒ¼ãƒ ãƒãƒƒãƒ—ã‚ˆã‚Š)
     /// </summary>
     /// <param name="playerPos"></param>
     public void PlayerUpdate(Vector2 playerPos)
@@ -192,7 +192,7 @@ public class PlayerManager : MonoBehaviour
         nowDirection = nowPos;
     }
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚Ìî•ñ‘—‚èæ(ƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[‚æ‚è)
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æƒ…å ±é€ã‚Šå…ˆ(ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚ˆã‚Š)
     /// </summary>
     /// <param name="nowTurn"></param>
     public void PlayertrunUpdate(bool nowTurn, int playerMove, int Repaint)

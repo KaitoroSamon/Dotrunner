@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,7 +52,7 @@ public class BGMManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("BGMƒNƒŠƒbƒv‚ª‚ ‚è‚Ü‚¹‚ñ");
+            Debug.Log("BGMã‚¯ãƒªãƒƒãƒ—ãŒã‚ã‚Šã¾ã›ã‚“");
         }
         
 

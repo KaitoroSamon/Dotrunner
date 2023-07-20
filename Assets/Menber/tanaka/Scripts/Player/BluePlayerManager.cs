@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,44 +9,44 @@ public class BluePlayerManager : MonoBehaviour
     Animator animator;
     public static Map map;
     public static GameManager gameManager;
-    [Header("Map‚ª‚Â‚¢‚Ä‚¢‚éGameObject")]
+    [Header("MapãŒã¤ã„ã¦ã„ã‚‹GameObject")]
     [SerializeField]
     GameObject mapScrits;
-    [Header("\nGameManager‚ª‚Â‚¢‚Ä‚¢‚éGameObject")]
+    [Header("\nGameManagerãŒã¤ã„ã¦ã„ã‚‹GameObject")]
     [SerializeField]
     GameObject gameManagerScripts;
-    [Header("\n©•ª‚ÌqƒIƒuƒWƒFƒNƒg‚ÌƒXƒLƒ“")]
+    [Header("\nè‡ªåˆ†ã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¹ã‚­ãƒ³")]
     [SerializeField]
     GameObject opponentPlayerPos;
 
-    //©•ª‚Ìƒ^[ƒ“‚©‚Ç‚¤‚©H(ƒ}ƒl[ƒWƒƒ[‚©‚çó‚¯æ‚è)
+    //è‡ªåˆ†ã®ã‚¿ãƒ¼ãƒ³ã‹ã©ã†ã‹ï¼Ÿ(ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰å—ã‘å–ã‚Š)
     private bool myTrun = false;
 
-    //¡‚Ì©•ª‚ÌÀ•W(ƒ}ƒl[ƒWƒƒ[‚©‚çó‚¯æ‚è)
+    //ä»Šã®è‡ªåˆ†ã®åº§æ¨™(ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰å—ã‘å–ã‚Š)
     private Vector2 nowPos = default;
 
-    //ˆÚ“®‚Å‚«‚é‰ñ”
+    //ç§»å‹•ã§ãã‚‹å›æ•°
     public int moveCounter = default;
 
-    //“h‚è‘Ö‚¦‚¹‚é‰ñ”
+    //å¡—ã‚Šæ›¿ãˆã›ã‚‹å›æ•°
     private int rePaint = default;
 
-    //‘I‘ğ’†‚Ì•ûŒü
+    //é¸æŠä¸­ã®æ–¹å‘
     public Vector2 nowDirection = default;
 
-    //ƒRƒ“ƒgƒ[ƒ‰[‚©‚ç‚ÌƒL[ó‚¯æ‚è—p
+    //ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‹ã‚‰ã®ã‚­ãƒ¼å—ã‘å–ã‚Šç”¨
     float Dx = default;
     float Dy = default;
     bool nowMove = false;
 
-    [Header("\n©•ª‚Ì‘·ƒIƒuƒWƒFƒNƒg‚ÌCursor")]
+    [Header("\nè‡ªåˆ†ã®å­«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Cursor")]
     [SerializeField]
     GameObject cursor;
     Image cursorImage;
 
     GameObject playerModel;
 
-    [Header("\nƒXƒLƒ“‚S•ûŒü")]
+    [Header("\nã‚¹ã‚­ãƒ³ï¼”æ–¹å‘")]
     [SerializeField]
     List<Sprite> sprites = new List<Sprite>();
 
@@ -57,8 +57,8 @@ public class BluePlayerManager : MonoBehaviour
         gameManager = gameManagerScripts.GetComponent<GameManager>();
         cursorImage = cursor.GetComponent<Image>();
         playerModel = transform.Find("PlayerModel").gameObject;
-        //ƒXƒLƒ“İ’è
-        //ƒJ[ƒ\ƒ‹‚ğ“§–¾‚É‚·‚é
+        //ã‚¹ã‚­ãƒ³è¨­å®š
+        //ã‚«ãƒ¼ã‚½ãƒ«ã‚’é€æ˜ã«ã™ã‚‹
         animator = cursor.GetComponent<Animator>();
         cursorImage.color = new Color32(0, 0, 0, 0);
 
@@ -74,12 +74,12 @@ public class BluePlayerManager : MonoBehaviour
         }
     }
 
-    //ƒvƒŒƒCƒ„[‚Ì‘Š‘ÎˆÚ“®“x(ˆêŠ‡ˆÚ“®‚ÍŒã‚Å)
+    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç›¸å¯¾ç§»å‹•åº¦(ä¸€æ‹¬ç§»å‹•ã¯å¾Œã§)
     void Update()
     {
         if (!GameManager.stopInputKey)
         {
-            //©ƒ^[ƒ“‚Ì‚İ“®‚©‚·
+            //è‡ªã‚¿ãƒ¼ãƒ³ã®ã¿å‹•ã‹ã™
             if (myTrun)
             {
                 cursorImage.color = new Color32(0, 0, 255, 255);
@@ -90,7 +90,7 @@ public class BluePlayerManager : MonoBehaviour
                     Dx = (int)Input.GetAxis("DpadX2");
                     Dy = (int)Input.GetAxis("DpadY2");
 
-                    //ƒJ[ƒ\ƒ‹‚ğˆÚ“®
+                    //ã‚«ãƒ¼ã‚½ãƒ«ã‚’ç§»å‹•
                     if (Dx != 0 || Dy != 0)
                     {
                         nowMove = true;
@@ -98,57 +98,57 @@ public class BluePlayerManager : MonoBehaviour
                     }
                 }
 
-                //“h‚è
+                //å¡—ã‚Š
                 if (!nowMove && Input.GetButtonDown("DS4circle2"))
                 {
                     nowMove = true;
                     StartCoroutine(map.paintBlueMap(nowDirection));
-                    //ƒvƒŒƒCƒ„[‚ÌÀ•W‚ÉŒ»İ‚ÌÀ•W‚ğ‘«‚µ‚½”’l‚ğƒ}ƒl[ƒWƒƒ[‚É“n‚·
+                    //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™ã«ç¾åœ¨ã®åº§æ¨™ã‚’è¶³ã—ãŸæ•°å€¤ã‚’ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«æ¸¡ã™
                     if (map.paint)
                     {
-                        //ƒ}ƒbƒv‘‚«Š·‚¦
+                        //ãƒãƒƒãƒ—æ›¸ãæ›ãˆ
                         map.mapRemake();
 
-                        //ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ğ“®‚©‚·
+                        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’å‹•ã‹ã™
                         StartCoroutine(playerAnimation());
 
-                        //ˆê‰ñ“h‚Á‚½‚Ì‚Ås“®‚ğˆêŒ¸‚ç‚·
+                        //ä¸€å›å¡—ã£ãŸã®ã§è¡Œå‹•ã‚’ä¸€æ¸›ã‚‰ã™
                         moveCounter--;
                         map.paint = false;
 
                     }
                     else
                     {
-                        Debug.Log("<color=red>—×Ú‚µ‚½ƒ}ƒX‚ª‚ ‚è‚Ü‚¹‚ñB</color>");
+                        Debug.Log("<color=red>éš£æ¥ã—ãŸãƒã‚¹ãŒã‚ã‚Šã¾ã›ã‚“ã€‚</color>");
                         nowMove = false;
                     }
                 }
 
-                //s“®‰ñ”‚ª0‚É‚È‚é‚©
-                //ƒ^[ƒ“I—¹ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚çI—¹
+                //è¡Œå‹•å›æ•°ãŒ0ã«ãªã‚‹ã‹
+                //ã‚¿ãƒ¼ãƒ³çµ‚äº†æ™‚ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚‰çµ‚äº†
                 if (!nowMove && moveCounter <= 0)
                 {
                     nowMove = true;
                     animator.SetBool("Selection", false);
                     myTrun = false;
-                    //ƒ}ƒl[ƒWƒƒ[‚É‚àI—¹‚µ‚½‚Æ•Ô‚·
+                    //ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ã‚‚çµ‚äº†ã—ãŸã¨è¿”ã™
                     gameManager.trunChange();
-                    //ƒ^[ƒ“I—¹ƒJ[ƒ\ƒ‹‚ğ“§–¾‚É‚·‚é
+                    //ã‚¿ãƒ¼ãƒ³çµ‚äº†æ™‚ã‚«ãƒ¼ã‚½ãƒ«ã‚’é€æ˜ã«ã™ã‚‹
                     cursorImage.color = new Color32(0, 0, 0, 0);
                     nowMove = false;
                 }
                 if (!nowMove && Input.GetButtonDown("DS4cross2"))
                 {
                     nowMove = true;
-                    //Ä“xŠm”F
+                    //å†åº¦ç¢ºèª
 
                     animator.SetBool("Selection", false);
-                    //ƒ}ƒl[ƒWƒƒ[‚É‚àI—¹‚µ‚½‚Æ•Ô‚·
+                    //ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ã‚‚çµ‚äº†ã—ãŸã¨è¿”ã™
                     gameManager.trunChange();
-                    //s“®‰ñ”‚ğ‚O‚É‚·‚é(ƒoƒO‘Îô)
+                    //è¡Œå‹•å›æ•°ã‚’ï¼ã«ã™ã‚‹(ãƒã‚°å¯¾ç­–)
                     moveCounter = 0;
                     myTrun = false;
-                    //ƒ^[ƒ“I—¹ƒJ[ƒ\ƒ‹‚ğ“§–¾‚É‚·‚é
+                    //ã‚¿ãƒ¼ãƒ³çµ‚äº†æ™‚ã‚«ãƒ¼ã‚½ãƒ«ã‚’é€æ˜ã«ã™ã‚‹
                     cursorImage.color = new Color32(0, 0, 0, 0);
                     nowMove = false;
                 }
@@ -163,7 +163,7 @@ public class BluePlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒJ[ƒ\ƒ‹‚ğ“®‚©‚·ˆ—
+    /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’å‹•ã‹ã™å‡¦ç†
     /// </summary>
     /// <returns></returns>
     private IEnumerator cursorMove()
@@ -171,12 +171,12 @@ public class BluePlayerManager : MonoBehaviour
         cursor.transform.position = new Vector3(cursor.transform.position.x + Dx, cursor.transform.position.y + Dy, cursor.transform.position.z);
         nowDirection = new Vector2(nowDirection.x + (int)Dx, nowDirection.y - (int)Dy);
 
-        //x[-15`0]‚Ì”ÍˆÍ‚Éy[-4`4]‚Ì”ÍˆÍ‚É§ŒÀ‚·‚é
+        //x[-15ï½0]ã®ç¯„å›²ã«y[-4ï½4]ã®ç¯„å›²ã«åˆ¶é™ã™ã‚‹
         var Xpos = Mathf.Clamp((int)cursor.transform.localPosition.x, (int)-15, (int)0);
         var Ypos = Mathf.Clamp((int)cursor.transform.localPosition.y, (int)-4, (int)4);
         Debug.Log(Xpos +" : "+ Ypos);
         cursor.transform.localPosition = new Vector3(Xpos, Ypos, cursor.transform.position.z);
-        //x -7.5`7.5 y -3.5`4.5
+        //x -7.5ï½7.5 y -3.5ï½4.5
         var Xdir = Mathf.Clamp(nowDirection.x,-7.5f,7.5f);
         var Ydir = Mathf.Clamp(nowDirection.y, -4.5f, 3.5f);
         nowDirection = new Vector2(Xdir, Ydir);
@@ -186,18 +186,18 @@ public class BluePlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ÌˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®ç§»å‹•ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‡¦ç†
     /// </summary>
     /// <returns></returns>
     private IEnumerator playerAnimation()
     {
-        //“h‚Á‚½ƒ}ƒX‚ÉˆÚ“®‚·‚é
+        //å¡—ã£ãŸãƒã‚¹ã«ç§»å‹•ã™ã‚‹
         playerModel.transform.position = new Vector3(cursor.transform.position.x + Dx,
             cursor.transform.position.y + Dy,
             playerModel.transform.position.z);
 
 
-        //C³ˆÄŒ
+        //ä¿®æ­£æ¡ˆä»¶
         if (playerModel.transform.position == opponentPlayerPos.transform.position)
         {
             GameManager.isBlueAttack = true;
@@ -211,7 +211,7 @@ public class BluePlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[î•ñ‘—‚èæ(ƒQ[ƒ€ƒ}ƒbƒv‚æ‚è)
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æƒ…å ±é€ã‚Šå…ˆ(ã‚²ãƒ¼ãƒ ãƒãƒƒãƒ—ã‚ˆã‚Š)
     /// </summary>
     /// <param name="playerPos"></param>
     public void PlayerUpdate(Vector2 playerPos)
@@ -221,7 +221,7 @@ public class BluePlayerManager : MonoBehaviour
         nowDirection = nowPos;
     }
     /// <summary>
-    /// ƒvƒŒƒCƒ„[‚Ìî•ñ‘—‚èæ(ƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[‚æ‚è)
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æƒ…å ±é€ã‚Šå…ˆ(ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚ˆã‚Š)
     /// </summary>
     /// <param name="nowTurn"></param>
     public void PlayertrunUpdate(bool nowTurn, int playerMove, int Repaint)

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -66,7 +66,8 @@ public class PauseScripts : MonoBehaviour
     {
         pauseActive = false;
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+        BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.TITLE, 0.6f);//菊地加筆
     }
     public void EndGame()
     {

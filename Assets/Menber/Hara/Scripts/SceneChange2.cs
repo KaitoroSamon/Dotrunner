@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,45 +33,45 @@ public class SceneChange2 : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "TitleScene")
         {
             SceneManager.LoadScene("MapSelect", LoadSceneMode.Single);
-            BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.STAGESELECT,0.6f);//‹e’n‰Á•M
+            BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.STAGESELECT,0.6f);//èŠåœ°åŠ ç­†
         }
         else
         {
             SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
-            BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.TITLE, 0.6f);//‹e’n‰Á•M
+            BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.TITLE, 0.6f);//èŠåœ°åŠ ç­†
         }
     }
 
     IEnumerator Color_FadeOut()
     {
-        // ‰æ–Ê‚ğƒtƒF[ƒhƒCƒ“‚³‚¹‚éƒR[ƒ‹ƒ`ƒ“
-        // ‘O’ñF‰æ–Ê‚ğ•¢‚¤Panel‚ÉƒAƒ^ƒbƒ`‚µ‚Ä‚¢‚é
+        // ç”»é¢ã‚’ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã•ã›ã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒ³
+        // å‰æï¼šç”»é¢ã‚’è¦†ã†Panelã«ã‚¢ã‚¿ãƒƒãƒã—ã¦ã„ã‚‹
 
-        // F‚ğ•Ï‚¦‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚©‚çImageƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
+        // è‰²ã‚’å¤‰ãˆã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
         //fade = GetComponent<Image>();
 
-        // ƒtƒF[ƒhŒã‚ÌF‚ğİ’èi•jš•ÏX‰Â
+        // ãƒ•ã‚§ãƒ¼ãƒ‰å¾Œã®è‰²ã‚’è¨­å®šï¼ˆé»’ï¼‰â˜…å¤‰æ›´å¯
         fade.color = new Color((0.0f / 255.0f), (0.0f / 255.0f), (0.0f / 0.0f), (0.0f / 255.0f));
 
-        // ƒtƒF[ƒhƒCƒ“‚É‚©‚©‚éŠÔi•bjš•ÏX‰Â
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã«ã‹ã‹ã‚‹æ™‚é–“ï¼ˆç§’ï¼‰â˜…å¤‰æ›´å¯
         const float fade_time = 1.5f;
 
-        // ƒ‹[ƒv‰ñ”i0‚ÍƒGƒ‰[jš•ÏX‰Â
+        // ãƒ«ãƒ¼ãƒ—å›æ•°ï¼ˆ0ã¯ã‚¨ãƒ©ãƒ¼ï¼‰â˜…å¤‰æ›´å¯
         const int loop_count = 50;
 
-        // ƒEƒFƒCƒgŠÔZo
+        // ã‚¦ã‚§ã‚¤ãƒˆæ™‚é–“ç®—å‡º
         float wait_time = fade_time / loop_count;
 
-        // F‚ÌŠÔŠu‚ğZo
+        // è‰²ã®é–“éš”ã‚’ç®—å‡º
         float alpha_interval = 255.0f / loop_count;
 
-        // F‚ğ™X‚É•Ï‚¦‚éƒ‹[ƒv
+        // è‰²ã‚’å¾ã€…ã«å¤‰ãˆã‚‹ãƒ«ãƒ¼ãƒ—
         for (float alpha = 0.0f; alpha <= 255.0f; alpha += alpha_interval)
         {
-            // ‘Ò‚¿ŠÔ
+            // å¾…ã¡æ™‚é–“
             yield return new WaitForSeconds(wait_time);
 
-            // Alpha’l‚ğ­‚µ‚¸‚Âã‚°‚é
+            // Alphaå€¤ã‚’å°‘ã—ãšã¤ä¸Šã’ã‚‹
             Color new_color = fade.color;
             new_color.a = alpha / 255.0f;
             fade.color = new_color;
