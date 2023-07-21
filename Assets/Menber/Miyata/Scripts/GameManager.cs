@@ -342,5 +342,6 @@ public class GameManager : MonoBehaviour
     public void ChangeScene()
     {
         SceneManager.LoadScene(nextScene);
+        BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.END, 0.6f);
     }
 }

@@ -781,11 +781,11 @@ MonoBehaviour:
   tentative: {fileID: 3102949487173693514}
   mapImage: {fileID: 3102949487062971983}
   tentativeImage:
-  - {fileID: 21300000, guid: 633080aad09429b49bb7070dea8ef450, type: 3}
-  - {fileID: 21300000, guid: 57707691e7b9c044994e8953aa183642, type: 3}
+  - {fileID: 21300000, guid: 6018e7f2d791b2b43a921f614f2350d5, type: 3}
+  - {fileID: 21300000, guid: b146570548900894ab329c3e6631d470, type: 3}
+  - {fileID: 21300000, guid: 4a6c280f673ece74a8b303cba3cb79b4, type: 3}
   - {fileID: 21300000, guid: 347d4afb9352a894d95737e3df9926e6, type: 3}
   - {fileID: 21300000, guid: 15645023591ea254f9ed0d3510e1dfd0, type: 3}
-  - {fileID: 21300000, guid: 132bd1e7414b5e54bbc63e7f1eadca6e, type: 3}
   lockItem: {fileID: 1873121689}
   lockAttack: {fileID: 1801889805}
   anim: {fileID: 782148104}

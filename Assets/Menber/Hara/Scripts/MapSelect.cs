@@ -232,6 +232,7 @@ public class MapSelect : MonoBehaviour
     public void TitleBack()
     {
         SceneManager.LoadScene("TitleScene");
+        BGMManager.Instance.PlayBGM(BGMManager.BGM_TYPE.TITLE, 0.6f);
     }
 #endregion
 }
