@@ -30,13 +30,21 @@ public class MapSelect : MonoBehaviour
     [SerializeField]
     GameObject tentative = default;
 
-    [Header("マップ仮イメージ")]
+    [Header("マップ仮イメージオブジェクト")]
     [SerializeField]
     Image mapImage = default;
 
     [Header("マップ仮イメージ")]
     [SerializeField]
     List<Sprite> tentativeImage = new List<Sprite>();
+
+    [Header("マップの特徴テキストオブジェクト")]
+    [SerializeField]
+    Text featureText = default;
+
+    [Header("マップの特徴テキスト")]
+    [SerializeField]
+    List<string> tentativefeatureText = new List<string>();
 
     [Header("アイテムカギ")]
     [SerializeField]
