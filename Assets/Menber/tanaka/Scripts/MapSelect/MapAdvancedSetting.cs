@@ -44,6 +44,9 @@ public class MapAdvancedSetting : MonoBehaviour
     [SerializeField]
     GameObject lockAttack = default;
 
+    private GameObject BGMGameobject;
+    private SEManager seManager;
+
     [SerializeField]
     Animator anim;
 
@@ -55,6 +58,9 @@ public class MapAdvancedSetting : MonoBehaviour
         stopAdvancedSettingKey = false;
         cicleAttack = 2;
         checkBoxSelectNow = 0;
+
+        BGMGameobject = GameObject.Find("SEManager");
+        seManager = BGMGameobject.GetComponent<SEManager>();
     }
 
     void Update()
@@ -84,6 +90,7 @@ public class MapAdvancedSetting : MonoBehaviour
                             checkBoxSelectNow++;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                     //上矢印を押した
                     else
@@ -100,12 +107,14 @@ public class MapAdvancedSetting : MonoBehaviour
                             checkBoxSelectNow--;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                 }
 
                 if (!nowMove && Input.GetButtonDown("DS4circle"))
                 {
                     check();
+                    seManager.Play((SEManager.SE_TYPE)1);
                 }
                 if (!nowMove && Input.GetButtonDown("DS4cross"))
                 {
@@ -119,6 +128,8 @@ public class MapAdvancedSetting : MonoBehaviour
                     lockItem.SetActive(false);
                     lockAttack.SetActive(false);
                     MapSelect.StopMapSelectKey = false;
+
+                    //seManager.Play((SEManager.SE_TYPE)2);
                 }
             }
         }

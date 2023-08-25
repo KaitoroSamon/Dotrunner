@@ -9,23 +9,28 @@ public class SceneChange2 : MonoBehaviour
     [SerializeField]
     Image fade = default;
 
+    //バグ取り
+    private bool startGame = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        startGame = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("DS4circle"))
+        if (!startGame && Input.GetButtonDown("DS4circle"))
         {
             StartCoroutine(Color_FadeOut());
+            startGame = true;
         }
 
-        if (Input.GetButtonDown("DS4circle2"))
+        if (!startGame && Input.GetButtonDown("DS4circle2"))
         {
             StartCoroutine(Color_FadeOut());
+            startGame = true;
         }
     }
     public void TitleChange()

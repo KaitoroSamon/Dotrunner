@@ -30,7 +30,7 @@ public class MapSelect : MonoBehaviour
     [SerializeField]
     GameObject tentative = default;
 
-    [Header("マップ仮イメージ")]
+    [Header("マップ仮イメージオブジェクト")]
     [SerializeField]
     Image mapImage = default;
 
@@ -38,12 +38,23 @@ public class MapSelect : MonoBehaviour
     [SerializeField]
     List<Sprite> tentativeImage = new List<Sprite>();
 
+    [Header("マップの特徴テキストオブジェクト")]
+    [SerializeField]
+    Text featureText = default;
+
+    [Header("マップの特徴テキスト")]
+    [SerializeField]
+    List<string> tentativefeatureText = new List<string>();
+
     [Header("アイテムカギ")]
     [SerializeField]
     GameObject lockItem = default;
     [Header("攻撃カギ")]
     [SerializeField]
     GameObject lockAttack = default;
+
+    private GameObject BGMGameobject;
+    private SEManager seManager;
 
     [SerializeField]
     Animator anim;
@@ -55,6 +66,10 @@ public class MapSelect : MonoBehaviour
         tentative.SetActive(false);
         lockItem.SetActive(false);
         lockAttack.SetActive(false);
+
+
+        BGMGameobject = GameObject.Find("SEManager");
+        seManager = BGMGameobject.GetComponent<SEManager>();
     }
     private void Update()
     {
@@ -83,6 +98,8 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow--;
                             StartCoroutine(coolTime());
                         }
+
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                     //右矢印を押した
                     else
@@ -99,6 +116,7 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow++;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                 }
                 if (Dy != 0)
@@ -118,6 +136,7 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow = buttonSelectNow + 3;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                     //上矢印を押した
                     else
@@ -134,6 +153,7 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow = (buttonSelectNow - 5) + 2;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                 }
 
@@ -175,6 +195,7 @@ public class MapSelect : MonoBehaviour
                         anim.SetBool("animStop", true);
                         MapAdvancedSetting.stopAdvancedSettingKey = false;
                     }
+                    seManager.Play((SEManager.SE_TYPE)1);
                 }
             }
         }

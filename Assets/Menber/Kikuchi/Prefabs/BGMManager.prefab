@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6609147995999124336
+--- !u!1 &2229114427519505266
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,17 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 6609147995999124365}
   - component: {fileID: 6609147995999124367}
   - component: {fileID: -2604405350738696871}
   - component: {fileID: 901604745697969068}
   - component: {fileID: 7563635338549348800}
+=======
+  - component: {fileID: 2459361497010787452}
+  - component: {fileID: 3939937992060832030}
+  - component: {fileID: 869219525373401415}
+>>>>>>> origin/future/tanaka
   m_Layer: 0
   m_Name: BGMManager
   m_TagString: Untagged
@@ -20,13 +26,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6609147995999124365
+--- !u!4 &2459361497010787452
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609147995999124336}
+  m_GameObject: {fileID: 2229114427519505266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,13 +41,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &6609147995999124367
+--- !u!82 &3939937992060832030
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609147995999124336}
+  m_GameObject: {fileID: 2229114427519505266}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -49,7 +55,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -131,13 +137,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-2604405350738696871
+--- !u!114 &869219525373401415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609147995999124336}
+  m_GameObject: {fileID: 2229114427519505266}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740f5ef39b61d6b45a39d49fbf7dfaff, type: 3}
@@ -148,6 +154,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ef0d072fb36d7524398fad2ba1218a49, type: 3}
   - {fileID: 8300000, guid: dfe9cbb3c812a0b428d015ec0518654f, type: 3}
   - {fileID: 8300000, guid: a8110a7069b482941ac3263ce7f4d75c, type: 3}
+<<<<<<< HEAD
   Audio_Source_BGM: {fileID: 6609147995999124367}
 --- !u!82 &901604745697969068
 AudioSource:
@@ -262,3 +269,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e7d20e2fbbda89146a3e001f02df3626, type: 3}
   Audio_Source_SE: {fileID: 901604745697969068}
   Audio_Source_SE_Vol: 1
+=======
+  Audio_Source_BGM: {fileID: 3939937992060832030}
+>>>>>>> origin/future/tanaka
