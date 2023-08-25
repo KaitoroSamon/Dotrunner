@@ -18,11 +18,10 @@ public class SEManager : MonoBehaviour
 
     public enum SE_TYPE
     {
-        BOMB = 0,
-        PORTION = 1,
+        Select = 0,
+        CURSORMOVE = 1,
         BUCKET = 2,
     }
-    //BGM_TYPE bgmType = BGM_TYPE.TITLE;
     private void Start()
     {
         _instance = this;
@@ -42,7 +41,7 @@ public class SEManager : MonoBehaviour
         }
     }
 
-    public void Play(SE_TYPE clip)
+    public void PlaySE(SE_TYPE clip)
     {
         if(Audio_Clip_SE[(int)clip] != null)
         {
@@ -65,12 +64,12 @@ public class SEManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Play(SE_TYPE.BOMB);
+            SEManager.Instance.PlaySE(SEManager.SE_TYPE.Select);
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            Play(SE_TYPE.BUCKET);
+            SEManager.Instance.PlaySE(SEManager.SE_TYPE.CURSORMOVE);
         }
     }
 
