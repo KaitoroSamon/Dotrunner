@@ -18,15 +18,9 @@ public class SEManager : MonoBehaviour
 
     public enum SE_TYPE
     {
-<<<<<<< HEAD
-        Select = 0,
-        CURSORMOVE = 1,
-        BUCKET = 2,
-=======
         Move = 0,
         Select = 1,
         Cansel = 2,
->>>>>>> origin/future/tanaka
     }
     private void Start()
     {
@@ -47,7 +41,7 @@ public class SEManager : MonoBehaviour
         }
     }
 
-    public void PlaySE(SE_TYPE clip)
+    public void Play(SE_TYPE clip)
     {
         if(Audio_Clip_SE[(int)clip] != null)
         {
@@ -71,20 +65,12 @@ public class SEManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-<<<<<<< HEAD
-            SEManager.Instance.PlaySE(SEManager.SE_TYPE.Select);
-=======
             Play(SE_TYPE.Move);
->>>>>>> origin/future/tanaka
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-<<<<<<< HEAD
-            SEManager.Instance.PlaySE(SEManager.SE_TYPE.CURSORMOVE);
-=======
             Play(SE_TYPE.Select);
->>>>>>> origin/future/tanaka
         }
     }
 
