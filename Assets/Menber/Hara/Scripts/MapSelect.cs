@@ -53,6 +53,9 @@ public class MapSelect : MonoBehaviour
     [SerializeField]
     GameObject lockAttack = default;
 
+    private GameObject BGMGameobject;
+    private SEManager seManager;
+
     [SerializeField]
     Animator anim;
 
@@ -63,6 +66,10 @@ public class MapSelect : MonoBehaviour
         tentative.SetActive(false);
         lockItem.SetActive(false);
         lockAttack.SetActive(false);
+
+
+        BGMGameobject = GameObject.Find("SEManager");
+        seManager = BGMGameobject.GetComponent<SEManager>();
     }
     private void Update()
     {
@@ -91,6 +98,8 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow--;
                             StartCoroutine(coolTime());
                         }
+
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                     //âEñÓàÛÇâüÇµÇΩ
                     else
@@ -107,6 +116,7 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow++;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                 }
                 if (Dy != 0)
@@ -126,6 +136,7 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow = buttonSelectNow + 3;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                     //è„ñÓàÛÇâüÇµÇΩ
                     else
@@ -142,6 +153,7 @@ public class MapSelect : MonoBehaviour
                             buttonSelectNow = (buttonSelectNow - 5) + 2;
                             StartCoroutine(coolTime());
                         }
+                        seManager.Play((SEManager.SE_TYPE)0);
                     }
                 }
 
@@ -183,6 +195,7 @@ public class MapSelect : MonoBehaviour
                         anim.SetBool("animStop", true);
                         MapAdvancedSetting.stopAdvancedSettingKey = false;
                     }
+                    seManager.Play((SEManager.SE_TYPE)1);
                 }
             }
         }

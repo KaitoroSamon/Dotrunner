@@ -18,9 +18,9 @@ public class SEManager : MonoBehaviour
 
     public enum SE_TYPE
     {
-        BOMB = 0,
-        PORTION = 1,
-        BUCKET = 2,
+        Move = 0,
+        Select = 1,
+        Cansel = 2,
     }
     //BGM_TYPE bgmType = BGM_TYPE.TITLE;
     private void Start()
@@ -46,6 +46,7 @@ public class SEManager : MonoBehaviour
     {
         if(Audio_Clip_SE[(int)clip] != null)
         {
+            Debug.Log("SE" + clip);
             Audio_Source_SE.clip = Audio_Clip_SE[(int)clip];
             Audio_Source_SE.PlayOneShot(Audio_Clip_SE[(int)clip]);
         }
@@ -65,12 +66,12 @@ public class SEManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Play(SE_TYPE.BOMB);
+            Play(SE_TYPE.Move);
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            Play(SE_TYPE.BUCKET);
+            Play(SE_TYPE.Select);
         }
     }
 

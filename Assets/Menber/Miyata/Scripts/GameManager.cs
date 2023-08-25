@@ -337,7 +337,7 @@ public class GameManager : MonoBehaviour
     public void sceneLoadtime()
     {
         stopInputKey = true;
-        Invoke("ChangeScene", 2.0f);
+        Invoke("ChangeScene", 1.0f);
     }
     public void ChangeScene()
     {

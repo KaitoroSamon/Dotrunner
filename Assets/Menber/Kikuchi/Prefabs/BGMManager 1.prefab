@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2229114427519505266
+--- !u!1 &8188572062353526656
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2459361497010787452}
-  - component: {fileID: 3939937992060832030}
-  - component: {fileID: 869219525373401415}
+  - component: {fileID: 8188572062353526653}
+  - component: {fileID: 8188572062353526655}
+  - component: {fileID: 8196697367107457449}
   m_Layer: 0
-  m_Name: BGMManager
+  m_Name: BGMManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2459361497010787452
+--- !u!4 &8188572062353526653
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2229114427519505266}
+  m_GameObject: {fileID: 8188572062353526656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,13 +33,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &3939937992060832030
+--- !u!82 &8188572062353526655
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2229114427519505266}
+  m_GameObject: {fileID: 8188572062353526656}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -129,13 +129,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &869219525373401415
+--- !u!114 &8196697367107457449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2229114427519505266}
+  m_GameObject: {fileID: 8188572062353526656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740f5ef39b61d6b45a39d49fbf7dfaff, type: 3}
@@ -146,4 +146,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ef0d072fb36d7524398fad2ba1218a49, type: 3}
   - {fileID: 8300000, guid: dfe9cbb3c812a0b428d015ec0518654f, type: 3}
   - {fileID: 8300000, guid: a8110a7069b482941ac3263ce7f4d75c, type: 3}
-  Audio_Source_BGM: {fileID: 3939937992060832030}
+  Audio_Source_BGM: {fileID: 8188572062353526655}
