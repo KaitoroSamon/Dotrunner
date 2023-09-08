@@ -170,11 +170,11 @@ public class MapSelect : MonoBehaviour
                             mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 2:
-                            tanaka_map01();
+                            kaneko_Map2_ver1();
                             mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 3:
-                            Tomita_Map_Sample2();
+                            kaneko_Map3_ver1();
                             mapImage.sprite = tentativeImage[buttonSelectNow];
                             break;
                         case 4:
@@ -226,20 +226,20 @@ public class MapSelect : MonoBehaviour
         StartSetting.test = "/StreamingAssets/csv/BaseMap.csv";
     }
 
-    public void tanaka_map01()
+    public void kaneko_Map2_ver1()
     {
         tutorialManager.tutorialNow=false;
         MapAdvancedSetting.LockItem = true;
         MapAdvancedSetting.LockAttack = false;
-        StartSetting.test = "/StreamingAssets/csv/tanaka_map01.csv";
+        StartSetting.test = "/StreamingAssets/csv/kaneko_Map2_ver1.csv";
     }
 
-    public void Tomita_Map_Sample2()
+    public void kaneko_Map3_ver1()
     {
         tutorialManager.tutorialNow=false;
         MapAdvancedSetting.LockItem = true;
         MapAdvancedSetting.LockAttack = false;
-        StartSetting.test = "/StreamingAssets/csv/Tomita_Map_Sample5.csv";
+        StartSetting.test = "/StreamingAssets/csv/kaneko_Map3_ver1.csv";
     }
 
     public void Tomita_Map_Sample4()
