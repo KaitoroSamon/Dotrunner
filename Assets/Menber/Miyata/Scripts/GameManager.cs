@@ -90,7 +90,6 @@ public class GameManager : MonoBehaviour
         nextRedMaxMoveCounter = redMaxMoveCounter;
         nextBlueMaxMoveCounter = blueMaxMoveCounter;
 
-        //どれかがバグの原因
         stopInputKey = false;
         nextScene = default;
         nowWait = true;
@@ -325,7 +324,7 @@ public class GameManager : MonoBehaviour
     {
         stopInputKey = true;
         animator.SetBool("TrunChange", true);
-        yield return new WaitForSecondsRealtime(3.0f);
+        yield return new WaitForSecondsRealtime(5.0f);
         animator.SetBool("TrunChange", false);
         stopInputKey = false;
     }
