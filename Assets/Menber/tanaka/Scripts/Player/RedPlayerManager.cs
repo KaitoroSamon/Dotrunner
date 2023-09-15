@@ -93,6 +93,11 @@ public class RedPlayerManager : MonoBehaviour
                     //カーソルを移動
                     if (Dx != 0 || Dy != 0)
                     {
+                        //斜め移動対策
+                        if(Dx == Dy)
+                        {
+                            Dy = 0;
+                        }
                         nowMove = true;
                         StartCoroutine(cursorMove());
                     }
