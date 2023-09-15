@@ -924,6 +924,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901088460}
+    - target: {fileID: 591796390674075226, guid: e8f7faa754546f142b9eb3937fc388e9, type: 3}
+      propertyPath: m_Color.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 591796390674075226, guid: e8f7faa754546f142b9eb3937fc388e9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 591796390674075226, guid: e8f7faa754546f142b9eb3937fc388e9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 591796391265634620, guid: e8f7faa754546f142b9eb3937fc388e9, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2662326666638844753, guid: e8f7faa754546f142b9eb3937fc388e9, type: 3}
       propertyPath: m_Name
       value: UIMaster
