@@ -324,7 +324,7 @@ public class GameManager : MonoBehaviour
     {
         stopInputKey = true;
         animator.SetBool("TrunChange", true);
-        yield return new WaitForSecondsRealtime(5.0f);
+        yield return new WaitForSecondsRealtime(2.0f);
         animator.SetBool("TrunChange", false);
         stopInputKey = false;
     }
